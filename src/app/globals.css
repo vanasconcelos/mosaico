@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta editorial Mosaico (redesenho 2026-10-20) — reaponta os tokens
+   * existentes para a paleta aprovada; nenhuma classe utilitária
+   * (text-mosaico-ink, bg-mosaico-accent-deep etc.) já usada nos
+   * componentes precisou mudar de nome. */
+  --color-bg: #f7f0e8; /* Creme editorial */
+  --color-surface: #d8c3a8; /* Bege quente — superfície clara secundária, p/
+   * alternar com --color-bg sem repetir a mesma superfície duas vezes
+   * seguidas */
+  --color-ink: #17130f; /* Preto amarronzado */
+  /* ink-soft é derivado (color-mix), não um 8º hex fora da paleta — a Ana
+   * especificou 7 cores e nenhuma pra texto secundário. 62% ink / 38% bg
+   * dá contraste ~5:1 sobre --color-bg (verificado), com margem segura
+   * acima do mínimo AA de 4.5:1 para texto normal. */
+  --color-ink-soft: color-mix(in oklab, var(--color-ink) 62%, var(--color-bg) 38%);
+  --color-border: #382219; /* Marrom profundo — já só usado em opacidade
+   * reduzida (/40, /50) nos componentes, nunca sólido */
+  --color-accent: #b58b5d; /* Caramelo */
+  --color-accent-deep: #541126; /* Vinho escuro */
+  --color-wine: #541126; /* Mesmo tom de accent-deep, nome semântico próprio
+   * — usado como SUPERFÍCIE escura (bg-mosaico-wine), não como cor de
+   * destaque/texto */
+  --color-red: #791d25; /* Vermelho fechado — só acentos pequenos (ex.:
+   * badge "Em preparação"), nunca preenchimento grande, por pedido
+   * explícito da Ana */
+}
+
+@theme inline {
+  --color-mosaico-bg: var(--color-bg);
+  --color-mosaico-surface: var(--color-surface);
+  --color-mosaico-ink: var(--color-ink);
+  --color-mosaico-ink-soft: var(--color-ink-soft);
+  --color-mosaico-border: var(--color-border);
+  --color-mosaico-accent: var(--color-accent);
+  --color-mosaico-accent-deep: var(--color-accent-deep);
+  --color-mosaico-wine: var(--color-wine);
+  --color-mosaico-red: var(--color-red);
+
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+/*
+ * Animação é secundária à apresentação visual (o produto precisa continuar
+ * legível sem ela). Ambas só tocam com motion-safe — sem preferência de
+ * movimento reduzido, os elementos ficam parados no estado final.
+ *
+ * mosaico-reveal: entrada única (fade + leve subida + scale) — miniaturas
+ * "revelando" ao carregar, com pequeno atraso escalonado por índice.
+ * mosaico-float: flutuação vertical contínua e muito sutil — aplicada num
+ * wrapper interno do mockup, para não brigar com a inclinação estática do
+ * frame (que fica num elemento pai; ver PhoneMockup).
+ */
+@keyframes mosaico-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mosaico-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/*
+ * Textura de "mesa de trabalho" (2026-10-20, revisão da home) — grid de
+ * linhas finas muito sutil, no mesmo espírito do papel quadriculado das
+ * referências visuais da Ana (Canva Combo, Template Club). CSS puro
+ * (repeating-linear-gradient), sem imagem — decorativo, nunca compete com
+ * o conteúdo por cima (opacidade baixa, cor derivada de --color-border).
+ */
+.bg-grid-paper {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-border) 14%, transparent) 0 1px,
+      transparent 1px 64px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-border) 14%, transparent) 0 1px,
+      transparent 1px 64px
+    );
+}
