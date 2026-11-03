@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Karla } from "next/font/google";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -8,8 +9,17 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+/**
+ * Troca de Inter por Karla (Fase de refinamento tipográfico) — Inter é a
+ * face "segura" mais associada a sites genéricos/gerados por IA; Karla
+ * tem desenho humanista, ligeiramente irregular (traços de origem
+ * manuscrita), lê bem em telas pequenas e combina com o caráter
+ * editorial do Fraunces sem competir com ele. Só troca o que preenche
+ * `--font-sans` (globals.css) — nenhuma classe utilitária (`font-sans`)
+ * já usada nos componentes precisou mudar.
+ */
+const karla = Karla({
+  variable: "--font-karla",
   subsets: ["latin"],
 });
 
@@ -53,9 +63,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${karla.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-mosaico-bg text-mosaico-ink">
+        <SiteHeader />
         {children}
       </body>
     </html>
