@@ -1950,7 +1950,7 @@ const templates: Template[] = [
   },
   {
     id: "template01",
-    title: "Template 01",
+    title: "Carrossel — Social Media #01",
     slug: "template01",
     // `category`/`kitSlug` vieram diretamente da Ana ("o carrossel que
     // mandei" / "inclua no kit de social media") — não são suposição.
@@ -1966,7 +1966,7 @@ const templates: Template[] = [
   },
   {
     id: "template02",
-    title: "Template 02",
+    title: "Carrossel — Social Media #02",
     slug: "template02",
     // `category` vem do nome do arquivo enviado ("Carrossel Instagram Sem
     // Ideias"). `kitSlug: "social-media"` confirmado pela Ana em
@@ -1986,7 +1986,7 @@ const templates: Template[] = [
   },
   {
     id: "template03",
-    title: "Template 03",
+    title: "Carrossel — Social Media #03",
     slug: "template03",
     // `category`/`kitSlug: "social-media"` vieram diretamente da Ana pra
     // este template ("adicionar EXCLUSIVAMENTE ao Kit Social Media").
@@ -2007,7 +2007,7 @@ const templates: Template[] = [
   },
   {
     id: "template04",
-    title: "Template 04",
+    title: "Carrossel — Social Media #04",
     slug: "template04",
     // `kitSlug: "social-media"` veio explícito da Ana. `category:
     // "Carrossel"` confirmado pelo nome do arquivo do preview ("Template
@@ -2036,7 +2036,7 @@ const templates: Template[] = [
   },
   {
     id: "template05",
-    title: "Template 05",
+    title: "Carrossel — Social Media #05",
     slug: "template05",
     // `kitSlug: "social-media"` e o título vieram explícitos da Ana.
     // `category: "Carrossel"` — as 7 páginas reais já chegaram junto
@@ -2059,7 +2059,7 @@ const templates: Template[] = [
   },
   {
     id: "template06",
-    title: "Template 06",
+    title: "Carrossel — Social Media #06",
     slug: "template06",
     // `kitSlug: "social-media"` veio explícito da Ana. `category:
     // "Carrossel"` pelo conteúdo (6 páginas, "O que é um conteúdo
@@ -2081,7 +2081,7 @@ const templates: Template[] = [
   },
   {
     id: "template07",
-    title: "Template 07",
+    title: "Carrossel — Social Media #07",
     slug: "template07",
     // "470" era só a referência da Ana (planilha/catálogo dela) pra
     // descrever o pedido — confirmado por ela que no site segue a
@@ -2104,7 +2104,7 @@ const templates: Template[] = [
   },
   {
     id: "template08",
-    title: "Template 08",
+    title: "Carrossel — Social Media #08",
     slug: "template08",
     // Tema/conteúdo: "3 perguntas antes de criar qualquer post" (título
     // que a Ana deu no pedido) — `title` exibido segue o mesmo padrão
@@ -2127,7 +2127,7 @@ const templates: Template[] = [
   },
   {
     id: "template09",
-    title: "Template 09",
+    title: "Carrossel — Social Media #09",
     slug: "template09",
     // Tema: "Por que seu conteúdo não está gerando interação?" — peça já
     // existente no Canva da Ana, não criada por mim (ela pediu
@@ -2155,7 +2155,7 @@ const templates: Template[] = [
   },
   {
     id: "template10",
-    title: "Template 10",
+    title: "Carrossel — Social Media #10",
     slug: "template10",
     // "Como transformar uma ideia em vários conteúdos" (tema/conteúdo —
     // `title` exibido no site é "Template 10", padrão sequencial já
@@ -2182,7 +2182,7 @@ const templates: Template[] = [
   },
   {
     id: "template11",
-    title: "Template 11",
+    title: "Carrossel — Social Media #11",
     slug: "template11",
     // "Seu feed está comunicando o que sua marca é?" (tema/conteúdo —
     // `title` exibido no site é "Template 11", padrão sequencial já
@@ -2207,7 +2207,7 @@ const templates: Template[] = [
   },
   {
     id: "template12",
-    title: "Template 12",
+    title: "Carrossel — Social Media #12",
     slug: "template12",
     // "5 elementos de um perfil profissional" (tema/conteúdo — assinado
     // "Mosaico — Estratégia de Presença" na própria peça, mesmo padrão de
@@ -2241,7 +2241,7 @@ const templates: Template[] = [
   },
   {
     id: "template13",
-    title: "Template 13",
+    title: "Feed — Social Media #13",
     slug: "template13",
     // "Bio que explica quem você é em poucos segundos" (tema/conteúdo —
     // título interno no Canva: "Instagram Post Cover Bio"). Página única
@@ -2272,7 +2272,7 @@ const templates: Template[] = [
   },
   {
     id: "template14",
-    title: "Template 14",
+    title: "Feed — Social Media #14",
     slug: "template14",
     // "Antes de postar: o que analisar" (tema/conteúdo — título interno no
     // Canva: "Instagram Carousel Cover"). A Ana se referiu a este pedido
@@ -2307,7 +2307,7 @@ const templates: Template[] = [
   },
   {
     id: "template15",
-    title: "Template 15",
+    title: "Feed — Social Media #15",
     slug: "template15",
     // "Feed bonito não é sinônimo de feed estratégico" — tema veio
     // explícito da Ana (título interno no Canva: "Capa Instagram
@@ -2345,7 +2345,7 @@ const templates: Template[] = [
   },
   {
     id: "template16",
-    title: "Template 16",
+    title: "Feed — Social Media #16",
     slug: "template16",
     // "3 sinais de que seu perfil precisa de uma mudança" (tema explícito
     // da Ana — título interno no Canva: "Instagram Carousel Cover: Profile
@@ -2376,7 +2376,7 @@ const templates: Template[] = [
   },
   {
     id: "template17",
-    title: "Template 17",
+    title: "Feed — Social Media #17",
     slug: "template17",
     // "Como criar uma identidade visual consistente" (tema explícito da
     // Ana — mesmo título interno no Canva: "Identidade Visual
@@ -2405,7 +2405,7 @@ const templates: Template[] = [
   },
   {
     id: "template18",
-    title: "Template 18",
+    title: "Feed — Social Media #18",
     slug: "template18",
     // "O que ninguém te conta sobre crescer no Instagram" (tema explícito
     // da Ana — título interno no Canva: "Capa Instagram: Crescer no
@@ -2434,7 +2434,7 @@ const templates: Template[] = [
   },
   {
     id: "template19",
-    title: "Template 19",
+    title: "Feed — Social Media #19",
     slug: "template19",
     // "Você está falando com seu público ou com todo mundo?" (tema
     // explícito da Ana — título interno no Canva: "Instagram Carousel
@@ -2462,7 +2462,7 @@ const templates: Template[] = [
   },
   {
     id: "template20",
-    title: "Template 20",
+    title: "Feed — Social Media #20",
     slug: "template20",
     // "Checklist antes de publicar um conteúdo" (tema explícito da Ana —
     // título interno no Canva: "Checklist Editorial Instagram Cover").
@@ -2489,7 +2489,7 @@ const templates: Template[] = [
   },
   {
     id: "template21",
-    title: "Template 21",
+    title: "Carrossel — Social Media #21",
     slug: "template21",
     // "5 erros visuais que deixam seu perfil amador" (tema explícito da
     // Ana — título interno no Canva: "Instagram Carrossel: Erros
@@ -2522,7 +2522,7 @@ const templates: Template[] = [
   },
   {
     id: "template22",
-    title: "Template 22",
+    title: "Carrossel — Social Media #22",
     slug: "template22",
     // "Como escolher fontes para sua marca" (tema explícito da Ana —
     // título interno no Canva: "Carrossel Instagram: Fontes de Marca").
@@ -2551,7 +2551,7 @@ const templates: Template[] = [
   },
   {
     id: "template23",
-    title: "Template 23",
+    title: "Carrossel — Social Media #23",
     slug: "template23",
     // "Como escolher uma paleta de cores" (tema/conteúdo — título interno
     // no Canva: "Instagram Color Palette Carousel"). `title` exibido no
@@ -2581,7 +2581,7 @@ const templates: Template[] = [
   },
   {
     id: "template24",
-    title: "Template 24",
+    title: "Carrossel — Social Media #24",
     slug: "template24",
     // "Por que sua identidade visual importa?" (tema/conteúdo — título
     // interno no Canva: "Carrossel Instagram Identidade Visual"). `title`
@@ -2619,7 +2619,7 @@ const templates: Template[] = [
   },
   {
     id: "template25",
-    title: "Template 25",
+    title: "Carrossel — Social Media #25",
     slug: "template25",
     // "3 formas de deixar seu conteúdo mais profissional" (tema/conteúdo —
     // título interno no Canva: "Carrossel Instagram Profissional"). `title`
@@ -2652,7 +2652,7 @@ const templates: Template[] = [
   },
   {
     id: "template26",
-    title: "Template 26",
+    title: "Carrossel — Social Media #26",
     slug: "template26",
     // "Hierarquia visual: onde você quer que as pessoas olhem primeiro?"
     // (tema/conteúdo — título interno no Canva: "Carrossel Instagram
@@ -2681,7 +2681,7 @@ const templates: Template[] = [
   },
   {
     id: "template27",
-    title: "Template 27",
+    title: "Carrossel — Social Media #27",
     slug: "template27",
     // "Como usar espaço em branco no design" (tema/conteúdo — título
     // interno no Canva: "Carrossel Instagram Espaço em Branco"). `title`
@@ -2716,7 +2716,7 @@ const templates: Template[] = [
   },
   {
     id: "template28",
-    title: "Template 28",
+    title: "Carrossel — Social Media #28",
     slug: "template28",
     // "Design bonito × design que comunica" (tema/conteúdo — título
     // interno no Canva: "Carrossel Instagram Kit Social Media"). `title`
@@ -2745,7 +2745,7 @@ const templates: Template[] = [
   },
   {
     id: "template29",
-    title: "Template 29",
+    title: "Carrossel — Social Media #29",
     slug: "template29",
     // "5 elementos que podem criar reconhecimento de marca" (tema/conteúdo
     // — título interno no Canva: "Carrossel Instagram Kit Social Media").
@@ -2777,7 +2777,7 @@ const templates: Template[] = [
   },
   {
     id: "template30",
-    title: "Template 30",
+    title: "Carrossel — Social Media #30",
     slug: "template30",
     // "Seu conteúdo precisa parecer que pertence à mesma marca"
     // (tema/conteúdo — título interno no Canva: "Carrossel Instagram Kit
@@ -2806,7 +2806,7 @@ const templates: Template[] = [
   },
   {
     id: "template31",
-    title: "Template 31",
+    title: "Feed — Social Media #31",
     slug: "template31",
     // "O que analisar depois de publicar um post?" (tema/conteúdo —
     // título interno no Canva: "Instagram Post Kit Social Media"). `title`
@@ -2836,7 +2836,7 @@ const templates: Template[] = [
   },
   {
     id: "template32",
-    title: "Template 32",
+    title: "Feed — Social Media #32",
     slug: "template32",
     // "Curtidas não são a única métrica importante" (tema/conteúdo — texto
     // real da peça; título interno no Canva é só "Kit Social Media
@@ -2869,7 +2869,7 @@ const templates: Template[] = [
   },
   {
     id: "template33",
-    title: "Template 33",
+    title: "Feed — Social Media #33",
     slug: "template33",
     // "Como descobrir quais conteúdos funcionam melhor" (tema/título
     // explícitos no pedido — título interno no Canva: "Instagram Post —
@@ -2899,7 +2899,7 @@ const templates: Template[] = [
   },
   {
     id: "template34",
-    title: "Template 34",
+    title: "Feed — Social Media #34",
     slug: "template34",
     // "3 métricas que todo social media deveria acompanhar" (tema/título
     // explícitos da Ana — título interno no Canva: "Instagram Feed Post
@@ -2941,7 +2941,7 @@ const templates: Template[] = [
   },
   {
     id: "template35",
-    title: "Template 35",
+    title: "Feed — Social Media #35",
     slug: "template35",
     // "Seu conteúdo teve poucas curtidas. E agora?" (tema/título explícitos
     // da Ana — título interno no Canva: "Post Instagram Kit Social
@@ -2979,7 +2979,7 @@ const templates: Template[] = [
   },
   {
     id: "template36",
-    title: "Template 36",
+    title: "Feed — Social Media #36",
     slug: "template36",
     // "Como transformar dados em novas ideias" (tema/título explícitos da
     // Ana — título interno no Canva: "Instagram Post Mosaico: Dados em
@@ -3009,7 +3009,7 @@ const templates: Template[] = [
   },
   {
     id: "template37",
-    title: "Template 37",
+    title: "Feed — Social Media #37",
     slug: "template37",
     // "O que observar nos conteúdos que mais performaram" (tema/título
     // explícitos da Ana — título interno no Canva: "Instagram Post:
@@ -3040,7 +3040,7 @@ const templates: Template[] = [
   },
   {
     id: "template38",
-    title: "Template 38",
+    title: "Feed — Social Media #38",
     slug: "template38",
     // "Alcance alto × conversão: qual é a diferença?" (tema/título
     // explícitos da Ana — título interno no Canva: "Instagram Post Cover
@@ -3071,7 +3071,7 @@ const templates: Template[] = [
   },
   {
     id: "template39",
-    title: "Template 39",
+    title: "Feed — Social Media #39",
     slug: "template39",
     // "Alcance alto × conversão: qual é a diferença?" (tema/título
     // explícitos da Ana — título interno no Canva, genérico: "Instagram
@@ -3113,7 +3113,7 @@ const templates: Template[] = [
   },
   {
     id: "template40",
-    title: "Template 40",
+    title: "Feed — Social Media #40",
     slug: "template40",
     // "Seu conteúdo está atraindo ou convertendo?" (tema/título explícitos
     // da Ana — título interno no Canva: "Instagram Post: Atraindo ou
@@ -3144,7 +3144,7 @@ const templates: Template[] = [
   },
   {
     id: "template41",
-    title: "Template 41",
+    title: "Feed — Social Media #41",
     slug: "template41",
     // "Checklist mensal de análise do Instagram" (tema/título explícitos
     // da Ana — título interno no Canva: "Checklist Mensal Instagram
@@ -3175,7 +3175,7 @@ const templates: Template[] = [
   },
   {
     id: "template42",
-    title: "Template 42",
+    title: "Carrossel — Social Media #42",
     slug: "template42",
     // "Como apresentar seu trabalho para um novo cliente" (tema/título
     // explícitos da Ana — título interno no Canva: "Carrossel Instagram
@@ -3212,7 +3212,7 @@ const templates: Template[] = [
   },
   {
     id: "template43",
-    title: "Template 43",
+    title: "Carrossel — Social Media #43",
     slug: "template43",
     // "O que um social media realmente faz?" (tema explícito da Ana —
     // título interno no Canva: "Carrossel Instagram: Social Media").
@@ -3238,7 +3238,7 @@ const templates: Template[] = [
   },
   {
     id: "template44",
-    title: "Template 44",
+    title: "Carrossel — Social Media #44",
     slug: "template44",
     // "Social media não é só fazer post" (tema explícito da Ana — título
     // interno no Canva: "Carrossel Mosaico: Social Media Não Só Post").
@@ -3276,7 +3276,7 @@ const templates: Template[] = [
   },
   {
     id: "template45",
-    title: "Template 45",
+    title: "Carrossel — Social Media #45",
     slug: "template45",
     // "5 coisas que você precisa saber antes de fechar com um cliente"
     // (tema explícito da Ana — título interno no Canva: "Carrossel
@@ -3305,7 +3305,7 @@ const templates: Template[] = [
   },
   {
     id: "template46",
-    title: "Template 46",
+    title: "Carrossel — Social Media #46",
     slug: "template46",
     // "Como organizar um calendário de conteúdo" (tema explícito da Ana —
     // título interno no Canva: "Carrossel Calendário de Conteúdo").
@@ -3333,7 +3333,7 @@ const templates: Template[] = [
   },
   {
     id: "template47",
-    title: "Template 47",
+    title: "Carrossel — Social Media #47",
     slug: "template47",
     // "O que pedir ao cliente antes de começar um projeto" (tema
     // explícito da Ana — título interno no Canva: "Carrossel: Briefing do
@@ -3374,7 +3374,7 @@ const templates: Template[] = [
   },
   {
     id: "template48",
-    title: "Template 48",
+    title: "Carrossel — Social Media #48",
     slug: "template48",
     // "Briefing: o que não pode faltar" (tema explícito da Ana — mesmo
     // título interno no Canva: "Carrossel Briefing do Projeto"). Design
@@ -3414,7 +3414,7 @@ const templates: Template[] = [
   },
   {
     id: "template49",
-    title: "Template 49",
+    title: "Carrossel — Social Media #49",
     slug: "template49",
     // "Como transformar objetivos do cliente em conteúdo" (tema explícito
     // da Ana — título interno no Canva: "Carrossel: Objetivos do
@@ -3442,7 +3442,7 @@ const templates: Template[] = [
   },
   {
     id: "template50",
-    title: "Template 50",
+    title: "Carrossel — Social Media #50",
     slug: "template50",
     // "5 sinais de que seu cliente precisa de estratégia" (tema explícito
     // da Ana — título interno no Canva: "Carrossel: Estratégia para
@@ -3470,7 +3470,7 @@ const templates: Template[] = [
   },
   {
     id: "template51",
-    title: "Template 51",
+    title: "Carrossel — Social Media #51",
     slug: "template51",
     // "Social media: criatividade + estratégia + análise" (tema explícito
     // da Ana — título interno no Canva: "Social Media Carousel
@@ -3515,7 +3515,7 @@ const templates: Template[] = [
     // Tema real: "5 sinais de que seu contrato tem uma cláusula abusiva"
     // (era o `title` original, campo "NOME" do primeiro pedido).
     id: "5-sinais-clausula-abusiva",
-    title: "Template 01",
+    title: "Carrossel — Institucional Advocacia #01",
     slug: "5-sinais-clausula-abusiva",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3553,7 +3553,7 @@ const templates: Template[] = [
     // fazer nas primeiras 24h após um acidente de trânsito" (era o
     // `title` original).
     id: "24h-apos-acidente",
-    title: "Template 02",
+    title: "Carrossel — Institucional Advocacia #02",
     slug: "24h-apos-acidente",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3586,7 +3586,7 @@ const templates: Template[] = [
     // "Mitos sobre pensão alimentícia que todo mundo acredita" (era o
     // `title` original).
     id: "mitos-pensao-alimenticia",
-    title: "Template 03",
+    title: "Carrossel — Institucional Advocacia #03",
     slug: "mitos-pensao-alimenticia",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3621,7 +3621,7 @@ const templates: Template[] = [
     // precisar de correção posterior desta vez. Tema real: "Como funciona
     // a prescrição de uma dívida" (era o `title` no pedido da Ana).
     id: "prescricao-divida",
-    title: "Template 04",
+    title: "Carrossel — Institucional Advocacia #04",
     slug: "prescricao-divida",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3656,7 +3656,7 @@ const templates: Template[] = [
     // trabalhador que ninguém usa por não saber que existem" (era o
     // `title` no pedido da Ana).
     id: "direitos-trabalhador",
-    title: "Template 05",
+    title: "Carrossel — Institucional Advocacia #05",
     slug: "direitos-trabalhador",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3699,7 +3699,7 @@ const templates: Template[] = [
     // "3" final) — confirmado via resolve-shortlink que resolve pro mesmo
     // design_id do link de preview antes do cadastro prosseguir.
     id: "lgpd-advocacia",
-    title: "Template 06",
+    title: "Carrossel — Institucional Advocacia #06",
     slug: "lgpd-advocacia",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3739,7 +3739,7 @@ const templates: Template[] = [
     // desde o cadastro ("Template 07"/"Carrossel"), mesmo padrão já
     // estabelecido pra este kit.
     id: "demissao-justa-causa",
-    title: "Template 07",
+    title: "Carrossel — Institucional Advocacia #07",
     slug: "demissao-justa-causa",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3774,7 +3774,7 @@ const templates: Template[] = [
     // `category` sequenciais desde o cadastro ("Template 08"/
     // "Carrossel"), mesmo padrão já estabelecido pra este kit.
     id: "inventario",
-    title: "Template 08",
+    title: "Carrossel — Institucional Advocacia #08",
     slug: "inventario",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3810,7 +3810,7 @@ const templates: Template[] = [
     // kit. `title`/`category` sequenciais desde o cadastro ("Template
     // 09"/"Carrossel"), mesmo padrão já estabelecido pra este kit.
     id: "assedio-moral",
-    title: "Template 09",
+    title: "Carrossel — Institucional Advocacia #09",
     slug: "assedio-moral",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3845,7 +3845,7 @@ const templates: Template[] = [
     // sequenciais desde o cadastro ("Template 10"/"Carrossel"), mesmo
     // padrão já estabelecido pra este kit.
     id: "guarda-compartilhada",
-    title: "Template 10",
+    title: "Carrossel — Institucional Advocacia #10",
     slug: "guarda-compartilhada",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3885,7 +3885,7 @@ const templates: Template[] = [
     // `title`/`category` sequenciais desde o cadastro ("Template 11"/
     // "Carrossel"), mesmo padrão já estabelecido pra este kit.
     id: "contrato-aluguel",
-    title: "Template 11",
+    title: "Carrossel — Institucional Advocacia #11",
     slug: "contrato-aluguel",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3930,7 +3930,7 @@ const templates: Template[] = [
     // cópia independente, nunca toca no original), usado como
     // `canvaUrl` abaixo.
     id: "golpes-juridicos",
-    title: "Template 12",
+    title: "Carrossel — Institucional Advocacia #12",
     slug: "golpes-juridicos",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -3992,7 +3992,7 @@ const templates: Template[] = [
     // Resposta da Ana: "Manter as 7 páginas como estão" — nenhuma
     // página removida, reordenada ou recriada.
     id: "rescisao-indireta",
-    title: "Template 13",
+    title: "Carrossel — Institucional Advocacia #13",
     slug: "rescisao-indireta",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4046,7 +4046,7 @@ const templates: Template[] = [
     // azul-marinho/bege correta, texto do design_content (via
     // read-design) coerente do início ao fim.
     id: "direitos-consumidor",
-    title: "Template 14",
+    title: "Carrossel — Institucional Advocacia #14",
     slug: "direitos-consumidor",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4104,7 +4104,7 @@ const templates: Template[] = [
     // (slide01.png sobrescrito), resolvendo a anomalia. Páginas 2-7
     // inalteradas, no tema e na identidade visual certas desde o início.
     id: "testamento",
-    title: "Template 15",
+    title: "Carrossel — Institucional Advocacia #15",
     slug: "testamento",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4154,7 +4154,7 @@ const templates: Template[] = [
     // verdade (gera cópia independente, nunca toca no original), usado
     // como `canvaUrl` abaixo.
     id: "clausula-nao-concorrencia",
-    title: "Template 16",
+    title: "Feed — Institucional Advocacia #16",
     slug: "clausula-nao-concorrencia",
     category: "Feed",
     kitSlug: "advogados",
@@ -4205,7 +4205,7 @@ const templates: Template[] = [
     // verdade (gera cópia independente, nunca toca no original), usado
     // como `canvaUrl` abaixo.
     id: "erros-causa-trabalhista",
-    title: "Template 17",
+    title: "Feed — Institucional Advocacia #17",
     slug: "erros-causa-trabalhista",
     category: "Feed",
     kitSlug: "advogados",
@@ -4252,7 +4252,7 @@ const templates: Template[] = [
     // verdade (gera cópia independente, nunca toca no original), usado
     // como `canvaUrl` abaixo.
     id: "horas-extras",
-    title: "Template 18",
+    title: "Feed — Institucional Advocacia #18",
     slug: "horas-extras",
     category: "Feed",
     kitSlug: "advogados",
@@ -4303,7 +4303,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "divorcio-caminhos",
-    title: "Template 19",
+    title: "Feed — Institucional Advocacia #19",
     slug: "divorcio-caminhos",
     category: "Feed",
     kitSlug: "advogados",
@@ -4351,7 +4351,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "nome-negativado",
-    title: "Template 20",
+    title: "Feed — Institucional Advocacia #20",
     slug: "nome-negativado",
     category: "Feed",
     kitSlug: "advogados",
@@ -4403,7 +4403,7 @@ const templates: Template[] = [
     // cópia independente, nunca toca no original), usado como
     // `canvaUrl` abaixo.
     id: "direitos-trabalhadores-app",
-    title: "Template 21",
+    title: "Carrossel — Institucional Advocacia #21",
     slug: "direitos-trabalhadores-app",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4453,7 +4453,7 @@ const templates: Template[] = [
     // cópia independente, nunca toca no original), usado como
     // `canvaUrl` abaixo.
     id: "usucapiao",
-    title: "Template 22",
+    title: "Feed — Institucional Advocacia #22",
     slug: "usucapiao",
     category: "Feed",
     kitSlug: "advogados",
@@ -4511,7 +4511,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "sociedade-amigos",
-    title: "Template 23",
+    title: "Feed — Institucional Advocacia #23",
     slug: "sociedade-amigos",
     category: "Feed",
     kitSlug: "advogados",
@@ -4560,7 +4560,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "dano-moral",
-    title: "Template 24",
+    title: "Feed — Institucional Advocacia #24",
     slug: "dano-moral",
     category: "Feed",
     kitSlug: "advogados",
@@ -4609,7 +4609,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "guarda-animais",
-    title: "Template 25",
+    title: "Feed — Institucional Advocacia #25",
     slug: "guarda-animais",
     category: "Feed",
     kitSlug: "advogados",
@@ -4658,7 +4658,7 @@ const templates: Template[] = [
     // cópia, nunca acesso colaborativo ao original), usado como
     // `canvaUrl` abaixo.
     id: "protecao-marca",
-    title: "Template 26",
+    title: "Feed — Institucional Advocacia #26",
     slug: "protecao-marca",
     category: "Feed",
     kitSlug: "advogados",
@@ -4711,7 +4711,7 @@ const templates: Template[] = [
     // cópia, nunca acesso colaborativo ao original), usado como
     // `canvaUrl` abaixo.
     id: "mei-me-eireli",
-    title: "Template 27",
+    title: "Carrossel — Institucional Advocacia #27",
     slug: "mei-me-eireli",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4765,7 +4765,7 @@ const templates: Template[] = [
     // cópia, nunca acesso colaborativo ao original), usado como
     // `canvaUrl` abaixo.
     id: "clausulas-contratos",
-    title: "Template 28",
+    title: "Carrossel — Institucional Advocacia #28",
     slug: "clausulas-contratos",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4837,7 +4837,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "cobranca-indevida",
-    title: "Template 29",
+    title: "Carrossel — Institucional Advocacia #29",
     slug: "cobranca-indevida",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4899,7 +4899,7 @@ const templates: Template[] = [
     // resolve para `.../view?...&mode=preview` — o Template Link de
     // verdade, usado como `canvaUrl` abaixo.
     id: "adocao-brasil",
-    title: "Template 30",
+    title: "Carrossel — Institucional Advocacia #30",
     slug: "adocao-brasil",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -4957,7 +4957,7 @@ const templates: Template[] = [
     // resolve para `.../view?...&mode=preview` — o Template Link de
     // verdade, usado como `canvaUrl` abaixo.
     id: "direitos-gestante",
-    title: "Template 31",
+    title: "Carrossel — Institucional Advocacia #31",
     slug: "direitos-gestante",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5012,7 +5012,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "holerite-direitos",
-    title: "Template 32",
+    title: "Carrossel — Institucional Advocacia #32",
     slug: "holerite-direitos",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5069,7 +5069,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "multa-transito",
-    title: "Template 33",
+    title: "Carrossel — Institucional Advocacia #33",
     slug: "multa-transito",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5125,7 +5125,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "heranca-digital",
-    title: "Template 34",
+    title: "Carrossel — Institucional Advocacia #34",
     slug: "heranca-digital",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5183,7 +5183,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade, usado
     // como `canvaUrl` abaixo.
     id: "contrato-social",
-    title: "Template 35",
+    title: "Carrossel — Institucional Advocacia #35",
     slug: "contrato-social",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5238,7 +5238,7 @@ const templates: Template[] = [
     // realmente cumpre "personalizar cópia própria sem alterar o
     // original"), usado como `canvaUrl` abaixo.
     id: "contestacoes-pix",
-    title: "Template 36",
+    title: "Carrossel — Institucional Advocacia #36",
     slug: "contestacoes-pix",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5297,7 +5297,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade (o que
     // efetivamente cumpre o pedido), usado como `canvaUrl` abaixo.
     id: "fidelidade-plano-saude",
-    title: "Template 37",
+    title: "Carrossel — Institucional Advocacia #37",
     slug: "fidelidade-plano-saude",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5347,7 +5347,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade (o que
     // efetivamente cumpre o pedido), usado como `canvaUrl` abaixo.
     id: "partilha-bens-divorcio",
-    title: "Template 38",
+    title: "Feed — Institucional Advocacia #38",
     slug: "partilha-bens-divorcio",
     category: "Feed",
     kitSlug: "advogados",
@@ -5395,7 +5395,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade (o que
     // efetivamente cumpre o pedido), usado como `canvaUrl` abaixo.
     id: "abandono-emprego",
-    title: "Template 39",
+    title: "Feed — Institucional Advocacia #39",
     slug: "abandono-emprego",
     category: "Feed",
     kitSlug: "advogados",
@@ -5449,7 +5449,7 @@ const templates: Template[] = [
     // `.../view?...&mode=preview` — o Template Link de verdade (o que
     // efetivamente cumpre o pedido), usado como `canvaUrl` abaixo.
     id: "imovel-na-planta",
-    title: "Template 40",
+    title: "Feed — Institucional Advocacia #40",
     slug: "imovel-na-planta",
     category: "Feed",
     kitSlug: "advogados",
@@ -5502,7 +5502,7 @@ const templates: Template[] = [
     // atendido pelo comportamento padrão do DownloadTemplateButton —
     // nenhuma mudança necessária nesse botão.
     id: "propaganda-enganosa",
-    title: "Template 41",
+    title: "Feed — Institucional Advocacia #41",
     slug: "propaganda-enganosa",
     category: "Feed",
     kitSlug: "advogados",
@@ -5567,7 +5567,7 @@ const templates: Template[] = [
     // bate exatamente com o pedido antes de usar — sem anomalia real
     // aqui, apenas nome genérico coincidente.
     id: "planejamento-sucessorio",
-    title: "Template 42",
+    title: "Feed — Institucional Advocacia #42",
     slug: "planejamento-sucessorio",
     category: "Feed",
     kitSlug: "advogados",
@@ -5622,7 +5622,7 @@ const templates: Template[] = [
     // atendido pelo comportamento padrão do DownloadTemplateButton —
     // nenhuma mudança necessária nesse botão.
     id: "boletim-de-ocorrencia",
-    title: "Template 43",
+    title: "Feed — Institucional Advocacia #43",
     slug: "boletim-de-ocorrencia",
     category: "Feed",
     kitSlug: "advogados",
@@ -5687,7 +5687,7 @@ const templates: Template[] = [
     // original" já é atendido pelo comportamento padrão do
     // DownloadTemplateButton — nenhuma mudança necessária nesse botão.
     id: "clausulas-escondidas-financiamento",
-    title: "Template 44",
+    title: "Carrossel — Institucional Advocacia #44",
     slug: "clausulas-escondidas-financiamento",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5751,7 +5751,7 @@ const templates: Template[] = [
     // original" já é atendido pelo comportamento padrão do
     // DownloadTemplateButton — nenhuma mudança necessária nesse botão.
     id: "defeito-no-produto",
-    title: "Template 45",
+    title: "Carrossel — Institucional Advocacia #45",
     slug: "defeito-no-produto",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5819,7 +5819,7 @@ const templates: Template[] = [
     // original" já é atendido pelo comportamento padrão do
     // DownloadTemplateButton — nenhuma mudança necessária nesse botão.
     id: "licenca-maternidade-paternidade",
-    title: "Template 46",
+    title: "Carrossel — Institucional Advocacia #46",
     slug: "licenca-maternidade-paternidade",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5886,7 +5886,7 @@ const templates: Template[] = [
     // original" já é atendido pelo comportamento padrão do
     // DownloadTemplateButton — nenhuma mudança necessária nesse botão.
     id: "direitos-autorais-postar",
-    title: "Template 47",
+    title: "Carrossel — Institucional Advocacia #47",
     slug: "direitos-autorais-postar",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -5953,7 +5953,7 @@ const templates: Template[] = [
     // original" já é atendido pelo comportamento padrão do
     // DownloadTemplateButton — nenhuma mudança necessária nesse botão.
     id: "virar-socio-de-alguem",
-    title: "Template 48",
+    title: "Carrossel — Institucional Advocacia #48",
     slug: "virar-socio-de-alguem",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -6022,7 +6022,7 @@ const templates: Template[] = [
     // original" já é atendido pelo comportamento padrão do
     // DownloadTemplateButton — nenhuma mudança necessária nesse botão.
     id: "erros-contrato-sem-ajuda-juridica",
-    title: "Template 49",
+    title: "Carrossel — Institucional Advocacia #49",
     slug: "erros-contrato-sem-ajuda-juridica",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -6704,7 +6704,7 @@ const templates: Template[] = [
     // design diferente). `title` sequencial ("Template 50", continuando
     // a série Carrossel deste kit). `category: "Carrossel"`.
     id: "definir-honorarios-advocaticios",
-    title: "Template 50",
+    title: "Carrossel — Institucional Advocacia #50",
     slug: "definir-honorarios-advocaticios",
     category: "Carrossel",
     kitSlug: "advogados",
@@ -6786,7 +6786,7 @@ const templates: Template[] = [
     // como `canvaUrl` abaixo. Os dois links continuam separados e
     // nenhum dos dois foi alterado.
     id: "repensar-gestao-empresa",
-    title: "Template 01",
+    title: "Carrossel — Consultoria Empresarial #01",
     slug: "repensar-gestao-empresa",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -6844,7 +6844,7 @@ const templates: Template[] = [
     // como `canvaUrl` abaixo. Os dois links continuam separados e
     // nenhum dos dois foi alterado.
     id: "erros-precificacao-margem",
-    title: "Template 02",
+    title: "Carrossel — Consultoria Empresarial #02",
     slug: "erros-precificacao-margem",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -6908,7 +6908,7 @@ const templates: Template[] = [
     // como `canvaUrl` abaixo. Os dois links continuam separados e
     // nenhum dos dois foi alterado.
     id: "planejamento-estrategico-tarde",
-    title: "Template 03",
+    title: "Carrossel — Consultoria Empresarial #03",
     slug: "planejamento-estrategico-tarde",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -6974,7 +6974,7 @@ const templates: Template[] = [
     // como `canvaUrl` abaixo. Os dois links continuam separados e
     // nenhum dos dois foi alterado.
     id: "medir-alem-faturamento",
-    title: "Template 04",
+    title: "Carrossel — Consultoria Empresarial #04",
     slug: "medir-alem-faturamento",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7033,7 +7033,7 @@ const templates: Template[] = [
     // existe no site e nunca usa canvaUrl — ver DownloadTemplateButton).
     // Os dois links continuam separados e nenhum dos dois foi alterado.
     id: "sinais-contratando-errado",
-    title: "Template 05",
+    title: "Carrossel — Consultoria Empresarial #05",
     slug: "sinais-contratando-errado",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7090,7 +7090,7 @@ const templates: Template[] = [
     // existe no site e nunca usa canvaUrl — ver DownloadTemplateButton).
     // Os dois links continuam separados e nenhum dos dois foi alterado.
     id: "delegar-sem-perder-controle",
-    title: "Template 06",
+    title: "Carrossel — Consultoria Empresarial #06",
     slug: "delegar-sem-perder-controle",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7147,7 +7147,7 @@ const templates: Template[] = [
     // Ano.zip") e read-design (page_count: 8) concordam. Todas as 8
     // páginas em 1080×1350 (4/5), sem inconsistência interna.
     id: "erros-primeiro-ano-empresa",
-    title: "Template 07",
+    title: "Carrossel — Consultoria Empresarial #07",
     slug: "erros-primeiro-ano-empresa",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7203,7 +7203,7 @@ const templates: Template[] = [
     // existe no site e nunca usa canvaUrl — ver DownloadTemplateButton).
     // Os dois links continuam separados e nenhum dos dois foi alterado.
     id: "caixa-aperta",
-    title: "Template 08",
+    title: "Carrossel — Consultoria Empresarial #08",
     slug: "caixa-aperta",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7280,7 +7280,7 @@ const templates: Template[] = [
     // existe no site e nunca usa canvaUrl — ver DownloadTemplateButton).
     // Os dois links continuam separados e nenhum dos dois foi alterado.
     id: "definir-metas-time",
-    title: "Template 09",
+    title: "Carrossel — Consultoria Empresarial #09",
     slug: "definir-metas-time",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7340,7 +7340,7 @@ const templates: Template[] = [
     // existe no site e nunca usa canvaUrl — ver DownloadTemplateButton).
     // Os dois links continuam separados e nenhum dos dois foi alterado.
     id: "empresa-depende-de-voce",
-    title: "Template 10",
+    title: "Carrossel — Consultoria Empresarial #10",
     slug: "empresa-depende-de-voce",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7402,7 +7402,7 @@ const templates: Template[] = [
     // existe no site e nunca usa canvaUrl — ver DownloadTemplateButton).
     // Os dois links continuam separados e nenhum dos dois foi alterado.
     id: "funil-de-vendas-simples",
-    title: "Template 11",
+    title: "Carrossel — Consultoria Empresarial #11",
     slug: "funil-de-vendas-simples",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7442,7 +7442,7 @@ const templates: Template[] = [
     // anteriores eram todos "Carrossel"). `kitSlug: "consultoria-
     // empresarial"` explícito.
     id: "revisar-contrato-social",
-    title: "Template 12",
+    title: "Feed — Consultoria Empresarial #12",
     slug: "revisar-contrato-social",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -7485,7 +7485,7 @@ const templates: Template[] = [
     // página"), mesma situação do Template 12. `kitSlug:
     // "consultoria-empresarial"` explícito.
     id: "erros-comunicacao-times-pequenos",
-    title: "Template 13",
+    title: "Feed — Consultoria Empresarial #13",
     slug: "erros-comunicacao-times-pequenos",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -7528,7 +7528,7 @@ const templates: Template[] = [
     // dos Templates 12/13. `kitSlug: "consultoria-empresarial"`
     // explícito.
     id: "ponto-de-equilibrio",
-    title: "Template 14",
+    title: "Feed — Consultoria Empresarial #14",
     slug: "ponto-de-equilibrio",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -7572,7 +7572,7 @@ const templates: Template[] = [
     // dos Templates 12-14. `kitSlug: "consultoria-empresarial"`
     // explícito.
     id: "kpis-empresa",
-    title: "Template 15",
+    title: "Feed — Consultoria Empresarial #15",
     slug: "kpis-empresa",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -7620,7 +7620,7 @@ const templates: Template[] = [
     // dos Templates 12-15. `kitSlug: "consultoria-empresarial"`
     // explícito.
     id: "processo-onboarding",
-    title: "Template 16",
+    title: "Feed — Consultoria Empresarial #16",
     slug: "processo-onboarding",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -7663,7 +7663,7 @@ const templates: Template[] = [
     // dos Templates 12-16. `kitSlug: "consultoria-empresarial"`
     // explícito.
     id: "abrir-filial",
-    title: "Template 17",
+    title: "Feed — Consultoria Empresarial #17",
     slug: "abrir-filial",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -7716,7 +7716,7 @@ const templates: Template[] = [
     // Instagram 1080×1350 px", conforme pedido). `kitSlug:
     // "consultoria-empresarial"` explícito.
     id: "burnout-lideranca",
-    title: "Template 18",
+    title: "Carrossel — Consultoria Empresarial #18",
     slug: "burnout-lideranca",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7769,7 +7769,7 @@ const templates: Template[] = [
     // compare, negocie, registre"). Todas as 8 páginas em 1080×1350
     // (4/5), sem inconsistência de proporção.
     id: "negociar-fornecedores",
-    title: "Template 19",
+    title: "Carrossel — Consultoria Empresarial #19",
     slug: "negociar-fornecedores",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7823,7 +7823,7 @@ const templates: Template[] = [
     // Instagram 1080×1350 px", conforme pedido). `kitSlug:
     // "consultoria-empresarial"` explícito.
     id: "publico-alvo-erros",
-    title: "Template 20",
+    title: "Carrossel — Consultoria Empresarial #20",
     slug: "publico-alvo-erros",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7884,7 +7884,7 @@ const templates: Template[] = [
     // confirmadas via read-design — page_count: 6 — e pelo zip). `kitSlug:
     // "consultoria-empresarial"` explícito.
     id: "plano-sucessao",
-    title: "Template 21",
+    title: "Carrossel — Consultoria Empresarial #21",
     slug: "plano-sucessao",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -7943,7 +7943,7 @@ const templates: Template[] = [
     // confirmadas via read-design — page_count: 6 — e pelo zip). `kitSlug:
     // "consultoria-empresarial"` explícito.
     id: "captar-investimento",
-    title: "Template 22",
+    title: "Carrossel — Consultoria Empresarial #22",
     slug: "captar-investimento",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8005,7 +8005,7 @@ const templates: Template[] = [
     // reais, confirmadas via read-design — page_count: 10 — e pelo
     // zip). `kitSlug: "consultoria-empresarial"` explícito.
     id: "sinais-automatizar-processo",
-    title: "Template 23",
+    title: "Carrossel — Consultoria Empresarial #23",
     slug: "sinais-automatizar-processo",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8063,7 +8063,7 @@ const templates: Template[] = [
     // confirmadas via read-design — page_count: 10 — e pelo zip).
     // `kitSlug: "consultoria-empresarial"` explícito.
     id: "reunioes-curtas",
-    title: "Template 24",
+    title: "Carrossel — Consultoria Empresarial #24",
     slug: "reunioes-curtas",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8130,7 +8130,7 @@ const templates: Template[] = [
     // confirmadas via read-design — page_count: 10 — e pelo zip).
     // `kitSlug: "consultoria-empresarial"` explícito.
     id: "erros-fluxo-caixa",
-    title: "Template 25",
+    title: "Carrossel — Consultoria Empresarial #25",
     slug: "erros-fluxo-caixa",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8205,7 +8205,7 @@ const templates: Template[] = [
     // que esse valor foi adicionado ao union — páginas 1080×1440 reais,
     // confirmado via `sips` (não inventado).
     id: "saida-de-socio",
-    title: "Template 26",
+    title: "Carrossel — Consultoria Empresarial #26",
     slug: "saida-de-socio",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8272,7 +8272,7 @@ const templates: Template[] = [
     // "3/4"` — páginas 1080×1440 reais, confirmado via `sips` (mesmo
     // formato do Template 26).
     id: "indicadores-performance-area",
-    title: "Template 27",
+    title: "Carrossel — Consultoria Empresarial #27",
     slug: "indicadores-performance-area",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8341,7 +8341,7 @@ const templates: Template[] = [
     // "consultoria-empresarial"` — pedido não especificou kit; segui o
     // mesmo padrão já confirmado pela Ana para os templates 26 e 27.
     id: "sinais-cultura-organizacional-fraca",
-    title: "Template 28",
+    title: "Feed — Consultoria Empresarial #28",
     slug: "sinais-cultura-organizacional-fraca",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -8400,7 +8400,7 @@ const templates: Template[] = [
     // `id`/`slug: "revisar-antes-expandir-equipe"` — descritivo. `title`
     // sequencial ("Template 29").
     id: "revisar-antes-expandir-equipe",
-    title: "Template 29",
+    title: "Feed — Consultoria Empresarial #29",
     slug: "revisar-antes-expandir-equipe",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -8467,7 +8467,7 @@ const templates: Template[] = [
     // 1080×1440 real, confirmado via `sips` (mesmo formato dos
     // Templates 26 e 27).
     id: "concorrencia-agressiva-preco",
-    title: "Template 30",
+    title: "Feed — Consultoria Empresarial #30",
     slug: "concorrencia-agressiva-preco",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -8526,7 +8526,7 @@ const templates: Template[] = [
     // sequencial ("Template 31"). `aspectRatio: "4/5"` — página
     // 1080×1350 real, confirmado via `sips`.
     id: "erros-terceirizar-servico",
-    title: "Template 31",
+    title: "Feed — Consultoria Empresarial #31",
     slug: "erros-terceirizar-servico",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -8584,7 +8584,7 @@ const templates: Template[] = [
     // sequencial ("Template 32"). `aspectRatio: "4/5"` — página
     // 1080×1350 real, confirmado via `sips`.
     id: "plano-carreira-interno",
-    title: "Template 32",
+    title: "Feed — Consultoria Empresarial #32",
     slug: "plano-carreira-interno",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -8657,7 +8657,7 @@ const templates: Template[] = [
     // especificou kit; segui o padrão já confirmado pela Ana para os
     // Templates 26-32.
     id: "estruturar-processo-feedback",
-    title: "Template 33",
+    title: "Carrossel — Consultoria Empresarial #33",
     slug: "estruturar-processo-feedback",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8735,7 +8735,7 @@ const templates: Template[] = [
     // 10 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel desta vez (sem a inconsistência vista no Template 33).
     id: "sinais-reposicionamento",
-    title: "Template 34",
+    title: "Carrossel — Consultoria Empresarial #34",
     slug: "sinais-reposicionamento",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8802,7 +8802,7 @@ const templates: Template[] = [
     // 10 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "crise-de-imagem",
-    title: "Template 35",
+    title: "Carrossel — Consultoria Empresarial #35",
     slug: "crise-de-imagem",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8866,7 +8866,7 @@ const templates: Template[] = [
     // 10 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "orcamento-anual-realista",
-    title: "Template 36",
+    title: "Carrossel — Consultoria Empresarial #36",
     slug: "orcamento-anual-realista",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8930,7 +8930,7 @@ const templates: Template[] = [
     // 10 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "erros-contratos-fornecedores",
-    title: "Template 37",
+    title: "Carrossel — Consultoria Empresarial #37",
     slug: "erros-contratos-fornecedores",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -8999,7 +8999,7 @@ const templates: Template[] = [
     // 9 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "trocar-sistema-gestao",
-    title: "Template 38",
+    title: "Carrossel — Consultoria Empresarial #38",
     slug: "trocar-sistema-gestao",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9062,7 +9062,7 @@ const templates: Template[] = [
     // 9 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "okrs-trimestrais-time-pequeno",
-    title: "Template 39",
+    title: "Carrossel — Consultoria Empresarial #39",
     slug: "okrs-trimestrais-time-pequeno",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9126,7 +9126,7 @@ const templates: Template[] = [
     // 9 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "sinais-cfo-part-time",
-    title: "Template 40",
+    title: "Carrossel — Consultoria Empresarial #40",
     slug: "sinais-cfo-part-time",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9190,7 +9190,7 @@ const templates: Template[] = [
     // Ana. Todas as 9 páginas 1080×1350 — `aspectRatio: "4/5"`
     // consistente em todo o carrossel.
     id: "demanda-cresce-mais-que-estrutura",
-    title: "Template 41",
+    title: "Carrossel — Consultoria Empresarial #41",
     slug: "demanda-cresce-mais-que-estrutura",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9258,7 +9258,7 @@ const templates: Template[] = [
     // confirmado pela Ana. Todas as 9 páginas 1080×1350 — `aspectRatio:
     // "4/5"` consistente em todo o carrossel.
     id: "erros-precificacao-servico-recorrente",
-    title: "Template 42",
+    title: "Carrossel — Consultoria Empresarial #42",
     slug: "erros-precificacao-servico-recorrente",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9318,7 +9318,7 @@ const templates: Template[] = [
     // sequencial ("Template 43"). `aspectRatio: "4/5"` — página
     // 1080×1350 real, confirmado via `sips`.
     id: "contrato-longo-prazo",
-    title: "Template 43",
+    title: "Feed — Consultoria Empresarial #43",
     slug: "contrato-longo-prazo",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -9375,7 +9375,7 @@ const templates: Template[] = [
     // sequencial ("Template 44"). `aspectRatio: "4/5"` — página
     // 1080×1350 real, confirmado via `sips`.
     id: "comite-decisao-eficiente",
-    title: "Template 44",
+    title: "Feed — Consultoria Empresarial #44",
     slug: "comite-decisao-eficiente",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -9432,7 +9432,7 @@ const templates: Template[] = [
     // ("Template 45"). `aspectRatio: "4/5"` — página 1080×1350 real,
     // confirmado via `sips`.
     id: "codigo-de-conduta",
-    title: "Template 45",
+    title: "Feed — Consultoria Empresarial #45",
     slug: "codigo-de-conduta",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -9489,7 +9489,7 @@ const templates: Template[] = [
     // sequencial ("Template 46"). `aspectRatio: "4/5"` — página
     // 1080×1350 real, confirmado via `sips`.
     id: "demitir-funcionario-chave",
-    title: "Template 46",
+    title: "Feed — Consultoria Empresarial #46",
     slug: "demitir-funcionario-chave",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -9550,7 +9550,7 @@ const templates: Template[] = [
     // `title` sequencial ("Template 47"). `aspectRatio: "4/5"` —
     // página 1080×1350 real, confirmado via `sips`.
     id: "plano-contingencia-financeira",
-    title: "Template 47",
+    title: "Feed — Consultoria Empresarial #47",
     slug: "plano-contingencia-financeira",
     category: "Feed",
     kitSlug: "consultoria-empresarial",
@@ -9611,7 +9611,7 @@ const templates: Template[] = [
     // Ana. Todas as 9 páginas 1080×1350 — `aspectRatio: "4/5"`
     // consistente em todo o carrossel.
     id: "erros-apresentacoes-investidores",
-    title: "Template 48",
+    title: "Carrossel — Consultoria Empresarial #48",
     slug: "erros-apresentacoes-investidores",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9681,7 +9681,7 @@ const templates: Template[] = [
     // 9 páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "primeiros-90-dias-negocio",
-    title: "Template 49",
+    title: "Carrossel — Consultoria Empresarial #49",
     slug: "primeiros-90-dias-negocio",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -9759,7 +9759,7 @@ const templates: Template[] = [
     // páginas 1080×1350 — `aspectRatio: "4/5"` consistente em todo o
     // carrossel.
     id: "custos-ocultos-processo",
-    title: "Template 50",
+    title: "Carrossel — Consultoria Empresarial #50",
     slug: "custos-ocultos-processo",
     category: "Carrossel",
     kitSlug: "consultoria-empresarial",
@@ -10482,7 +10482,7 @@ const templates: Template[] = [
     // seu resultado, mesmo treinando todo dia") preservado só em
     // comentário/`id`/`slug`, nunca exibido ao usuário. `id`/`slug`
     // intocados de propósito (mudar quebraria a rota já compartilhada).
-    title: "Template 01",
+    title: "Carrossel — Personal Trainer #01",
     slug: "5-erros-que-travam-seu-resultado",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10543,7 +10543,7 @@ const templates: Template[] = [
     // `title` = "Template 02" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "Por que treinar até a falha nem sempre é a melhor estratégia".
-    title: "Template 02",
+    title: "Carrossel — Personal Trainer #02",
     slug: "treinar-ate-a-falha",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10609,7 +10609,7 @@ const templates: Template[] = [
     // `title` = "Template 03" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "Mitos sobre hipertrofia que ainda circulam na academia".
-    title: "Template 03",
+    title: "Carrossel — Personal Trainer #03",
     slug: "mitos-sobre-hipertrofia",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10651,7 +10651,7 @@ const templates: Template[] = [
     // `title` = "Template 04" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "O que fazer nos primeiros 5 minutos antes do treino".
-    title: "Template 04",
+    title: "Carrossel — Personal Trainer #04",
     slug: "5-minutos-antes-do-treino",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10700,7 +10700,7 @@ const templates: Template[] = [
     // `title` = "Template 05" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "Sinais de que você está treinando o mesmo grupo muscular demais".
-    title: "Template 05",
+    title: "Carrossel — Personal Trainer #05",
     slug: "mesmo-grupo-muscular-demais",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10750,7 +10750,7 @@ const templates: Template[] = [
     // `title` = "Template 06" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "Como montar uma divisão de treino pra iniciante".
-    title: "Template 06",
+    title: "Carrossel — Personal Trainer #06",
     slug: "divisao-de-treino-para-iniciantes",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10802,7 +10802,7 @@ const templates: Template[] = [
     // `title` = "Template 07" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "O que priorizar quando o tempo de treino é curto".
-    title: "Template 07",
+    title: "Carrossel — Personal Trainer #07",
     slug: "o-que-priorizar-no-treino-curto",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10852,7 +10852,7 @@ const templates: Template[] = [
     // `title` = "Template 08" — mesmo pedido de numeração da Ana
     // (2026-10-13), aplicado a todos os templates deste kit. Tema real:
     // "Erros comuns ao treinar em jejum".
-    title: "Template 08",
+    title: "Carrossel — Personal Trainer #08",
     slug: "erros-comuns-ao-treinar-em-jejum",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10908,7 +10908,7 @@ const templates: Template[] = [
     // marca d'água nas páginas — confirmado visualmente, página por
     // página: nenhuma identificação de criador em nenhuma das 7 imagens.
     id: "como-saber-se-esta-progredindo",
-    title: "Template 09",
+    title: "Carrossel — Personal Trainer #09",
     slug: "como-saber-se-esta-progredindo",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -10963,7 +10963,7 @@ const templates: Template[] = [
     // página por página: nenhuma identificação de criador em nenhuma das
     // 7 imagens.
     id: "sinais-de-overtraining",
-    title: "Template 10",
+    title: "Carrossel — Personal Trainer #10",
     slug: "sinais-de-overtraining",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11015,7 +11015,7 @@ const templates: Template[] = [
     // colidir — este é um produto de página única separado, não uma
     // variante de cor do mesmo registro.
     id: "sinais-de-overtraining-capa",
-    title: "Template 11",
+    title: "Feed — Personal Trainer #11",
     slug: "sinais-de-overtraining-capa",
     // Página única (post, não carrossel) — `category: "Feed"`, mesma
     // convenção já usada em outros templates de página única do
@@ -11065,7 +11065,7 @@ const templates: Template[] = [
     // título interno do design), 1080×1350 — mesmo arquivo apontado
     // pelos links abaixo, nunca recriado/redesenhado.
     id: "mitos-sobre-alongamento",
-    title: "Template 12",
+    title: "Feed — Personal Trainer #12",
     slug: "mitos-sobre-alongamento",
     // Página única (post, não carrossel) — `category: "Feed"`, mesma
     // convenção já usada no Template 11 e em outros templates de
@@ -11118,7 +11118,7 @@ const templates: Template[] = [
     // Premium Instagram.png` (nome igual ao título interno do design),
     // 1080×1350.
     id: "como-ajustar-a-carga-sem-se-machucar",
-    title: "Template 13",
+    title: "Feed — Personal Trainer #13",
     slug: "como-ajustar-a-carga-sem-se-machucar",
     // Página única (post, não carrossel) — `category: "Feed"`, mesma
     // convenção já usada nos Templates 11/12.
@@ -11168,7 +11168,7 @@ const templates: Template[] = [
     // 2-6 do zip removidas de `public/templates/.../` por não serem mais
     // referenciadas por nenhum campo.
     id: "o-que-considerar-antes-de-treinar-com-dor",
-    title: "Template 14",
+    title: "Feed — Personal Trainer #14",
     slug: "o-que-considerar-antes-de-treinar-com-dor",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -11209,7 +11209,7 @@ const templates: Template[] = [
     // Postura.png` (nome igual ao título interno do design, só com "_"
     // no lugar de ":" por ser inválido em nome de arquivo), 1080×1350.
     id: "erros-de-postura-exercicios-basicos",
-    title: "Template 15",
+    title: "Feed — Personal Trainer #15",
     slug: "erros-de-postura-exercicios-basicos",
     // Página única (post, não carrossel) — `category: "Feed"`, mesma
     // convenção já usada nos Templates 11-14.
@@ -11260,7 +11260,7 @@ const templates: Template[] = [
     // `~/Downloads/Treino Instagram 7 Páginas em Casa.png` (nome igual
     // ao título interno do design), 1080×1350.
     id: "treino-em-casa-sem-equipamento",
-    title: "Template 16",
+    title: "Feed — Personal Trainer #16",
     slug: "treino-em-casa-sem-equipamento",
     // Página única (post, não carrossel) — `category: "Feed"`, mesma
     // convenção já usada nos Templates 11-15.
@@ -11305,7 +11305,7 @@ const templates: Template[] = [
     // `~/Downloads/Carrossel Instagram Respiração no Treino.png` (nome
     // igual ao título interno do design), 1080×1350.
     id: "respiracao-errada-no-treino",
-    title: "Template 17",
+    title: "Feed — Personal Trainer #17",
     slug: "respiracao-errada-no-treino",
     // Página única (post, não carrossel) — `category: "Feed"`, mesma
     // convenção já usada nos Templates 11-16.
@@ -11356,7 +11356,7 @@ const templates: Template[] = [
     // dois, 4 fatores antes de decidir (objetivo, intensidade, fadiga,
     // recuperação), encerramento com CTA.
     id: "cardio-ou-musculacao-primeiro",
-    title: "Template 18",
+    title: "Carrossel — Personal Trainer #18",
     slug: "cardio-ou-musculacao-primeiro",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11405,7 +11405,7 @@ const templates: Template[] = [
     // os movimentos do treino, 04 aumentar a especificidade, 05
     // preparar-se para a primeira série —, encerramento com CTA.
     id: "aquecimento-eficiente-5-minutos",
-    title: "Template 19",
+    title: "Carrossel — Personal Trainer #19",
     slug: "aquecimento-eficiente-5-minutos",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11457,7 +11457,7 @@ const templates: Template[] = [
     // encerramento ("Não existe atalho para escolher onde perder
     // gordura.").
     id: "mitos-gordura-localizada",
-    title: "Template 20",
+    title: "Carrossel — Personal Trainer #20",
     slug: "mitos-gordura-localizada",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11510,7 +11510,7 @@ const templates: Template[] = [
     // para voltar; encerramento com orientação de emergência real (SAMU
     // 192, no Brasil).
     id: "tontura-durante-o-treino",
-    title: "Template 21",
+    title: "Carrossel — Personal Trainer #21",
     slug: "tontura-durante-o-treino",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11558,7 +11558,7 @@ const templates: Template[] = [
     // treino novo (checklist de 5 perguntas antes de trocar tudo);
     // encerramento ("Não troque por trocar. Ajuste com estratégia.").
     id: "sinais-trocar-de-treino",
-    title: "Template 22",
+    title: "Carrossel — Personal Trainer #22",
     slug: "sinais-trocar-de-treino",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11611,7 +11611,7 @@ const templates: Template[] = [
     // reforça que "cada gestação exige um olhar individual". Sem
     // nenhuma anomalia de página.
     id: "treinar-com-seguranca-na-gravidez",
-    title: "Template 23",
+    title: "Carrossel — Personal Trainer #23",
     slug: "treinar-com-seguranca-na-gravidez",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11663,7 +11663,7 @@ const templates: Template[] = [
     // lesão, cirurgia ou doença); encerramento ("Não tente recuperar
     // tudo de uma vez.").
     id: "erros-ao-voltar-a-treinar",
-    title: "Template 24",
+    title: "Carrossel — Personal Trainer #24",
     slug: "erros-ao-voltar-a-treinar",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11715,7 +11715,7 @@ const templates: Template[] = [
     // só quando houver motivo real (técnica consistente); encerramento
     // ("Progresso não é só levantar mais.").
     id: "antes-de-aumentar-a-carga",
-    title: "Template 25",
+    title: "Carrossel — Personal Trainer #25",
     slug: "antes-de-aumentar-a-carga",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11771,7 +11771,7 @@ const templates: Template[] = [
     // ("Seu primeiro treino precisa ser sustentável. Comece pelo básico.
     // Evolua com controle.").
     id: "treino-funcional-para-iniciantes",
-    title: "Template 26",
+    title: "Carrossel — Personal Trainer #26",
     slug: "treino-funcional-para-iniciantes",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11826,7 +11826,7 @@ const templates: Template[] = [
     // atendimento médico imediato); encerramento ("Descansar também é
     // saber treinar.").
     id: "sinais-de-fadiga-muscular-que-pedem-descanso",
-    title: "Template 27",
+    title: "Carrossel — Personal Trainer #27",
     slug: "sinais-de-fadiga-muscular-que-pedem-descanso",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -11876,7 +11876,7 @@ const templates: Template[] = [
     // consistência mesmo sem motivação" — confirma exatamente o título
     // pedido.
     id: "como-manter-a-consistencia-sem-motivacao",
-    title: "Template 28",
+    title: "Feed — Personal Trainer #28",
     slug: "como-manter-a-consistencia-sem-motivacao",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -11923,7 +11923,7 @@ const templates: Template[] = [
     // treino de abdômen / 'Definir a barriga'" — confirma exatamente
     // o título pedido.
     id: "mitos-sobre-treino-de-abdomen",
-    title: "Template 29",
+    title: "Feed — Personal Trainer #29",
     slug: "mitos-sobre-treino-de-abdomen",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -11969,7 +11969,7 @@ const templates: Template[] = [
     // treino em dias de menos energia" — confirma exatamente o título
     // pedido.
     id: "como-ajustar-o-treino-em-dias-de-menos-energia",
-    title: "Template 30",
+    title: "Feed — Personal Trainer #30",
     slug: "como-ajustar-o-treino-em-dias-de-menos-energia",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12019,7 +12019,7 @@ const templates: Template[] = [
     // no agachamento que podem sobrecarregar o joelho" — confirma
     // exatamente o título pedido.
     id: "erros-de-execucao-no-agachamento-que-sobrecarregam-o-joelho",
-    title: "Template 31",
+    title: "Feed — Personal Trainer #31",
     slug: "erros-de-execucao-no-agachamento-que-sobrecarregam-o-joelho",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12070,7 +12070,7 @@ const templates: Template[] = [
     // no treino pra quem tem rotina corrida" — confirma exatamente o
     // título pedido.
     id: "o-que-priorizar-no-treino-para-rotina-corrida",
-    title: "Template 32",
+    title: "Feed — Personal Trainer #32",
     slug: "o-que-priorizar-no-treino-para-rotina-corrida",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12123,7 +12123,7 @@ const templates: Template[] = [
     // enviado, não algo a corrigir no cadastro (a arte é usada
     // exatamente como exportada do Canva).
     id: "sinais-de-que-voce-precisa-de-mais-descanso-entre-series",
-    title: "Template 33",
+    title: "Carrossel — Personal Trainer #33",
     slug: "sinais-de-que-voce-precisa-de-mais-descanso-entre-series",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12176,7 +12176,7 @@ const templates: Template[] = [
     // final ficam parcialmente cobertos pela foto, um problema de
     // layout do design original.
     id: "como-montar-um-treino-de-mobilidade-para-quem-trabalha-sentado",
-    title: "Template 34",
+    title: "Carrossel — Personal Trainer #34",
     slug: "como-montar-um-treino-de-mobilidade-para-quem-trabalha-sentado",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12236,7 +12236,7 @@ const templates: Template[] = [
     // médica. Encerramento: "Voltar bem importa mais do que voltar
     // rápido."
     id: "o-que-fazer-antes-de-voltar-a-treinar-apos-lesao",
-    title: "Template 35",
+    title: "Carrossel — Personal Trainer #35",
     slug: "o-que-fazer-antes-de-voltar-a-treinar-apos-lesao",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12288,7 +12288,7 @@ const templates: Template[] = [
     // sobreposto por uma camada de texto de fundo semitransparente,
     // problema de layout do design original.
     id: "mitos-sobre-treinar-todo-dia",
-    title: "Template 36",
+    title: "Carrossel — Personal Trainer #36",
     slug: "mitos-sobre-treinar-todo-dia",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12341,7 +12341,7 @@ const templates: Template[] = [
     // sintomas); encerramento ("O melhor exercício é aquele que faz
     // sentido pra você.").
     id: "como-identificar-se-um-exercicio-nao-e-ideal-pro-seu-corpo",
-    title: "Template 37",
+    title: "Carrossel — Personal Trainer #37",
     slug: "como-identificar-se-um-exercicio-nao-e-ideal-pro-seu-corpo",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12395,7 +12395,7 @@ const templates: Template[] = [
     // encerramento ("Nem toda diferença é um problema. Mas vale
     // observar.").
     id: "sinais-de-desequilibrio-muscular-que-passam-despercebidos",
-    title: "Template 38",
+    title: "Carrossel — Personal Trainer #38",
     slug: "sinais-de-desequilibrio-muscular-que-passam-despercebidos",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12452,7 +12452,7 @@ const templates: Template[] = [
     // necessário; encerramento ("Independência se constrói com
     // orientação.").
     id: "o-que-considerar-antes-de-treinar-sozinho-pela-primeira-vez",
-    title: "Template 39",
+    title: "Carrossel — Personal Trainer #39",
     slug: "o-que-considerar-antes-de-treinar-sozinho-pela-primeira-vez",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12506,7 +12506,7 @@ const templates: Template[] = [
     // lidar com semanas que fogem do planejado sem abandonar a rotina;
     // encerramento ("Seu primeiro mês é o começo, não a prova final.").
     id: "como-montar-metas-de-treino-realistas-pro-primeiro-mes",
-    title: "Template 40",
+    title: "Carrossel — Personal Trainer #40",
     slug: "como-montar-metas-de-treino-realistas-pro-primeiro-mes",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12559,7 +12559,7 @@ const templates: Template[] = [
     // encerramento ("O cinturão funciona melhor quando você sabe por
     // que está usando.").
     id: "erros-comuns-ao-usar-cinturao-de-musculacao",
-    title: "Template 41",
+    title: "Carrossel — Personal Trainer #41",
     slug: "erros-comuns-ao-usar-cinturao-de-musculacao",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12612,7 +12612,7 @@ const templates: Template[] = [
     // corpo); encerramento ("Treinar mais não é sempre treinar
     // melhor.").
     id: "o-que-priorizar-intensidade-ou-volume-de-treino",
-    title: "Template 42",
+    title: "Carrossel — Personal Trainer #42",
     slug: "o-que-priorizar-intensidade-ou-volume-de-treino",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12668,7 +12668,7 @@ const templates: Template[] = [
     // enquanto as páginas 2–7 vêm em 1080×1350 (4:5) — `aspectRatio`
     // do cadastro usa o formato majoritário (4:5, 6 das 7 páginas).
     id: "sinais-de-que-sua-tecnica-no-levantamento-terra-esta-errada",
-    title: "Template 43",
+    title: "Carrossel — Personal Trainer #43",
     slug: "sinais-de-que-sua-tecnica-no-levantamento-terra-esta-errada",
     category: "Carrossel",
     kitSlug: "personal-trainer",
@@ -12720,7 +12720,7 @@ const templates: Template[] = [
     // treino em dias de viagem" — confirma exatamente o título
     // pedido.
     id: "como-manter-o-treino-em-dias-de-viagem",
-    title: "Template 44",
+    title: "Feed — Personal Trainer #44",
     slug: "como-manter-o-treino-em-dias-de-viagem",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12767,7 +12767,7 @@ const templates: Template[] = [
     // postagem única (não transformar em carrossel/capa de Reels) —
     // respeitado.
     id: "o-que-fazer-se-o-treino-parar-de-te-dar-prazer",
-    title: "Template 45",
+    title: "Feed — Personal Trainer #45",
     slug: "o-que-fazer-se-o-treino-parar-de-te-dar-prazer",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12817,7 +12817,7 @@ const templates: Template[] = [
     // reforçou explicitamente para manter a classificação de postagem
     // única — respeitado.
     id: "como-montar-um-treino-de-reabilitacao-leve-pos-lesao",
-    title: "Template 46",
+    title: "Feed — Personal Trainer #46",
     slug: "como-montar-um-treino-de-reabilitacao-leve-pos-lesao",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12864,7 +12864,7 @@ const templates: Template[] = [
     // profissional"). Pedido reforçou explicitamente para manter a
     // classificação de postagem única — respeitado.
     id: "sinais-de-que-voce-precisa-de-acompanhamento-profissional",
-    title: "Template 47",
+    title: "Feed — Personal Trainer #47",
     slug: "sinais-de-que-voce-precisa-de-acompanhamento-profissional",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12911,7 +12911,7 @@ const templates: Template[] = [
     // treino"). Pedido reforçou explicitamente para manter a
     // classificação de postagem única — respeitado.
     id: "o-que-considerar-antes-de-mudar-de-modalidade-de-treino",
-    title: "Template 48",
+    title: "Feed — Personal Trainer #48",
     slug: "o-que-considerar-antes-de-mudar-de-modalidade-de-treino",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -12960,7 +12960,7 @@ const templates: Template[] = [
     // resultado 'perfeito'"). Pedido reforçou explicitamente para
     // manter a classificação de postagem única — respeitado.
     id: "como-comemorar-pequenas-vitorias-sem-esperar-o-resultado-perfeito",
-    title: "Template 49",
+    title: "Feed — Personal Trainer #49",
     slug: "como-comemorar-pequenas-vitorias-sem-esperar-o-resultado-perfeito",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -13012,7 +13012,7 @@ const templates: Template[] = [
     // aluno antes de aumentar a intensidade), consistente com o
     // público do kit.
     id: "o-que-observar-no-primeiro-mes-de-um-aluno-novo",
-    title: "Template 50",
+    title: "Feed — Personal Trainer #50",
     slug: "o-que-observar-no-primeiro-mes-de-um-aluno-novo",
     category: "Feed",
     kitSlug: "personal-trainer",
@@ -13641,7 +13641,7 @@ const templates: Template[] = [
     // template deste kit, começa em 01. Tema real preservado só em
     // `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "5-erros-de-alimentacao-que-travam-o-ganho-de-massa",
-    title: "Template 01",
+    title: "Carrossel — Nutrição Esportiva #01",
     slug: "5-erros-de-alimentacao-que-travam-o-ganho-de-massa",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -13695,7 +13695,7 @@ const templates: Template[] = [
     // sequencial por kit já usada nos demais. Tema real preservado em
     // `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "o-que-comer-antes-do-treino-pra-ter-mais-energia",
-    title: "Template 02",
+    title: "Carrossel — Nutrição Esportiva #02",
     slug: "o-que-comer-antes-do-treino-pra-ter-mais-energia",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -13749,7 +13749,7 @@ const templates: Template[] = [
     // numeração sequencial por kit. Tema real preservado em
     // `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "mitos-sobre-carboidrato-a-noite",
-    title: "Template 03",
+    title: "Carrossel — Nutrição Esportiva #03",
     slug: "mitos-sobre-carboidrato-a-noite",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -13803,7 +13803,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "como-montar-um-pos-treino-eficiente-sem-suplemento-caro",
-    title: "Template 04",
+    title: "Carrossel — Nutrição Esportiva #04",
     slug: "como-montar-um-pos-treino-eficiente-sem-suplemento-caro",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -13865,7 +13865,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "sinais-de-que-voce-esta-comendo-pouca-proteina",
-    title: "Template 05",
+    title: "Carrossel — Nutrição Esportiva #05",
     slug: "sinais-de-que-voce-esta-comendo-pouca-proteina",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -13922,7 +13922,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "o-que-priorizar-na-dieta-em-fase-de-cutting",
-    title: "Template 06",
+    title: "Carrossel — Nutrição Esportiva #06",
     slug: "o-que-priorizar-na-dieta-em-fase-de-cutting",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -13978,7 +13978,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "erros-comuns-ao-contar-macros-pela-primeira-vez",
-    title: "Template 07",
+    title: "Carrossel — Nutrição Esportiva #07",
     slug: "erros-comuns-ao-contar-macros-pela-primeira-vez",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14031,7 +14031,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "o-que-considerar-antes-de-tomar-creatina",
-    title: "Template 08",
+    title: "Carrossel — Nutrição Esportiva #08",
     slug: "o-que-considerar-antes-de-tomar-creatina",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14085,7 +14085,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "sinais-de-que-sua-dieta-esta-sabotando-seu-treino",
-    title: "Template 09",
+    title: "Carrossel — Nutrição Esportiva #09",
     slug: "sinais-de-que-sua-dieta-esta-sabotando-seu-treino",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14144,7 +14144,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "como-montar-um-pre-treino-natural-sem-suplemento",
-    title: "Template 10",
+    title: "Carrossel — Nutrição Esportiva #10",
     slug: "como-montar-um-pre-treino-natural-sem-suplemento",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14200,7 +14200,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "mitos-sobre-jejum-e-treino-de-forca",
-    title: "Template 11",
+    title: "Carrossel — Nutrição Esportiva #11",
     slug: "mitos-sobre-jejum-e-treino-de-forca",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14256,7 +14256,7 @@ const templates: Template[] = [
     // convenção de numeração sequencial por kit. Tema real preservado
     // em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "o-que-fazer-em-dias-de-treino-dobrado",
-    title: "Template 12",
+    title: "Carrossel — Nutrição Esportiva #12",
     slug: "o-que-fazer-em-dias-de-treino-dobrado",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14313,7 +14313,7 @@ const templates: Template[] = [
     // estática" já usado para pedidos de imagem única. Tema real
     // preservado em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "erros-comuns-na-reposicao-de-eletrolitos",
-    title: "Template 13",
+    title: "Feed — Nutrição Esportiva #13",
     slug: "erros-comuns-na-reposicao-de-eletrolitos",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14358,7 +14358,7 @@ const templates: Template[] = [
     // estática" já usado para pedidos de imagem única. Tema real
     // preservado em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "como-ajustar-a-dieta-em-semana-de-treino-leve",
-    title: "Template 14",
+    title: "Feed — Nutrição Esportiva #14",
     slug: "como-ajustar-a-dieta-em-semana-de-treino-leve",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14405,7 +14405,7 @@ const templates: Template[] = [
     // (capa única, sem `carouselImageUrls`). Tema real preservado em
     // `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "sinais-de-que-voce-esta-comendo-pouco-pro-seu-gasto-calorico",
-    title: "Template 15",
+    title: "Feed — Nutrição Esportiva #15",
     slug: "sinais-de-que-voce-esta-comendo-pouco-pro-seu-gasto-calorico",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14449,7 +14449,7 @@ const templates: Template[] = [
     // (capa única, sem `carouselImageUrls`). Tema real preservado em
     // `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "o-que-priorizar-no-cafe-da-manha-de-quem-treina-cedo",
-    title: "Template 16",
+    title: "Feed — Nutrição Esportiva #16",
     slug: "o-que-priorizar-no-cafe-da-manha-de-quem-treina-cedo",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14497,7 +14497,7 @@ const templates: Template[] = [
     // "Feed"` (capa única, sem `carouselImageUrls`). Tema real
     // preservado em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "como-montar-um-lanche-pre-treino-rapido",
-    title: "Template 17",
+    title: "Feed — Nutrição Esportiva #17",
     slug: "como-montar-um-lanche-pre-treino-rapido",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14540,7 +14540,7 @@ const templates: Template[] = [
     // "Feed"` (capa única, sem `carouselImageUrls`). Tema real
     // preservado em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "mitos-sobre-whey-protein-faz-mal-pro-rim",
-    title: "Template 18",
+    title: "Feed — Nutrição Esportiva #18",
     slug: "mitos-sobre-whey-protein-faz-mal-pro-rim",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14587,7 +14587,7 @@ const templates: Template[] = [
     // (capa única, sem `carouselImageUrls`). Tema real preservado em
     // `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "o-que-considerar-antes-de-cortar-carboidrato-totalmente",
-    title: "Template 19",
+    title: "Feed — Nutrição Esportiva #19",
     slug: "o-que-considerar-antes-de-cortar-carboidrato-totalmente",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14631,7 +14631,7 @@ const templates: Template[] = [
     // "Feed"` (capa única, sem `carouselImageUrls`). Tema real
     // preservado em `id`/`slug`/comentário, nunca exibido ao usuário.
     id: "erros-ao-suplementar-sem-orientacao",
-    title: "Template 20",
+    title: "Feed — Nutrição Esportiva #20",
     slug: "erros-ao-suplementar-sem-orientacao",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14677,7 +14677,7 @@ const templates: Template[] = [
     // de dia em relação aos vinte produtos anteriores desta mesma
     // sessão contínua, todos de 2026-10-16).
     id: "como-identificar-sinais-de-baixa-energia-por-alimentacao",
-    title: "Template 21",
+    title: "Feed — Nutrição Esportiva #21",
     slug: "como-identificar-sinais-de-baixa-energia-por-alimentacao",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14728,7 +14728,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-priorizar-na-dieta-em-fase-de-bulking",
-    title: "Template 22",
+    title: "Feed — Nutrição Esportiva #22",
     slug: "o-que-priorizar-na-dieta-em-fase-de-bulking",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -14781,7 +14781,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "sinais-de-que-voce-precisa-comer-mais-fibra",
-    title: "Template 23",
+    title: "Carrossel — Nutrição Esportiva #23",
     slug: "sinais-de-que-voce-precisa-comer-mais-fibra",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14838,7 +14838,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-montar-um-cardapio-de-treino-pra-quem-e-vegetariano",
-    title: "Template 24",
+    title: "Carrossel — Nutrição Esportiva #24",
     slug: "como-montar-um-cardapio-de-treino-pra-quem-e-vegetariano",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14882,7 +14882,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "mitos-sobre-comer-de-3-em-3-horas-e-obrigatorio",
-    title: "Template 25",
+    title: "Carrossel — Nutrição Esportiva #25",
     slug: "mitos-sobre-comer-de-3-em-3-horas-e-obrigatorio",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14929,7 +14929,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-fazer-se-sentir-enjoo-durante-o-treino",
-    title: "Template 26",
+    title: "Carrossel — Nutrição Esportiva #26",
     slug: "o-que-fazer-se-sentir-enjoo-durante-o-treino",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -14977,7 +14977,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "erros-comuns-na-hidratacao-em-dias-muito-quentes",
-    title: "Template 27",
+    title: "Carrossel — Nutrição Esportiva #27",
     slug: "erros-comuns-na-hidratacao-em-dias-muito-quentes",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15023,7 +15023,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-ajustar-a-dieta-em-periodo-de-competicao",
-    title: "Template 28",
+    title: "Carrossel — Nutrição Esportiva #28",
     slug: "como-ajustar-a-dieta-em-periodo-de-competicao",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15074,7 +15074,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "sinais-de-que-sua-ingestao-de-gordura-esta-desequilibrada",
-    title: "Template 29",
+    title: "Carrossel — Nutrição Esportiva #29",
     slug: "sinais-de-que-sua-ingestao-de-gordura-esta-desequilibrada",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15121,7 +15121,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-priorizar-no-jantar-de-quem-treina-a-noite",
-    title: "Template 30",
+    title: "Carrossel — Nutrição Esportiva #30",
     slug: "o-que-priorizar-no-jantar-de-quem-treina-a-noite",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15166,7 +15166,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-montar-uma-lista-de-compras-pra-dieta-fitness",
-    title: "Template 31",
+    title: "Carrossel — Nutrição Esportiva #31",
     slug: "como-montar-uma-lista-de-compras-pra-dieta-fitness",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15211,7 +15211,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "mitos-sobre-bcaa-e-essencial-pra-todo-mundo",
-    title: "Template 32",
+    title: "Carrossel — Nutrição Esportiva #32",
     slug: "mitos-sobre-bcaa-e-essencial-pra-todo-mundo",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15256,7 +15256,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-considerar-antes-de-fazer-dieta-cetogenica-e-treinar-pesado",
-    title: "Template 33",
+    title: "Feed — Nutrição Esportiva #33",
     slug: "o-que-considerar-antes-de-fazer-dieta-cetogenica-e-treinar-pesado",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -15300,7 +15300,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "erros-ao-pular-refeicoes-em-dia-de-treino-intenso",
-    title: "Template 34",
+    title: "Feed — Nutrição Esportiva #34",
     slug: "erros-ao-pular-refeicoes-em-dia-de-treino-intenso",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -15341,7 +15341,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-identificar-sinais-de-deficiencia-de-ferro-em-atletas",
-    title: "Template 35",
+    title: "Feed — Nutrição Esportiva #35",
     slug: "como-identificar-sinais-de-deficiencia-de-ferro-em-atletas",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -15384,7 +15384,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-priorizar-na-alimentacao-em-semana-de-prova-ou-maratona",
-    title: "Template 36",
+    title: "Feed — Nutrição Esportiva #36",
     slug: "o-que-priorizar-na-alimentacao-em-semana-de-prova-ou-maratona",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -15426,7 +15426,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "sinais-de-que-voce-precisa-rever-a-ingestao-de-sodio",
-    title: "Template 37",
+    title: "Feed — Nutrição Esportiva #37",
     slug: "sinais-de-que-voce-precisa-rever-a-ingestao-de-sodio",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -15470,7 +15470,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-montar-snacks-saudaveis-pra-levar-na-academia",
-    title: "Template 38",
+    title: "Carrossel — Nutrição Esportiva #38",
     slug: "como-montar-snacks-saudaveis-pra-levar-na-academia",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15514,7 +15514,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "mitos-sobre-suco-detox-acelera-o-resultado",
-    title: "Template 39",
+    title: "Carrossel — Nutrição Esportiva #39",
     slug: "mitos-sobre-suco-detox-acelera-o-resultado",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15561,7 +15561,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-fazer-se-o-apetite-sumir-em-fase-de-corte",
-    title: "Template 40",
+    title: "Carrossel — Nutrição Esportiva #40",
     slug: "o-que-fazer-se-o-apetite-sumir-em-fase-de-corte",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15606,7 +15606,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "erros-comuns-ao-substituir-refeicao-por-shake",
-    title: "Template 41",
+    title: "Carrossel — Nutrição Esportiva #41",
     slug: "erros-comuns-ao-substituir-refeicao-por-shake",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15651,7 +15651,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-ajustar-a-dieta-em-dias-de-descanso",
-    title: "Template 42",
+    title: "Carrossel — Nutrição Esportiva #42",
     slug: "como-ajustar-a-dieta-em-dias-de-descanso",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15699,7 +15699,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "sinais-de-que-sua-recuperacao-muscular-esta-lenta-pela-alimentacao",
-    title: "Template 43",
+    title: "Carrossel — Nutrição Esportiva #43",
     slug: "sinais-de-que-sua-recuperacao-muscular-esta-lenta-pela-alimentacao",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15751,7 +15751,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "o-que-priorizar-no-pos-treino-de-forca-vs-pos-treino-de-cardio",
-    title: "Template 44",
+    title: "Carrossel — Nutrição Esportiva #44",
     slug: "o-que-priorizar-no-pos-treino-de-forca-vs-pos-treino-de-cardio",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15797,7 +15797,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-montar-um-cardapio-de-sabado-sem-sabotar-a-semana",
-    title: "Template 45",
+    title: "Carrossel — Nutrição Esportiva #45",
     slug: "como-montar-um-cardapio-de-sabado-sem-sabotar-a-semana",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15849,7 +15849,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "mitos-sobre-gordura-boa-engorda-igual-gordura-ruim",
-    title: "Template 46",
+    title: "Carrossel — Nutrição Esportiva #46",
     slug: "mitos-sobre-gordura-boa-engorda-igual-gordura-ruim",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15912,7 +15912,7 @@ const templates: Template[] = [
     // `previewImageUrl`/`carouselImageUrls` (capa) e `aspectRatio`
     // permanecem intocados.
     id: "o-que-considerar-antes-de-usar-termogenico",
-    title: "Template 47",
+    title: "Carrossel — Nutrição Esportiva #47",
     slug: "o-que-considerar-antes-de-usar-termogenico",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -15961,7 +15961,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "erros-ao-calcular-necessidade-calorica-sozinho",
-    title: "Template 48",
+    title: "Carrossel — Nutrição Esportiva #48",
     slug: "erros-ao-calcular-necessidade-calorica-sozinho",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -16009,7 +16009,7 @@ const templates: Template[] = [
     // real preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-manter-a-consistencia-alimentar-em-fase-de-viagem",
-    title: "Template 49",
+    title: "Carrossel — Nutrição Esportiva #49",
     slug: "como-manter-a-consistencia-alimentar-em-fase-de-viagem",
     category: "Carrossel",
     kitSlug: "nutricao-esportiva",
@@ -16056,7 +16056,7 @@ const templates: Template[] = [
     // preservado em `id`/`slug`/comentário, nunca exibido ao
     // usuário.
     id: "como-a-alimentacao-influencia-a-qualidade-do-sono-e-a-recuperacao-muscular",
-    title: "Template 50",
+    title: "Feed — Nutrição Esportiva #50",
     slug: "como-a-alimentacao-influencia-a-qualidade-do-sono-e-a-recuperacao-muscular",
     category: "Feed",
     kitSlug: "nutricao-esportiva",
@@ -16605,7 +16605,7 @@ const templates: Template[] = [
     // carrossel coerente com o tema (IR, malha fina, comprovantes), sem
     // página em branco ou fora do tema.
     id: "como-declarar-o-imposto-de-renda-sem-cair-na-malha-fina",
-    title: "Template 01",
+    title: "Carrossel — Contabilidade #01",
     slug: "como-declarar-o-imposto-de-renda-sem-cair-na-malha-fina",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16662,7 +16662,7 @@ const templates: Template[] = [
     // profissional de contabilidade), sem página em branco ou fora do
     // tema.
     id: "5-erros-que-fazem-seu-mei-pagar-imposto-a-mais",
-    title: "Template 02",
+    title: "Carrossel — Contabilidade #02",
     slug: "5-erros-que-fazem-seu-mei-pagar-imposto-a-mais",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16703,7 +16703,7 @@ const templates: Template[] = [
     // o regime ideal depende da realidade de cada empresa), sem página
     // em branco ou fora do tema.
     id: "diferenca-entre-simples-nacional-lucro-presumido-e-lucro-real",
-    title: "Template 03",
+    title: "Carrossel — Contabilidade #03",
     slug: "diferenca-entre-simples-nacional-lucro-presumido-e-lucro-real",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16747,7 +16747,7 @@ const templates: Template[] = [
     // formalizar um CNPJ, formalização como decisão financeira e não só
     // burocrática), sem página em branco ou fora do tema.
     id: "o-que-muda-no-seu-bolso-ao-formalizar-o-negocio",
-    title: "Template 04",
+    title: "Carrossel — Contabilidade #04",
     slug: "o-que-muda-no-seu-bolso-ao-formalizar-o-negocio",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16789,7 +16789,7 @@ const templates: Template[] = [
     // fiscal como parte da gestão do negócio), sem página em branco ou
     // fora do tema.
     id: "prazos-fiscais-que-todo-empreendedor-esquece",
-    title: "Template 05",
+    title: "Carrossel — Contabilidade #05",
     slug: "prazos-fiscais-que-todo-empreendedor-esquece",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16831,7 +16831,7 @@ const templates: Template[] = [
     // parte de um processo maior de organização e cumprimento de
     // obrigações fiscais), sem página em branco ou fora do tema.
     id: "como-emitir-nota-fiscal-corretamente-pela-primeira-vez",
-    title: "Template 06",
+    title: "Carrossel — Contabilidade #06",
     slug: "como-emitir-nota-fiscal-corretamente-pela-primeira-vez",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16873,7 +16873,7 @@ const templates: Template[] = [
     // esquecimentos no pagamento podem virar grandes pendências), sem
     // página em branco ou fora do tema.
     id: "o-que-e-das-e-por-que-atrasar-ele-custa-caro",
-    title: "Template 07",
+    title: "Carrossel — Contabilidade #07",
     slug: "o-que-e-das-e-por-que-atrasar-ele-custa-caro",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16916,7 +16916,7 @@ const templates: Template[] = [
     // cada negócio e deve ser conversada com o contador), sem página em
     // branco ou fora do tema.
     id: "sinais-de-que-voce-precisa-trocar-de-regime-tributario",
-    title: "Template 08",
+    title: "Carrossel — Contabilidade #08",
     slug: "sinais-de-que-voce-precisa-trocar-de-regime-tributario",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -16958,7 +16958,7 @@ const templates: Template[] = [
     // caro, a importância de processo em vez de improviso no
     // fechamento da folha), sem página em branco ou fora do tema.
     id: "erros-comuns-na-folha-de-pagamento",
-    title: "Template 09",
+    title: "Carrossel — Contabilidade #09",
     slug: "erros-comuns-na-folha-de-pagamento",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -17003,7 +17003,7 @@ const templates: Template[] = [
     // o cálculo para evitar surpresas), sem página em branco ou fora do
     // tema.
     id: "como-funciona-o-13-salario-passo-a-passo",
-    title: "Template 10",
+    title: "Carrossel — Contabilidade #10",
     slug: "como-funciona-o-13-salario-passo-a-passo",
     category: "Carrossel",
     kitSlug: "contabilidade",
@@ -17051,7 +17051,7 @@ const templates: Template[] = [
     // mesma convenção dos dez templates anteriores deste kit (tema real
     // preservado em id/slug/descrição, nunca exibido como título).
     id: "o-que-considerar-antes-de-contratar-seu-primeiro-funcionario",
-    title: "Template 11",
+    title: "Feed — Contabilidade #11",
     slug: "o-que-considerar-antes-de-contratar-seu-primeiro-funcionario",
     category: "Feed",
     kitSlug: "contabilidade",
@@ -17095,7 +17095,7 @@ const templates: Template[] = [
     // `id`/`slug` descritivos, `title` sequencial ("Template 12"),
     // mesma convenção dos onze templates anteriores deste kit.
     id: "diferenca-entre-pro-labore-e-distribuicao-de-lucros",
-    title: "Template 12",
+    title: "Feed — Contabilidade #12",
     slug: "diferenca-entre-pro-labore-e-distribuicao-de-lucros",
     category: "Feed",
     kitSlug: "contabilidade",
@@ -17144,7 +17144,7 @@ const templates: Template[] = [
     // sufoco no caixa, organização financeira para antecipar
     // compromissos fiscais), sem mismatch.
     id: "como-planejar-o-pagamento-de-impostos-sem-sufoco-no-caixa",
-    title: "Template 13",
+    title: "Feed — Contabilidade #13",
     slug: "como-planejar-o-pagamento-de-impostos-sem-sufoco-no-caixa",
     category: "Feed",
     kitSlug: "contabilidade",
@@ -17187,7 +17187,7 @@ const templates: Template[] = [
     // estratégia legal de pagar impostos, diferente de esconder
     // informações/sonegação), sem mismatch.
     id: "o-que-e-planejamento-tributario-e-por-que-nao-e-sonegacao",
-    title: "Template 14",
+    title: "Feed — Contabilidade #14",
     slug: "o-que-e-planejamento-tributario-e-por-que-nao-e-sonegacao",
     category: "Feed",
     kitSlug: "contabilidade",
@@ -17229,7 +17229,7 @@ const templates: Template[] = [
     // DAHYgMSzqW8, título interno "Capa de Carrossel Instagram")
     // confirmou page_count: 1, batendo com a imagem única.
     id: "erros-que-travam-a-abertura-de-uma-empresa",
-    title: "Template 15",
+    title: "Feed — Contabilidade #15",
     slug: "erros-que-travam-a-abertura-de-uma-empresa",
     category: "Feed",
     kitSlug: "contabilidade",
@@ -17268,7 +17268,7 @@ const templates: Template[] = [
     // funciona o cálculo do FGTS, quanto a empresa deve recolher), sem
     // mismatch.
     id: "como-funciona-o-calculo-do-fgts",
-    title: "Template 16",
+    title: "Feed — Contabilidade #16",
     slug: "como-funciona-o-calculo-do-fgts",
     category: "Feed",
     kitSlug: "contabilidade",
@@ -17312,7 +17312,7 @@ const templates: Template[] = [
     // documentos e seguir as orientações oficiais), sem página em
     // branco ou fora do tema.
     id: "o-que-fazer-se-cair-na-malha-fina",
-    title: "Template 17",
+    title: "Carrossel — Contabilidade #17",
     slug: "o-que-fazer-se-cair-na-malha-fina",
     category: "Carrossel",
     kitSlug: "contabilidade",
