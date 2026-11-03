@@ -49,6 +49,7 @@ export function BrandVoiceSection() {
               <TemplatePreview
                 template={template}
                 placeholderStyle="pending"
+                sizes="220px"
                 className="overflow-hidden rounded-[3px] border border-mosaico-bg/15 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.6)]"
               />
             </div>

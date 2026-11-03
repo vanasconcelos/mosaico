@@ -90,6 +90,7 @@ export function PhoneShowcaseSection() {
                     images={images}
                     alt="Arte real de um kit do Mosaico"
                     intervalMs={4000 + i * 450}
+                    sizes="100px"
                     className="h-full w-full"
                   />
                 ))}

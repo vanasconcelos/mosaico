@@ -35,7 +35,7 @@ export function AtualizarSenhaForm() {
       </label>
 
       {state.error && (
-        <p className="font-sans text-sm text-mosaico-red">
+        <p role="alert" className="font-sans text-sm text-mosaico-red">
           Não foi possível atualizar a senha. O link pode ter expirado — peça
           um novo em &quot;Esqueci minha senha&quot;.
         </p>

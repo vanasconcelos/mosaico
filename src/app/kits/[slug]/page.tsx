@@ -1,15 +1,65 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { getKitBySlug } from "@/lib/kits";
 import { getAllTemplates } from "@/lib/templates";
+import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { TemplateCard } from "@/components/templates/TemplateCard";
 import { PresentationFolderCard } from "@/components/presentations/PresentationFolderCard";
 import { resolveAccessState } from "@/lib/server/access";
+import { formatMosaicoPrice } from "@/lib/pricing";
 import { cx } from "@/lib/cx";
 
 interface KitPageProps {
   params: Promise<{ slug: string }>;
+}
+
+/**
+ * Metadados do kit (Fase 4.3, item 1) — título e descrição vêm só do
+ * próprio `Kit` (nunca inventados). Chama `notFound()` igual à página,
+ * pra um slug inexistente não gerar metadados de um kit que não existe
+ * (mesma checagem, nunca duas fontes de verdade divergentes).
+ *
+ * Capa de Open Graph (item 2): primeiro template real do kit com
+ * `previewImageUrl`, mesmo critério de exclusão de "Apresentação"/
+ * "Conteúdo Jurídico" já usado em `KitCatalogCard.getKitCoverImages` —
+ * nunca uma arte de Apresentação/documento A4 como miniatura de
+ * compartilhamento. Kit sem nenhum template real (ou sem capa própria)
+ * herda o fallback institucional de src/app/opengraph-image.tsx.
+ */
+export async function generateMetadata({ params }: KitPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const kit = getKitBySlug(slug);
+  if (!kit) {
+    notFound();
+  }
+
+  const coverTemplate = getAllTemplates().find(
+    (template) =>
+      template.kitSlug === kit.slug &&
+      template.previewImageUrl &&
+      template.category !== "Apresentação" &&
+      template.category !== "Conteúdo Jurídico",
+  );
+  const coverUrl = coverTemplate ? resolveSafeCoverUrl(coverTemplate.slug) : null;
+
+  // `openGraph`/`twitter` só entram no objeto quando existe capa — definir
+  // a chave como `undefined` (em vez de omiti-la) faz o Next tratar como
+  // "esta página declara Open Graph vazio" e BLOQUEAR a herança do
+  // fallback institucional (src/app/opengraph-image.tsx), em vez de
+  // herdar normalmente. Confirmado na prática (B4.3): só omitir a chave
+  // preserva o fallback.
+  return {
+    title: `Kit ${kit.title}`,
+    description: kit.description,
+    ...(coverUrl && {
+      openGraph: { images: [{ url: coverUrl }] },
+      twitter: { card: "summary_large_image" as const, images: [coverUrl] },
+    }),
+  };
 }
 
 /**
@@ -55,6 +105,19 @@ interface KitPageProps {
  * a oferta de compra pra quem já tem acesso). Só aparece quando o kit
  * tem templates reais; kit vazio mostra uma mensagem honesta em vez de
  * um botão sem destino — comportamento inalterado.
+ *
+ * `<Suspense>` manual só ao redor do CTA (Fase 4.5, não um `loading.tsx`
+ * de rota): é a ÚNICA parte da página com I/O de verdade
+ * (`resolveAccessState`) — título, descrição, contagem, pastas e grid
+ * dependem só de `kit`/`kitTemplates` (síncronos, `getAllTemplates()` é
+ * mock em memória) e já renderizam de verdade, sem esqueleto, desde a
+ * primeira resposta. Um `loading.tsx` de rota envolveria a função inteira,
+ * incluindo a checagem de slug acima: o Next passaria a comprometer o
+ * status HTTP como 200 antes de saber se `notFound()` ia ser chamado —
+ * comprovado nesta fase isolando o problema (slug inexistente respondia
+ * 200 em vez de 404, ver relatório). Com o `<Suspense>` só aqui, a
+ * checagem de slug roda fora de qualquer streaming — o 404 continua
+ * exatamente como a Fase 4.3 validou.
  */
 export default async function KitPage({ params }: KitPageProps) {
   const { slug } = await params;
@@ -63,8 +126,6 @@ export default async function KitPage({ params }: KitPageProps) {
   if (!kit) {
     notFound();
   }
-
-  const { hasSession, hasPaidAccess } = await resolveAccessState();
 
   const kitTemplates = getAllTemplates().filter(
     (template) => template.kitSlug === kit.slug,
@@ -85,7 +146,11 @@ export default async function KitPage({ params }: KitPageProps) {
   const hasRealContent = kitTemplates.length > 0;
 
   return (
-    <section className="bg-mosaico-bg py-20 lg:py-28">
+    // `<main>` em vez de `<section>` (Fase 4.9, item 2) — landmark
+    // principal da página, mesma classe/layout/filhos de antes, só a tag
+    // muda. `layout.tsx` não tem `<main>` compartilhado (confirmado antes
+    // desta edição), então não há risco de aninhamento.
+    <main className="bg-mosaico-bg py-20 lg:py-28">
       <Container>
         <div className="mx-auto max-w-xl text-center">
           <h1 className="font-serif text-4xl text-mosaico-ink sm:text-5xl">
@@ -94,32 +159,21 @@ export default async function KitPage({ params }: KitPageProps) {
           <p className="mt-4 font-sans text-base text-mosaico-ink-soft">
             {kit.description}
           </p>
+          {hasRealContent && (
+            <p className="mt-3 font-sans text-sm text-mosaico-ink-soft">
+              {kitTemplates.length}{" "}
+              {kitTemplates.length === 1 ? "template incluído" : "templates incluídos"}{" "}
+              ·{" "}
+              <span className="font-serif text-lg text-mosaico-ink">
+                {formatMosaicoPrice()}
+              </span>{" "}
+              — acesso completo, pagamento único
+            </p>
+          )}
           {hasRealContent ? (
-            hasPaidAccess ? (
-              <a
-                href="#conteudo"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-mosaico-accent-deep px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-bg uppercase transition-colors hover:bg-mosaico-ink"
-              >
-                Ver meu kit
-                <span aria-hidden>↓</span>
-              </a>
-            ) : hasSession ? (
-              <Link
-                href="/conta"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-mosaico-accent-deep px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-bg uppercase transition-colors hover:bg-mosaico-ink"
-              >
-                Quero meu kit
-                <span aria-hidden>→</span>
-              </Link>
-            ) : (
-              <Link
-                href={`/login?next=${encodeURIComponent(`/kits/${kit.slug}`)}`}
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-mosaico-accent-deep px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-bg uppercase transition-colors hover:bg-mosaico-ink"
-              >
-                Quero meu kit
-                <span aria-hidden>→</span>
-              </Link>
-            )
+            <Suspense fallback={<KitCtaSkeleton />}>
+              <KitCta kitSlug={kit.slug} />
+            </Suspense>
           ) : (
             <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-mosaico-border/40 px-6 py-3 font-sans text-sm font-semibold tracking-wide text-mosaico-ink-soft uppercase">
               Em preparação — ainda sem peças publicadas
@@ -174,6 +228,64 @@ export default async function KitPage({ params }: KitPageProps) {
           )}
         </div>
       </Container>
-    </section>
+    </main>
+  );
+}
+
+/**
+ * CTA do kit isolado num componente async próprio — ver o comentário
+ * acima de `KitPage` (Fase 4.5) pra por que este é o único pedaço da
+ * página dentro de um `<Suspense>`. Mesma lógica de 3 destinos de antes,
+ * sem nenhuma mudança de comportamento — só movida pra cá.
+ */
+async function KitCta({ kitSlug }: { kitSlug: string }) {
+  const { hasSession, hasPaidAccess } = await resolveAccessState();
+
+  if (hasPaidAccess) {
+    return (
+      <a
+        href="#conteudo"
+        className="mt-8 inline-flex items-center gap-2 rounded-full bg-mosaico-accent-deep px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-bg uppercase transition-colors hover:bg-mosaico-ink"
+      >
+        Ver meu kit
+        <span aria-hidden>↓</span>
+      </a>
+    );
+  }
+
+  if (hasSession) {
+    return (
+      <Link
+        href="/conta"
+        className="mt-8 inline-flex items-center gap-2 rounded-full bg-mosaico-accent-deep px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-bg uppercase transition-colors hover:bg-mosaico-ink"
+      >
+        Quero meu kit
+        <span aria-hidden>→</span>
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      href={`/login?next=${encodeURIComponent(`/kits/${kitSlug}`)}`}
+      className="mt-8 inline-flex items-center gap-2 rounded-full bg-mosaico-accent-deep px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-bg uppercase transition-colors hover:bg-mosaico-ink"
+    >
+      Quero meu kit
+      <span aria-hidden>→</span>
+    </Link>
+  );
+}
+
+/** Mesmo tamanho aproximado do botão real (`px-8 py-4`, texto `text-sm`)
+ * — evita que o CTA "pule" de tamanho quando `KitCta` resolve.
+ * `role="status"` + texto `sr-only`: o `Skeleton` em si é `aria-hidden`
+ * (não carrega informação nenhuma), então quem usa leitor de tela precisa
+ * desta anúncio separado pra saber que o botão está carregando. */
+function KitCtaSkeleton() {
+  return (
+    <div role="status" className="mt-8">
+      <span className="sr-only">Carregando…</span>
+      <Skeleton className="mx-auto h-[52px] w-48 rounded-full" />
+    </div>
   );
 }

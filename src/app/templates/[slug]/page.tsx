@@ -1,11 +1,53 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getTemplateBySlug } from "@/lib/templates";
+import { getKitBySlug } from "@/lib/kits";
+import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { TemplateDetail } from "@/components/templates/TemplateDetail";
+import { TemplateDetailSkeleton } from "@/components/templates/TemplateDetailSkeleton";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/server/supabase-admin";
+import type { Template } from "@/types/template";
 
 interface TemplatePageProps {
   params: Promise<{ slug: string }>;
+}
+
+/**
+ * Metadados do template (Fase 4.3, item 1) — nunca lê `signedUrls`/acesso
+ * pago aqui (metadados são públicos por natureza, aparecem até pra quem
+ * não comprou); usa só o que já é público: título, descrição e a capa seg
+ * ura resolvida por `resolveSafeCoverUrl` (mesma função que já decide o
+ * que mostrar a visitantes sem acesso — nunca expõe página do conteúdo
+ * pago como imagem de compartilhamento). Descrição cai pra `kit.description`
+ * só quando o próprio template não tem a sua (`description: null`) — nunca
+ * o texto de preenchimento "Descrição a definir." usado na UI, que não
+ * faria sentido num resultado de busca.
+ */
+export async function generateMetadata({ params }: TemplatePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const template = getTemplateBySlug(slug);
+  if (!template) {
+    notFound();
+  }
+
+  const kit = template.kitSlug ? getKitBySlug(template.kitSlug) : undefined;
+  const description = template.description ?? kit?.description;
+  const coverUrl = resolveSafeCoverUrl(template.slug);
+
+  // Mesma ressalva de src/app/kits/[slug]/page.tsx: `description`/
+  // `openGraph`/`twitter` só entram no objeto quando têm valor real —
+  // definir a chave como `undefined` faz o Next bloquear a herança do
+  // metadado equivalente do layout raiz, em vez de herdar normalmente.
+  return {
+    title: template.title,
+    ...(description && { description }),
+    ...(coverUrl && {
+      openGraph: { images: [{ url: coverUrl }] },
+      twitter: { card: "summary_large_image" as const, images: [coverUrl] },
+    }),
+  };
 }
 
 const BUCKET = "template-assets";
@@ -79,6 +121,32 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
     notFound();
   }
 
+  return (
+    <Suspense fallback={<TemplateDetailSkeleton template={template} />}>
+      <TemplateDetailData template={template} slug={slug} />
+    </Suspense>
+  );
+}
+
+/**
+ * Parte com I/O de verdade (sessão + `has_paid_access` + signed URLs)
+ * isolada num componente async próprio, dentro de um `<Suspense>` manual
+ * (Fase 4.5) — não um `loading.tsx` de rota. Um `loading.tsx` de rota
+ * envolveria a função acima inteira, incluindo a checagem de slug: o
+ * Next passaria a transmitir (e comprometer o status HTTP como 200) antes
+ * de saber se `notFound()` ia ser chamado — comprovado nesta fase
+ * isolando o problema (slug inexistente respondia 200 em vez de 404, ver
+ * relatório). Com o `<Suspense>` só ao redor desta parte, a checagem de
+ * slug em `TemplatePage` roda fora de qualquer streaming — o 404
+ * continua exatamente como a Fase 4.3 validou.
+ */
+async function TemplateDetailData({
+  template,
+  slug,
+}: {
+  template: Template;
+  slug: string;
+}) {
   const { hasPaidAccess, signedUrls } = await resolvePaidGallery(slug);
 
   return (

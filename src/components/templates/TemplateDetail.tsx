@@ -1,8 +1,10 @@
 import { Container } from "@/components/ui/Container";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
 import { TemplateGallery } from "@/components/templates/TemplateGallery";
+import { SignedImage } from "@/components/templates/SignedImage";
 import { EditInCanvaButton } from "@/components/templates/EditInCanvaButton";
 import { DownloadTemplateButton } from "@/components/templates/DownloadTemplateButton";
+import { formatMosaicoPrice } from "@/lib/pricing";
 import type { Template } from "@/types/template";
 
 interface TemplateDetailProps {
@@ -43,9 +45,20 @@ interface TemplateDetailProps {
 export function TemplateDetail({ template, hasPaidAccess, signedUrls }: TemplateDetailProps) {
   const { title, slug, category, description } = template;
   const unlocked = hasPaidAccess && signedUrls && signedUrls.length > 0;
+  // Fonte da contagem de páginas: `carouselImageUrls`, não uma leitura do
+  // Storage — ver definição do campo em src/types/template.ts
+  // ("undefined/lista vazia = template de página única"). Confirmado
+  // consistente com o Storage para todo o catálogo na auditoria B4.0.
+  const pageCount = template.carouselImageUrls?.length ?? 1;
+  const pageCountLabel = pageCount > 1 ? `${pageCount} páginas` : "Peça única";
 
   return (
-    <section className="bg-mosaico-bg py-16 lg:py-24">
+    // `<main>` em vez de `<section>` (Fase 4.9, item 2) — landmark
+    // principal de `/templates/[slug]` (este componente é usado só por
+    // essa rota). `TemplateDetailSkeleton` (fallback do Suspense desta
+    // mesma posição na árvore) recebeu a mesma troca, nunca os dois ao
+    // mesmo tempo — sempre exatamente um `<main>` no DOM.
+    <main className="bg-mosaico-bg py-16 lg:py-24">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-start lg:gap-16">
           {/* 1. Design — o produto, lado principal. Só mostra a galeria/
@@ -66,14 +79,25 @@ export function TemplateDetail({ template, hasPaidAccess, signedUrls }: Template
                   style={{ aspectRatio: template.aspectRatio }}
                   className="relative w-full overflow-hidden rounded-[3px] border border-mosaico-border/40 shadow-[0_36px_70px_-32px_rgba(46,25,16,0.4)]"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={signedUrls![0]} alt={title} className="h-full w-full object-cover" />
+                  {/* Mesmo tratamento de carregamento/erro da galeria
+                      multi-página (Fase 4.11, item 1) — template de
+                      página única é só o caso de 1 imagem só, nunca um
+                      caminho visual à parte. */}
+                  <SignedImage
+                    src={signedUrls![0]}
+                    alt={title}
+                    loading="eager"
+                    fetchPriority="high"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               )
             ) : (
               <TemplatePreview
                 template={template}
                 placeholderStyle="pending"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="rounded-[3px] border border-mosaico-border/40 shadow-[0_36px_70px_-32px_rgba(46,25,16,0.4)]"
               />
             )}
@@ -95,6 +119,13 @@ export function TemplateDetail({ template, hasPaidAccess, signedUrls }: Template
               {description ?? "Descrição a definir."}
             </p>
 
+            <p className="mt-5 font-sans text-sm text-mosaico-ink-soft">
+              <span className="font-serif text-2xl text-mosaico-ink">
+                {formatMosaicoPrice()}
+              </span>{" "}
+              — acesso completo, pagamento único · {pageCountLabel}
+            </p>
+
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <DownloadTemplateButton title={title} slug={slug} />
               <EditInCanvaButton slug={slug} />
@@ -106,6 +137,6 @@ export function TemplateDetail({ template, hasPaidAccess, signedUrls }: Template
           </div>
         </div>
       </Container>
-    </section>
+    </main>
   );
 }

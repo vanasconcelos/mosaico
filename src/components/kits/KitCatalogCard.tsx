@@ -5,6 +5,7 @@ import { CrossfadeImage } from "@/components/ui/CrossfadeImage";
 import { getAllTemplates } from "@/lib/templates";
 import { kitHasRealContent } from "@/lib/kits";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
+import { formatMosaicoPrice } from "@/lib/pricing";
 import { cx } from "@/lib/cx";
 
 /**
@@ -55,9 +56,13 @@ interface KitCatalogCardProps {
    * mesma ideia das peças reais do Hero/PhoneShowcaseSection, nunca
    * aplicada no placeholder decorativo de kit vazio. */
   tilt?: -1 | 1;
+  /** `priority` do `next/image` (Fase 4.4) — só o primeiro card do grid
+   * (acima da dobra em `/kits`) deveria usar; os demais seguem lazy por
+   * padrão. Default `false` de propósito — ver /kits/page.tsx. */
+  priority?: boolean;
 }
 
-export function KitCatalogCard({ kit, tilt = -1 }: KitCatalogCardProps) {
+export function KitCatalogCard({ kit, tilt = -1, priority = false }: KitCatalogCardProps) {
   const hasContent = kitHasRealContent(kit.slug);
   const covers = hasContent ? getKitCoverImages(kit) : [];
 
@@ -74,6 +79,8 @@ export function KitCatalogCard({ kit, tilt = -1 }: KitCatalogCardProps) {
             images={covers}
             alt={`Peças reais do Kit ${kit.title}`}
             intervalMs={3800}
+            priority={priority}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="aspect-[4/5] w-full overflow-hidden rounded-[3px] border border-mosaico-border/40 shadow-[0_28px_56px_-24px_rgba(23,19,15,0.4)] transition-shadow group-hover:shadow-[0_32px_64px_-20px_rgba(23,19,15,0.5)]"
           />
         ) : (
@@ -101,6 +108,11 @@ export function KitCatalogCard({ kit, tilt = -1 }: KitCatalogCardProps) {
         <p className="mx-auto mt-2 max-w-xs font-sans text-sm text-mosaico-ink-soft">
           {kit.description}
         </p>
+        {hasContent && (
+          <p className="mt-2 font-sans text-xs text-mosaico-ink-soft">
+            {formatMosaicoPrice()} — acesso completo, pagamento único
+          </p>
+        )}
         <span
           className={cx(
             "mt-4 inline-flex items-center gap-2 font-sans text-sm font-semibold",

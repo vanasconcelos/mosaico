@@ -13,7 +13,17 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+/**
+ * Base para resolver URLs relativas em metadados (ex.: imagens de Open
+ * Graph) — mesmo fallback (`NEXT_PUBLIC_SITE_URL` ausente → localhost) já
+ * usado em sitemap.ts/robots.ts/actions.ts, nunca um domínio novo
+ * inventado aqui. Sem confirmação de domínio de produção no projeto (ver
+ * Fase 4.3), fica em localhost até essa variável ser configurada.
+ */
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Mosaico — Templates editáveis no Canva por nicho profissional",
     template: "%s — Mosaico",

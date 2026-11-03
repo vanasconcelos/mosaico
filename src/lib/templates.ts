@@ -821,9 +821,13 @@ const mitosSobreGorduraBoaEngordaIgualGorduraRuimPages = templatePages(
   "mitos-sobre-gordura-boa-engorda-igual-gordura-ruim",
   7,
 );
+// Contagem corrigida de 7 para 6 (2026-11-02) — o Storage já tem só as 6
+// páginas reais do design Canva atual (DAHYTVTVlIo), trocado em 17/10; o
+// valor antigo (7) refletia o design anterior e nunca tinha sido
+// atualizado em código (Etapas 3.16–3.30 da auditoria).
 const oQueConsiderarAntesDeUsarTermogenicoPages = templatePages(
   "o-que-considerar-antes-de-usar-termogenico",
-  7,
+  6,
 );
 const errosAoCalcularNecessidadeCaloricaSozinhoPages = templatePages(
   "erros-ao-calcular-necessidade-calorica-sozinho",
