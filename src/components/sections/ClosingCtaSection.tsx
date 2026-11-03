@@ -11,7 +11,7 @@ import { Container } from "@/components/ui/Container";
  */
 export function ClosingCtaSection() {
   return (
-    <section className="bg-mosaico-bg py-20 lg:py-28">
+    <section className="bg-mosaico-bg pt-10 pb-20 lg:pt-14 lg:pb-28">
       <Container>
         <div className="mx-auto max-w-lg text-center">
           <h2 className="font-serif text-3xl text-mosaico-ink sm:text-4xl">

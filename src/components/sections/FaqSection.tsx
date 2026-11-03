@@ -38,7 +38,7 @@ const faqItems = [
 
 export function FaqSection() {
   return (
-    <section className="bg-mosaico-bg py-20 lg:py-28">
+    <section className="bg-mosaico-bg pt-20 pb-10 lg:pt-28 lg:pb-14">
       <Container>
         <div className="mx-auto max-w-2xl">
           <h2 className="font-serif text-3xl text-mosaico-ink sm:text-4xl">
