@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 import { atualizarSenhaAction, type AuthActionState } from "../actions";
 
 const initialState: AuthActionState = { error: null };
@@ -24,8 +25,7 @@ export function AtualizarSenhaForm() {
     <form action={formAction} className="mt-8 space-y-5">
       <label className="block font-sans text-sm text-mosaico-ink-soft">
         Nova senha
-        <input
-          type="password"
+        <PasswordInput
           name="senha"
           required
           minLength={6}
