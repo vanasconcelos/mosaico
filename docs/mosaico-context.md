@@ -492,6 +492,47 @@ CTA de compra — ver estrutura original de 11 seções mencionada em sessões
 anteriores); cadastro de templates em outros kits além do Social Media
 (nenhum tem conteúdo real ainda).
 
+### 9.2. Verificação visual ao vivo — 2026-11-01
+
+**Classificação: Experiência e interface — verificada nas páginas e
+resoluções testadas, com ressalvas documentadas.**
+
+Inspeção visual realizada no servidor de desenvolvimento já em execução
+(`localhost:3000`), navegando de verdade com o navegador — não é leitura
+de código.
+
+**Páginas verificadas:** `/`, `/kits`, `/kits/social-media`,
+`/kits/psicologia`, `/login`, `/cadastro`.
+
+**Resoluções testadas:** 375px (mobile), 768px (tablet), 1280px (desktop).
+
+**Resultados:**
+- Identidade visual consistente nas páginas e larguras verificadas, com
+  Fraunces, Karla e a paleta creme/vinho.
+- O catálogo (`/kits`) diferencia visualmente kits disponíveis dos kits
+  em preparação.
+- Kits sem conteúdo não apresentam CTA de compra.
+- Os formulários de `/login` e `/cadastro` apresentam hierarquia visual e
+  instruções claras.
+- Nenhum erro de console ou falha de rede foi observado durante a
+  navegação realizada.
+- Nenhum problema de sobreposição, corte de texto ou rolagem horizontal
+  foi identificado nas larguras testadas.
+
+**Ressalvas:**
+- `/kits/psicologia` não teve captura visual própria nesta verificação;
+  sua avaliação foi principalmente estrutural e textual.
+- `/kits/social-media` teve confirmação visual em 768px (tablet), mas a
+  avaliação em 375px (mobile) foi principalmente estrutural.
+- As demais rotas do projeto (`/kits/[slug]/apresentacoes`,
+  `/kits/[slug]/conteudo-juridico`, `/templates/[slug]`, `/conta`,
+  `/recuperar-senha`, `/atualizar-senha`) não foram verificadas nesta
+  etapa.
+- A inspeção ocorreu em ambiente de desenvolvimento, não em produção.
+- Os resultados acima são evidências da navegação realizada nas páginas e
+  resoluções listadas — não constituem certificação de segurança,
+  acessibilidade ou funcionamento de pagamentos.
+
 ## 10. Referência externa — Canva Combo (Julia Pretti)
 
 Analisada em 2026-09-14 (site indicado pela Ana) para calibrar direção de
