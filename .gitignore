@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# worktrees locais (Claude Code)
+/.claude/worktrees/
+
+# cache do Supabase CLI
+/supabase/.temp/

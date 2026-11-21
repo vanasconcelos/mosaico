@@ -533,6 +533,56 @@ de código.
   resoluções listadas — não constituem certificação de segurança,
   acessibilidade ou funcionamento de pagamentos.
 
+### 9.3. Atualização de estado — 2026-11-21
+
+**Esta seção não substitui as anteriores — registra o que mudou desde
+9.1/9.2, que permanecem como histórico.**
+
+A afirmação da seção 9.1 ("`hasPaidAccess` ainda não existe em código",
+2026-09-17) **não é mais verdadeira**. Confirmado por leitura direta do
+código nesta data: autenticação (login/cadastro/recuperar-senha/
+atualizar-senha), `src/proxy.ts` (proteção de `/conta`, renovação de
+sessão a cada requisição), `/conta` (lê `profiles.has_paid_access` via
+RLS), checkout (`/api/checkout`), webhook do Mercado Pago
+(`/api/webhooks/mercadopago`, HMAC validado, chama `apply_purchase_event`)
+e os endpoints pagos (`/api/templates/[slug]/download`,
+`/api/templates/[slug]/edit-link`, com `DownloadTemplateButton`/
+`EditInCanvaButton` em `TemplateDetail.tsx`) estão todos implementados,
+com cobertura de teste (`tests/*.test.mjs`, 96/96 passando via
+`node --test`) e sem dependência de rede real.
+
+Também corrigido nesta data: um comentário e um texto voltado ao usuário
+em `src/app/conta/page.tsx` que diziam que a entrega de links de edição
+"ainda está sendo preparada" — desatualizado, já que o fluxo completo já
+funciona (`/conta` → kit → template → baixar/editar). E um comentário em
+`src/lib/supabase/server.ts` que dizia que `proxy.ts` "ainda não" existia.
+
+**Correção ao dado de ambiente da seção 9.1**: o remote real do
+repositório é `origin` (não confirmado aqui se é exatamente
+`vanasconcelos/mosaico.git`), e a branch de trabalho atual é
+`preview-limpo` (tracking `origin/preview-limpo`), não `main` como
+registrado anteriormente — meramente uma correção factual, não uma
+mudança de infraestrutura.
+
+**Verificado ao vivo nesta data** (servidor de desenvolvimento local,
+`localhost:3000`, navegação real): `/`, `/kits`, `/kits/social-media`,
+`/politica-de-privacidade` — sem erros de console, sem overflow
+horizontal, conteúdo real (323 templates, preço R$ 147,90, CTA correto
+para visitante sem sessão). `npx tsc --noEmit`, `npm run lint` e
+`node --test` (96/96) confirmados limpos nesta data. Não foram exercidos
+nesta verificação: fluxo de login/cadastro real (exigiria criar uma conta
+real no Supabase de produção — não autorizado) e o fluxo de pagamento
+real (exigiria uma transação real no Mercado Pago — não autorizado).
+
+**Migration 0008** (autorização por compra individual + tratamento de
+chargeback/disputa do Mercado Pago, substituindo o modelo atual de
+`has_paid_access` global): passou por um ciclo extenso de design e
+validação totalmente isolada (containers PostgreSQL 17 descartáveis,
+nunca o Supabase real), concluído com a arquitetura aprovada com
+ressalvas resolvidas. **Nunca foi aplicada a nenhum banco real.**
+Continua aguardando autorização explícita da Ana antes de qualquer
+aplicação — este documento não deve ser lido como essa autorização.
+
 ## 10. Referência externa — Canva Combo (Julia Pretti)
 
 Analisada em 2026-09-14 (site indicado pela Ana) para calibrar direção de

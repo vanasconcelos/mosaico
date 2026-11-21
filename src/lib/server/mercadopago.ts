@@ -100,9 +100,11 @@ export type CheckoutBackUrls = {
  * Reaproveita `/conta` como destino nos três estados (aprovado,
  * pendente, recusado) — é a única página que já existe hoje mostrando
  * status de acesso e o botão de comprar; esta fase não cria nenhuma
- * página nova de sucesso/erro. `/conta` ainda não diferencia "acabei de
- * pagar" de "já tinha acesso" na mensagem — lacuna de produto pra uma
- * etapa futura, não desta.
+ * página nova de sucesso/erro. `/conta` já lê `status`/`collection_status`
+ * da URL de retorno (ver `resolveCheckoutReturnState` em
+ * `src/app/conta/page.tsx`) e mostra um aviso diferente pra "acabei de
+ * pagar, aguardando confirmação" vs. o estado normal de acesso — nunca
+ * usa isso pra decidir liberação de acesso, só qual aviso exibir.
  *
  * O destino nunca concede acesso por si só: é só pra onde o navegador
  * do comprador volta depois do Checkout Pro — a liberação de

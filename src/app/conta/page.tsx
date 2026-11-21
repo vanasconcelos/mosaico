@@ -18,6 +18,44 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+interface ContaPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+type CheckoutReturnState = "approved" | "pending" | "failure" | null;
+
+/** Pega o primeiro valor de um parâmetro que pode vir repetido (array) —
+ * nunca deixa um `?status=a&status=b` quebrar a leitura. */
+function firstParam(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+/**
+ * Lê só `status`/`collection_status` do retorno do Mercado Pago, nunca
+ * `payment_id` (nunca usado como prova de pagamento — ver nota de
+ * segurança abaixo). Exige que os dois parâmetros, quando presentes,
+ * concordem no MESMO valor — se vierem ausentes, desconhecidos ou
+ * contraditórios entre si, retorna `null` (nenhuma mensagem), nunca
+ * "aprovado" sem uma evidência única e clara.
+ */
+function resolveCheckoutReturnState(
+  searchParams: Awaited<ContaPageProps["searchParams"]>,
+): CheckoutReturnState {
+  const values = new Set(
+    [firstParam(searchParams.status), firstParam(searchParams.collection_status)].filter(
+      (value): value is string => Boolean(value),
+    ),
+  );
+  if (values.size !== 1) {
+    return null;
+  }
+  const [value] = values;
+  if (value === "approved") return "approved";
+  if (value === "pending" || value === "in_process") return "pending";
+  if (value === "rejected" || value === "cancelled") return "failure";
+  return null;
+}
+
 /**
  * Área do comprador — protegida pelo proxy.ts (redireciona pra /login
  * sem sessão). Aqui, além de ter sessão, checamos de verdade
@@ -26,12 +64,21 @@ export const metadata: Metadata = {
  * linha, nunca a de outro usuário). Nunca libera nada só porque a
  * pessoa está logada ou chegou nesta URL.
  *
- * Ainda não entrega nenhum link do Canva aqui — isso é o endpoint
- * /api/templates/[slug]/edit-link, não implementado ainda (depende do
- * webhook gravar compras de verdade primeiro). Esta página só mostra o
- * status real do acesso.
+ * `status`/`collection_status` na URL (retorno do checkout) só decidem
+ * qual AVISO mostrar — nunca o acesso em si. `hasPaidAccess` abaixo
+ * continua vindo exclusivamente de `profiles.has_paid_access` no banco,
+ * igual já era antes desta mensagem existir.
+ *
+ * Não entrega nenhum link do Canva diretamente aqui — isso já é
+ * responsabilidade de /api/templates/[slug]/edit-link (implementado,
+ * testado em tests/edit-link.test.mjs), acessado a partir da página de
+ * cada template (TemplateDetail.tsx → EditInCanvaButton/
+ * DownloadTemplateButton), não desta tela. Esta página só mostra o
+ * status real do acesso e os links para os kits.
  */
-export default async function ContaPage() {
+export default async function ContaPage({ searchParams }: ContaPageProps) {
+  const checkoutReturnState = resolveCheckoutReturnState(await searchParams);
+
   const supabase = await createClient();
   const { data: claimsData } = await supabase.auth.getClaims();
 
@@ -69,6 +116,35 @@ export default async function ContaPage() {
             Sua área
           </h1>
 
+          {checkoutReturnState === "approved" && (
+            <p
+              role="status"
+              aria-live="polite"
+              className="mt-6 font-sans text-base text-mosaico-ink-soft"
+            >
+              Seu pagamento foi aprovado! Estamos atualizando seu acesso. Se
+              seus kits ainda não aparecerem, aguarde alguns instantes
+              enquanto finalizamos a confirmação.
+            </p>
+          )}
+          {checkoutReturnState === "pending" && (
+            <p
+              role="status"
+              aria-live="polite"
+              className="mt-6 font-sans text-base text-mosaico-ink-soft"
+            >
+              Seu pagamento está em processamento. Assim que a confirmação
+              for recebida, seu acesso aos kits será liberado
+              automaticamente.
+            </p>
+          )}
+          {checkoutReturnState === "failure" && (
+            <p role="alert" className="mt-6 font-sans text-base text-mosaico-red">
+              Não foi possível concluir seu pagamento. Você pode tentar
+              novamente.
+            </p>
+          )}
+
           {profileError ? (
             <p className="mt-6 font-sans text-base text-mosaico-ink-soft">
               Não conseguimos confirmar o status da sua conta agora. Tente de
@@ -77,8 +153,8 @@ export default async function ContaPage() {
           ) : hasPaidAccess ? (
             <>
               <p className="mt-6 font-sans text-base text-mosaico-ink-soft">
-                Compra confirmada — acesso liberado. A entrega dos links de
-                edição de cada template ainda está sendo preparada.
+                Compra confirmada — acesso liberado. Abra qualquer kit abaixo
+                para baixar ou editar cada template no Canva.
               </p>
               {/* Lista de kits acessíveis — leitura de getKitsWithRealContent(),
                   já usada em Hero/catálogo; acesso é único e global (não há

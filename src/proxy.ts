@@ -27,11 +27,12 @@ export async function proxy(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  // .env.local ainda não existe neste ambiente — sem as duas variáveis,
-  // não há como criar o client com segurança. Em vez de travar toda
-  // requisição (inclusive os assets estáticos que passam pelo matcher),
-  // a requisição segue sem renovar sessão, com um aviso no log do
-  // servidor. Nunca inventa um valor nem usa um placeholder aqui.
+  // Defesa para qualquer ambiente/deploy onde essas duas variáveis não
+  // estejam configuradas (ex.: um Preview sem o .env correspondente) —
+  // sem elas, não há como criar o client com segurança. Em vez de travar
+  // toda requisição (inclusive os assets estáticos que passam pelo
+  // matcher), a requisição segue sem renovar sessão, com um aviso no log
+  // do servidor. Nunca inventa um valor nem usa um placeholder aqui.
   if (!supabaseUrl || !supabaseAnonKey) {
     console.warn(
       "proxy.ts: NEXT_PUBLIC_SUPABASE_URL/NEXT_PUBLIC_SUPABASE_ANON_KEY " +
