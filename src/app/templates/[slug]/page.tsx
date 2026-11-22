@@ -8,6 +8,7 @@ import { TemplateDetail } from "@/components/templates/TemplateDetail";
 import { TemplateDetailSkeleton } from "@/components/templates/TemplateDetailSkeleton";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/server/supabase-admin";
+import { isDistributionAllowed } from "@/lib/server/distribution-allowlist";
 import type { Template } from "@/types/template";
 
 interface TemplatePageProps {
@@ -82,6 +83,16 @@ async function resolvePaidGallery(
     return { hasPaidAccess: false, signedUrls: null };
   }
 
+  // Allowlist de distribuição (Fase 4.58) — mesma função usada pelo
+  // endpoint de download, checada antes de qualquer custo de Storage.
+  // `hasPaidAccess` continua `true` (reflete a compra real, nunca mente
+  // sobre isso); só `signedUrls` fica `null` enquanto o slug não estiver
+  // liberado — a página mostra a capa segura, igual a quem não comprou,
+  // sem fingir que o acesso pago não existe.
+  if (!isDistributionAllowed(slug)) {
+    return { hasPaidAccess: true, signedUrls: null };
+  }
+
   const admin = createAdminClient();
   if (!admin) {
     // Sem service_role configurada, não há como gerar signed URL — trata
@@ -149,7 +160,20 @@ async function TemplateDetailData({
 }) {
   const { hasPaidAccess, signedUrls } = await resolvePaidGallery(slug);
 
+  // Mesma allowlist de distribuição (Fase 4.58), só pra decidir se o
+  // botão de download aparece na página — nunca uma segunda cópia da
+  // regra, a mesma função já usada em resolvePaidGallery e no endpoint
+  // de download. Independente de `hasPaidAccess`: a interface nunca
+  // oferece um caminho de entrega que o próprio servidor vai recusar,
+  // mesmo pra quem comprou.
+  const downloadAllowed = isDistributionAllowed(slug);
+
   return (
-    <TemplateDetail template={template} hasPaidAccess={hasPaidAccess} signedUrls={signedUrls} />
+    <TemplateDetail
+      template={template}
+      hasPaidAccess={hasPaidAccess}
+      signedUrls={signedUrls}
+      downloadAllowed={downloadAllowed}
+    />
   );
 }

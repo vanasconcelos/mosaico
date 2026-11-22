@@ -41,6 +41,12 @@ function loadRouteWith({
   adminAvailable = true,
   listResult,
   downloadResultFor,
+  // Allowlist de distribuição (Fase 4.58) — `true` por padrão pra nenhum
+  // dos testes já existentes (todos escritos antes da allowlist existir)
+  // precisar mudar: eles continuam exercendo exatamente o mesmo
+  // comportamento de sempre, como se "template51" já estivesse liberado.
+  // Os testes dedicados à allowlist, abaixo, passam `false` explicitamente.
+  distributionAllowed = true,
   // Atraso artificial (ms) antes de cada download fake resolver — default
   // 0 preserva o comportamento de todos os testes já existentes acima
   // (resolução síncrona de fato). Só usado pelos testes de concorrência
@@ -52,6 +58,7 @@ function loadRouteWith({
 }) {
   clearModuleCache();
   const calls = {
+    sessionClientCreated: false,
     profilesQueried: false,
     bucketListed: false,
     objectsDownloaded: [],
@@ -59,8 +66,15 @@ function loadRouteWith({
     maxConcurrentDownloads: 0,
   };
 
+  injectFakeModule("lib/server/distribution-allowlist", {
+    isDistributionAllowed() {
+      return distributionAllowed;
+    },
+  });
+
   injectFakeModule("lib/supabase/server", {
     async createClient() {
+      calls.sessionClientCreated = true;
       return {
         auth: {
           async getClaims() {
@@ -161,6 +175,58 @@ test("slug mal formado -> 400, antes de qualquer checagem de sessão ou acesso a
   assert.equal(cacheControl, "private, no-store");
   assert.equal(calls.profilesQueried, false);
   assert.equal(calls.bucketListed, false);
+});
+
+// ---------- ALLOWLIST DE DISTRIBUIÇÃO (Fase 4.58) ----------
+
+test("slug fora da allowlist -> 403 download_temporarily_unavailable, mesmo com sessão válida e has_paid_access=true, sem checar sessão/perfil/bucket", async () => {
+  const { mod, calls } = loadRouteWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    distributionAllowed: false,
+  });
+  const { status, body, cacheControl } = await callRouteJson(mod);
+  assert.equal(status, 403);
+  assert.equal(body.error, "download_temporarily_unavailable");
+  assert.equal(cacheControl, "private, no-store");
+  // O ponto central desta fase: o bloqueio da allowlist nunca gasta uma
+  // consulta real ao Supabase (sessão, perfil) nem toca o bucket — é
+  // verificado ANTES de qualquer um desses custos, independente de o
+  // usuário por trás do pedido ter ou não acesso pago de verdade.
+  assert.equal(calls.sessionClientCreated, false);
+  assert.equal(calls.profilesQueried, false);
+  assert.equal(calls.bucketListed, false);
+});
+
+test("slug fora da allowlist continua 403 mesmo sem nenhuma sessão — não depende de autenticação pra bloquear", async () => {
+  const { mod, calls } = loadRouteWith({ claims: null, distributionAllowed: false });
+  const { status, body } = await callRouteJson(mod);
+  assert.equal(status, 403);
+  assert.equal(body.error, "download_temporarily_unavailable");
+  assert.equal(calls.sessionClientCreated, false);
+});
+
+test("allowlist é checada depois da validação de formato do slug, não antes", async () => {
+  // Slug mal formado continua 400 (invalid_slug), nunca 403 — a ordem
+  // real no código (isValidSlug primeiro) é o que está sob teste aqui.
+  const { mod } = loadRouteWith({ claims: null, distributionAllowed: false });
+  const { status, body } = await callRouteJson(mod, "../../etc/passwd");
+  assert.equal(status, 400);
+  assert.equal(body.error, "invalid_slug");
+});
+
+test("slug dentro da allowlist mantém o fluxo normal (sessão, rate limit, has_paid_access, bucket) sem nenhuma mudança de comportamento", async () => {
+  const { mod, calls } = loadRouteWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    distributionAllowed: true,
+    listResult: { data: [{ name: "slide01.png" }], error: null },
+  });
+  const res = await callRoute(mod);
+  assert.equal(res.status, 200);
+  assert.equal(calls.sessionClientCreated, true);
+  assert.equal(calls.profilesQueried, true);
+  assert.equal(calls.bucketListed, true);
 });
 
 // ---------- SESSÃO ----------

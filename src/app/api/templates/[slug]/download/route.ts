@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/server/supabase-admin";
 import { checkRateLimit } from "@/lib/server/rate-limit";
 import { isValidSlug } from "@/lib/slug";
+import { isDistributionAllowed } from "@/lib/server/distribution-allowlist";
 
 const BUCKET = "template-assets";
 
@@ -12,9 +13,16 @@ const BUCKET = "template-assets";
  * final) como um .zip montado no servidor — nunca envia URLs individuais
  * nem bytes crus ao cliente antes de confirmar sessão + `has_paid_access`.
  * Mesmo esqueleto de checagem do endpoint `edit-link` (Fase 6): slug válido
- * → sessão → rate limit → `has_paid_access` → só então toca o bucket
- * privado, sempre com o client admin (service_role, ignora RLS, nunca
- * exposto ao cliente).
+ * → allowlist de distribuição → sessão → rate limit → `has_paid_access` →
+ * só então toca o bucket privado, sempre com o client admin (service_role,
+ * ignora RLS, nunca exposto ao cliente).
+ *
+ * Checagem de allowlist (Fase 4.58) logo após o formato do slug, antes de
+ * qualquer custo de I/O — nunca gasta uma consulta real ao Supabase pra
+ * um slug que vai ser negado de qualquer forma, independente de quem
+ * pergunta. Nunca decide isso por `has_paid_access`: mesmo um comprador
+ * de verdade recebe o mesmo bloqueio enquanto o slug não estiver na
+ * allowlist — ver src/lib/server/distribution-allowlist.ts.
  */
 export async function GET(
   request: Request,
@@ -26,6 +34,13 @@ export async function GET(
     return NextResponse.json(
       { error: "invalid_slug" },
       { status: 400, headers: { "Cache-Control": "private, no-store" } },
+    );
+  }
+
+  if (!isDistributionAllowed(slug)) {
+    return NextResponse.json(
+      { error: "download_temporarily_unavailable" },
+      { status: 403, headers: { "Cache-Control": "private, no-store" } },
     );
   }
 

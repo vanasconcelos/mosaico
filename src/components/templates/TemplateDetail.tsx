@@ -16,6 +16,13 @@ interface TemplateDetailProps {
    * `hasPaidAccess` é `true` e o bucket privado respondeu com sucesso.
    * `null` nunca deve virar um array vazio tratado como "sem páginas". */
   signedUrls: string[] | null;
+  /** Resolvido no servidor (page.tsx) via a mesma allowlist de
+   * distribuição do endpoint de download (Fase 4.58) — nunca decidido
+   * aqui, nunca uma segunda cópia da regra. `false` (hoje, pra todos os
+   * 323 templates, allowlist vazia de propósito) esconde o botão de
+   * download inteiro: a interface nunca oferece um caminho de entrega
+   * que o próprio endpoint vai recusar, mesmo pra quem já comprou. */
+  downloadAllowed: boolean;
 }
 
 /**
@@ -42,7 +49,12 @@ interface TemplateDetailProps {
  * `EditInCanvaButton` segue seu próprio caminho (endpoint `edit-link`, já
  * existente) para o Template Link do Canva — nenhuma mudança ali.
  */
-export function TemplateDetail({ template, hasPaidAccess, signedUrls }: TemplateDetailProps) {
+export function TemplateDetail({
+  template,
+  hasPaidAccess,
+  signedUrls,
+  downloadAllowed,
+}: TemplateDetailProps) {
   const { title, slug, category, description } = template;
   const unlocked = hasPaidAccess && signedUrls && signedUrls.length > 0;
   // Fonte da contagem de páginas: `carouselImageUrls`, não uma leitura do
@@ -127,12 +139,20 @@ export function TemplateDetail({ template, hasPaidAccess, signedUrls }: Template
             </p>
 
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
-              <DownloadTemplateButton title={title} slug={slug} />
+              {downloadAllowed && <DownloadTemplateButton title={title} slug={slug} />}
               <EditInCanvaButton slug={slug} />
             </div>
+            {/* Texto adaptado ao que a interface realmente oferece (Fase
+                4.60) — nunca anuncia o download como caminho de entrega
+                enquanto `downloadAllowed` for `false` (hoje, para todos os
+                323 templates): a allowlist de distribuição continua vazia
+                até a inspeção de licenciamento aprovar cada um
+                individualmente. Com download liberado, mantém a frase
+                original (os dois caminhos voltam a fazer sentido juntos). */}
             <p className="mx-auto mt-3 max-w-sm font-sans text-xs text-mosaico-ink-soft/70 lg:mx-0">
-              Use a arte exatamente como está, ou personalize textos, fotos,
-              cores e informações no Canva — sem afetar o modelo original.
+              {downloadAllowed
+                ? "Use a arte exatamente como está, ou personalize textos, fotos, cores e informações no Canva — sem afetar o modelo original."
+                : "Seu template fica disponível para edição no Canva — acesse, personalize textos, fotos e cores, e use sua própria versão."}
             </p>
           </div>
         </div>

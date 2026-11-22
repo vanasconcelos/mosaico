@@ -55,9 +55,21 @@ function loadPageWith({
   adminAvailable = true,
   listResult,
   signedUrlsResult,
+  // Allowlist de distribuição (Fase 4.58) — `true` por padrão, pra todos
+  // os testes já existentes (escritos antes da allowlist existir)
+  // continuarem exercendo o mesmo comportamento de sempre para
+  // "template51". Os testes dedicados à allowlist, abaixo, passam
+  // `false` explicitamente.
+  distributionAllowed = true,
 }) {
   clearModuleCache();
   const calls = { profilesQueried: false, bucketListed: false, signedUrlsRequestedFor: null, signedUrlsTtl: null };
+
+  injectFakeModule("lib/server/distribution-allowlist", {
+    isDistributionAllowed() {
+      return distributionAllowed;
+    },
+  });
 
   injectFakeModule("lib/templates", {
     getTemplateBySlug(slug) {
@@ -334,6 +346,75 @@ test("admin indisponível (sem service_role) -> hasPaidAccess: false, nunca fing
   assert.equal(props.hasPaidAccess, false);
   assert.equal(props.signedUrls, null);
   assert.equal(calls.bucketListed, false);
+});
+
+// ---------- ALLOWLIST DE DISTRIBUIÇÃO (Fase 4.58) ----------
+
+test("slug fora da allowlist -> hasPaidAccess permanece true (reflete a compra real), mas signedUrls: null, sem tocar o bucket", async () => {
+  const { mod, calls } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    distributionAllowed: false,
+    // Mesmo que o bucket tivesse conteúdo, não deve ser nem consultado.
+    listResult: { data: [{ name: "slide01.png" }], error: null },
+  });
+  const props = await renderPage(mod);
+  assert.equal(
+    props.hasPaidAccess,
+    true,
+    "a allowlist nunca deve mentir sobre o status real da compra — só bloqueia a entrega do arquivo",
+  );
+  assert.equal(props.signedUrls, null);
+  assert.equal(calls.bucketListed, false, "fora da allowlist, a galeria nunca deve chegar a listar o bucket");
+  assert.equal(calls.signedUrlsRequestedFor, null, "fora da allowlist, nenhuma signed URL deve ser solicitada");
+  assert.equal(
+    props.downloadAllowed,
+    false,
+    "fora da allowlist, downloadAllowed deve ser false (Fase 4.60 — esconde o botão de download)",
+  );
+});
+
+test("slug fora da allowlist e sem sessão -> ainda hasPaidAccess: false (a sessão é checada primeiro, allowlist não muda isso)", async () => {
+  const { mod, calls } = loadPageWith({ claims: null, distributionAllowed: false });
+  const props = await renderPage(mod);
+  assert.equal(props.hasPaidAccess, false);
+  assert.equal(props.signedUrls, null);
+  assert.equal(calls.bucketListed, false);
+  assert.equal(props.downloadAllowed, false);
+});
+
+test("slug dentro da allowlist mantém o comportamento normal da galeria (signedUrls preenchido) e downloadAllowed: true", async () => {
+  const { mod, calls } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    distributionAllowed: true,
+    listResult: { data: [{ name: "slide01.png" }], error: null },
+  });
+  const props = await renderPage(mod);
+  assert.equal(props.hasPaidAccess, true);
+  assert.deepEqual(props.signedUrls, ["https://fake.test/templates/template51/slide01.png?token=synthetic"]);
+  assert.equal(calls.bucketListed, true);
+  assert.equal(
+    props.downloadAllowed,
+    true,
+    "dentro da allowlist, downloadAllowed deve ser true (Fase 4.60 — botão de download aparece)",
+  );
+});
+
+test("downloadAllowed reflete a allowlist mesmo para visitante sem sessão e sem has_paid_access (decisão independente de quem está vendo)", async () => {
+  const semSessaoLiberado = await renderPage(
+    loadPageWith({ claims: null, distributionAllowed: true }).mod,
+  );
+  assert.equal(semSessaoLiberado.downloadAllowed, true);
+
+  const semAcessoBloqueado = await renderPage(
+    loadPageWith({
+      claims: { sub: "user-123" },
+      profile: { has_paid_access: false },
+      distributionAllowed: false,
+    }).mod,
+  );
+  assert.equal(semAcessoBloqueado.downloadAllowed, false);
 });
 
 // ---------- AUSÊNCIA DE EXPOSIÇÃO ANTES DA AUTORIZAÇÃO ----------
