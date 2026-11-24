@@ -2,8 +2,7 @@ import Link from "next/link";
 import type { Kit } from "@/types/kit";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
 import { CrossfadeImage } from "@/components/ui/CrossfadeImage";
-import { getAllTemplates } from "@/lib/templates";
-import { kitHasRealContent } from "@/lib/kits";
+import { getAllTemplates, kitHasRealContent } from "@/lib/catalog";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { formatMosaicoPrice } from "@/lib/pricing";
 import { cx } from "@/lib/cx";
@@ -36,8 +35,9 @@ import { cx } from "@/lib/cx";
  * peças reais desse kit, não mais uma imagem estática só. Até 4 peças
  * (mesmo critério de exclusão de sempre).
  */
-function getKitCoverImages(kit: Kit): string[] {
-  return getAllTemplates()
+async function getKitCoverImages(kit: Kit): Promise<string[]> {
+  const templates = await getAllTemplates();
+  return templates
     .filter(
       (template) =>
         template.kitSlug === kit.slug &&
@@ -60,11 +60,24 @@ interface KitCatalogCardProps {
    * (acima da dobra em `/kits`) deveria usar; os demais seguem lazy por
    * padrão. Default `false` de propósito — ver /kits/page.tsx. */
   priority?: boolean;
+  /** Posição no grid (ver /kits/page.tsx) — repassada ao placeholder
+   * decorativo de `TemplatePreview` pra variar o tom por card (achado da
+   * revisão visual, 2026-11-24): sem isto, todo card "Em preparação"
+   * caía no mesmo índice padrão (0) e mostrava o mesmo tom sólido
+   * escuro repetido em todos os 11 kits vazios — `TemplatePreview` já
+   * foi desenhado pra variar 6 tons, só faltava este valor chegar até
+   * ele. */
+  index?: number;
 }
 
-export function KitCatalogCard({ kit, tilt = -1, priority = false }: KitCatalogCardProps) {
-  const hasContent = kitHasRealContent(kit.slug);
-  const covers = hasContent ? getKitCoverImages(kit) : [];
+export async function KitCatalogCard({
+  kit,
+  tilt = -1,
+  priority = false,
+  index = 0,
+}: KitCatalogCardProps) {
+  const hasContent = await kitHasRealContent(kit.slug);
+  const covers = hasContent ? await getKitCoverImages(kit) : [];
 
   return (
     <Link href={`/kits/${kit.slug}`} className="group flex flex-col">
@@ -93,6 +106,7 @@ export function KitCatalogCard({ kit, tilt = -1, priority = false }: KitCatalogC
               previewImageUrl: null,
             }}
             placeholderStyle="decorative"
+            index={index}
             className="aspect-[4/5] w-full overflow-hidden rounded-[3px] border-2 border-dashed border-mosaico-border/40"
           />
         )}

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { KitCatalogCard } from "@/components/kits/KitCatalogCard";
-import { getAllKits } from "@/lib/kits";
-import { getAllTemplates } from "@/lib/templates";
+import { getAllKits, getAllTemplates } from "@/lib/catalog";
 
 /**
  * Metadados próprios do catálogo (Fase 4.3, item 1) — contagens reais,
@@ -10,11 +9,18 @@ import { getAllTemplates } from "@/lib/templates";
  * número hardcoded). Sem imagem própria: herda o fallback institucional
  * de src/app/opengraph-image.tsx (nenhuma arte representaria "todos os
  * kits" sem favorecer um produto específico).
+ *
+ * `generateMetadata` (async) em vez de `export const metadata` — Fase 2
+ * (integração do catálogo real via src/lib/catalog.ts): a leitura do
+ * Supabase é assíncrona, e `const metadata` só aceita um valor estático.
  */
-export const metadata: Metadata = {
-  title: "Catálogo de kits",
-  description: `${getAllKits().length} coleções de templates organizadas por profissão, somando ${getAllTemplates().length} templates editáveis no Canva.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [kits, templates] = await Promise.all([getAllKits(), getAllTemplates()]);
+  return {
+    title: "Catálogo de kits",
+    description: `${kits.length} coleções de templates organizadas por profissão, somando ${templates.length} templates editáveis no Canva.`,
+  };
+}
 
 /**
  * Catálogo (`/kits`, novo em 2026-10-20) — antes não existia: a única
@@ -34,9 +40,9 @@ export const metadata: Metadata = {
  *   I/O, nunca vazio; fingir esses estados simularia uma infraestrutura
  *   assíncrona que não existe no projeto.
  */
-export default function KitsCatalogPage() {
-  const kits = getAllKits();
-  const totalTemplates = getAllTemplates().length;
+export default async function KitsCatalogPage() {
+  const [kits, templates] = await Promise.all([getAllKits(), getAllTemplates()]);
+  const totalTemplates = templates.length;
 
   return (
     // `<main>` em vez de `<section>` (Fase 4.9, item 2 da auditoria de
@@ -68,6 +74,7 @@ export default function KitsCatalogPage() {
               kit={kit}
               tilt={i % 2 === 0 ? -1 : 1}
               priority={i === 0}
+              index={i}
             />
           ))}
         </div>

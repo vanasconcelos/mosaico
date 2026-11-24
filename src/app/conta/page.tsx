@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { createClient } from "@/lib/supabase/server";
 import { logoutAction } from "../(auth)/actions";
 import { ComprarAcessoButton } from "@/components/conta/ComprarAcessoButton";
-import { getKitsWithRealContent } from "@/lib/kits";
+import { getKitsWithRealContent } from "@/lib/catalog";
 import { formatMosaicoPrice } from "@/lib/pricing";
 
 /**
@@ -104,6 +104,9 @@ export default async function ContaPage({ searchParams }: ContaPageProps) {
     .maybeSingle();
 
   const hasPaidAccess = profile?.has_paid_access === true;
+  // Só busca quando de fato vai ser exibido — visitante sem acesso nunca
+  // precisa desta consulta.
+  const kitsComConteudo = hasPaidAccess ? await getKitsWithRealContent() : [];
 
   return (
     <main className="flex flex-1 items-center bg-mosaico-bg py-20">
@@ -153,8 +156,20 @@ export default async function ContaPage({ searchParams }: ContaPageProps) {
           ) : hasPaidAccess ? (
             <>
               <p className="mt-6 font-sans text-base text-mosaico-ink-soft">
-                Compra confirmada — acesso liberado. Abra qualquer kit abaixo
-                para baixar ou editar cada template no Canva.
+                Compra confirmada — acesso liberado a todo o catálogo do
+                Mosaico. Abra qualquer kit abaixo para baixar ou editar cada
+                template no Canva.
+              </p>
+              {/* "complemento, nunca a única forma de entrega" (Fase
+                  "Implementação do E-mail de Confirmação de Compra",
+                  seção 6) — o acesso já está liberado nesta própria
+                  página, independente do e-mail ter chegado ou não;
+                  esta linha existe só pra deixar isso explícito pra
+                  quem não recebeu (ou ainda não viu) o e-mail. */}
+              <p className="mt-2 font-sans text-sm text-mosaico-ink-soft">
+                Você também recebe um e-mail de confirmação — mas o acesso
+                já está disponível aqui, mesmo que o e-mail demore ou não
+                chegue.
               </p>
               {/* Lista de kits acessíveis — leitura de getKitsWithRealContent(),
                   já usada em Hero/catálogo; acesso é único e global (não há
@@ -166,7 +181,7 @@ export default async function ContaPage({ searchParams }: ContaPageProps) {
                   Seus kits
                 </p>
                 <ul className="mt-4 space-y-3">
-                  {getKitsWithRealContent().map((kit) => (
+                  {kitsComConteudo.map((kit) => (
                     <li key={kit.id}>
                       <Link
                         href={`/kits/${kit.slug}`}
@@ -184,7 +199,7 @@ export default async function ContaPage({ searchParams }: ContaPageProps) {
               <p className="mt-6 font-sans text-base text-mosaico-ink-soft">
                 Ainda não identificamos uma compra confirmada nesta conta.
                 Compre o acesso completo para editar e baixar qualquer
-                template.
+                template de qualquer kit do catálogo.
               </p>
               <p className="mt-4 font-serif text-2xl text-mosaico-ink">
                 {formatMosaicoPrice()}

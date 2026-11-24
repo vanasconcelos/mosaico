@@ -54,19 +54,21 @@ function findElementsByType(element, targetType, found = []) {
   return found;
 }
 
-test("downloadAllowed: false -> <DownloadTemplateButton> não aparece na árvore, <EditInCanvaButton> continua presente", () => {
+test("downloadAllowed: false -> <DownloadTemplateButton> não aparece na árvore, <EditInCanvaButton> continua presente (com editLinkAvailable: true)", () => {
   const tree = TemplateDetail({
     template: TEMPLATE,
     hasPaidAccess: true,
     signedUrls: null,
     downloadAllowed: false,
+    editLinkAvailable: true,
   });
 
   const downloadButtons = findElementsByType(tree, DownloadTemplateButton);
   const editButtons = findElementsByType(tree, EditInCanvaButton);
 
   assert.equal(downloadButtons.length, 0, "o botão de download não deve ser renderizado quando downloadAllowed é false");
-  assert.equal(editButtons.length, 1, "o botão de editar no Canva deve continuar presente, sempre");
+  assert.equal(editButtons.length, 1, "o componente de editar no Canva deve continuar presente (sua própria lógica decide o estado, ver edit-in-canva-button.test.mjs)");
+  assert.equal(editButtons[0].props.editLinkAvailable, true);
 });
 
 test("downloadAllowed: true -> <DownloadTemplateButton> aparece na árvore, junto com <EditInCanvaButton>", () => {
@@ -75,6 +77,7 @@ test("downloadAllowed: true -> <DownloadTemplateButton> aparece na árvore, junt
     hasPaidAccess: true,
     signedUrls: null,
     downloadAllowed: true,
+    editLinkAvailable: true,
   });
 
   const downloadButtons = findElementsByType(tree, DownloadTemplateButton);
@@ -85,12 +88,27 @@ test("downloadAllowed: true -> <DownloadTemplateButton> aparece na árvore, junt
   assert.equal(editButtons.length, 1);
 });
 
+test("TemplateDetail repassa editLinkAvailable: false pro <EditInCanvaButton>, sem decidir nada por conta própria", () => {
+  const tree = TemplateDetail({
+    template: TEMPLATE,
+    hasPaidAccess: true,
+    signedUrls: null,
+    downloadAllowed: true,
+    editLinkAvailable: false,
+  });
+
+  const editButtons = findElementsByType(tree, EditInCanvaButton);
+  assert.equal(editButtons.length, 1);
+  assert.equal(editButtons[0].props.editLinkAvailable, false);
+});
+
 test("downloadAllowed: false -> o texto explicativo não menciona baixar/usar a arte como está, só edição no Canva", () => {
   const tree = TemplateDetail({
     template: TEMPLATE,
     hasPaidAccess: true,
     signedUrls: null,
     downloadAllowed: false,
+    editLinkAvailable: true,
   });
 
   // Procura qualquer texto (string) em toda a árvore que mencione "baixar"

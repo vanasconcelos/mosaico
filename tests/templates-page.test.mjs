@@ -10,9 +10,10 @@
 // sem precisar de nenhum renderer/DOM, já que um elemento React nada
 // mais é que um objeto simples { type, props }.
 //
-// @/lib/templates (catálogo real, ~17 mil linhas) é substituído por um
-// fake minúsculo e sintético — o conteúdo real do catálogo não é o que
-// está sob teste aqui, só a lógica de autorização/signed URLs.
+// @/lib/catalog (Fase 2 — leitor real do catálogo, banco+fallback; antes
+// era @/lib/templates direto) é substituído por um fake minúsculo e
+// sintético — o conteúdo real do catálogo não é o que está sob teste
+// aqui, só a lógica de autorização/signed URLs.
 // @/components/templates/TemplateDetail também é substituído por um
 // stub inerte: não renderizamos nada, só inspecionamos as props que
 // chegam até ele.
@@ -61,9 +62,22 @@ function loadPageWith({
   // "template51". Os testes dedicados à allowlist, abaixo, passam
   // `false` explicitamente.
   distributionAllowed = true,
+  // editLinkAvailable (correção de 2026-11-23 — o botão "Editar no
+  // Canva" não devia mais aparecer incondicionalmente): `null` por
+  // padrão, simulando "link ainda não configurado" — mesmo valor que
+  // `canva_editable_url` tem hoje de verdade (banco vazio). Os testes
+  // dedicados a isso, abaixo, passam uma string explícita.
+  templateCanvaEditableUrl = null,
+  templatesQueryError = null,
 }) {
   clearModuleCache();
-  const calls = { profilesQueried: false, bucketListed: false, signedUrlsRequestedFor: null, signedUrlsTtl: null };
+  const calls = {
+    profilesQueried: false,
+    bucketListed: false,
+    signedUrlsRequestedFor: null,
+    signedUrlsTtl: null,
+    templatesQueried: false,
+  };
 
   injectFakeModule("lib/server/distribution-allowlist", {
     isDistributionAllowed() {
@@ -71,12 +85,15 @@ function loadPageWith({
     },
   });
 
-  injectFakeModule("lib/templates", {
-    getTemplateBySlug(slug) {
+  injectFakeModule("lib/catalog", {
+    async getTemplateBySlug(slug) {
       return slug === TEMPLATE_EXISTENTE.slug ? TEMPLATE_EXISTENTE : undefined;
     },
-    getAllTemplates() {
+    async getAllTemplates() {
       return [TEMPLATE_EXISTENTE];
+    },
+    async getKitBySlug() {
+      return undefined;
     },
   });
 
@@ -143,6 +160,25 @@ function loadPageWith({
               },
             };
           },
+        },
+        // Consulta de `canva_editable_url` (correção de 2026-11-23) —
+        // query builder mínimo, só o suficiente pra `.select().eq().maybeSingle()`
+        // encadear como o código real usa.
+        from(table) {
+          assert.equal(table, "templates");
+          calls.templatesQueried = true;
+          return {
+            select() {
+              return this;
+            },
+            eq() {
+              return this;
+            },
+            async maybeSingle() {
+              if (templatesQueryError) return { data: null, error: templatesQueryError };
+              return { data: { canva_editable_url: templateCanvaEditableUrl }, error: null };
+            },
+          };
         },
       };
     },
@@ -431,4 +467,76 @@ test("nenhum link do bucket chega às props antes de has_paid_access === true (v
     assert.equal(props.signedUrls, null);
     assert.equal(calls.bucketListed, false, `bucket não deveria ser tocado no cenário ${JSON.stringify(cenario)}`);
   }
+});
+
+// ---------- editLinkAvailable (correção de 2026-11-23 — "Editar no
+// Canva" não deve mais aparecer como disponível quando
+// canva_editable_url estiver vazio) ----------
+
+test("link ausente (canva_editable_url: null) -> editLinkAvailable: false, mesmo com acesso pago", async () => {
+  const { mod, calls } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    templateCanvaEditableUrl: null,
+  });
+  const props = await renderPage(mod);
+  assert.equal(props.editLinkAvailable, false);
+  assert.equal(calls.templatesQueried, true);
+});
+
+test("link presente, usuário SEM acesso pago -> editLinkAvailable: true (a existência do link é do template, não de quem olha); o bloqueio de verdade é no clique (ver tests/edit-link.test.mjs, 403 access_denied), não mudou", async () => {
+  const { mod } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: false },
+    templateCanvaEditableUrl: "https://www.canva.com/design/xyz/view",
+  });
+  const props = await renderPage(mod);
+  assert.equal(props.editLinkAvailable, true);
+  assert.equal(props.hasPaidAccess, false, "has_paid_access continua false — editLinkAvailable não concede acesso, só diz que o link existe");
+});
+
+test("link presente, usuário autorizado e com acesso pago -> editLinkAvailable: true", async () => {
+  const { mod } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    templateCanvaEditableUrl: "https://www.canva.com/design/xyz/view",
+  });
+  const props = await renderPage(mod);
+  assert.equal(props.editLinkAvailable, true);
+  assert.equal(props.hasPaidAccess, true);
+});
+
+test("usuário não autenticado -> editLinkAvailable continua só um booleano, nunca o link (consulta independe de sessão, mas o VALOR real nunca chega às props — só true/false)", async () => {
+  const { mod } = loadPageWith({
+    claims: null,
+    templateCanvaEditableUrl: "https://www.canva.com/design/xyz/view",
+  });
+  const props = await renderPage(mod);
+  assert.equal(typeof props.editLinkAvailable, "boolean");
+  assert.equal(props.editLinkAvailable, true);
+  assert.equal(props.hasPaidAccess, false, "sessão continua decidindo hasPaidAccess normalmente, independente do link existir");
+  // Nunca o valor cru da URL em lugar nenhum das props.
+  assert.ok(!JSON.stringify(props).includes("canva.com/design/xyz"));
+});
+
+test("erro na consulta de canva_editable_url -> editLinkAvailable: false, nunca lança, nunca apresenta a edição como disponível", async () => {
+  const { mod } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    templatesQueryError: { message: "connection refused" },
+  });
+  const props = await renderPage(mod);
+  assert.equal(props.editLinkAvailable, false);
+});
+
+test("admin indisponível (sem service_role) -> editLinkAvailable: false, nunca finge disponível", async () => {
+  const { mod, calls } = loadPageWith({
+    claims: { sub: "user-123" },
+    profile: { has_paid_access: true },
+    adminAvailable: false,
+    templateCanvaEditableUrl: "https://www.canva.com/design/xyz/view",
+  });
+  const props = await renderPage(mod);
+  assert.equal(props.editLinkAvailable, false);
+  assert.equal(calls.templatesQueried, false, "sem client admin, nem chega a tentar consultar a tabela");
 });

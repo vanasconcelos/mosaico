@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { getTemplateBySlug } from "@/lib/templates";
-import { getKitBySlug } from "@/lib/kits";
+import { getTemplateBySlug, getKitBySlug } from "@/lib/catalog";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { TemplateDetail } from "@/components/templates/TemplateDetail";
 import { TemplateDetailSkeleton } from "@/components/templates/TemplateDetailSkeleton";
@@ -28,12 +27,12 @@ interface TemplatePageProps {
  */
 export async function generateMetadata({ params }: TemplatePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const template = getTemplateBySlug(slug);
+  const template = await getTemplateBySlug(slug);
   if (!template) {
     notFound();
   }
 
-  const kit = template.kitSlug ? getKitBySlug(template.kitSlug) : undefined;
+  const kit = template.kitSlug ? await getKitBySlug(template.kitSlug) : undefined;
   const description = template.description ?? kit?.description;
   const coverUrl = resolveSafeCoverUrl(template.slug);
 
@@ -124,9 +123,35 @@ async function resolvePaidGallery(
   return { hasPaidAccess: true, signedUrls: urls.length > 0 ? urls : null };
 }
 
+/**
+ * Só decide SE o botão "Editar no Canva" deve ser oferecido como ação
+ * disponível, ou como "em breve" — nunca devolve o link em si, só um
+ * booleano (achado da revisão de 2026-11-23: o botão renderizava sempre,
+ * incondicionalmente, mesmo quando `canva_editable_url` estava vazio).
+ * Mesma coluna, mesmo client admin do endpoint `edit-link` (`templates`
+ * não concede SELECT a anon/authenticated — só o client admin lê esta
+ * coluna, migration 0002). Independente de `has_paid_access`: a
+ * existência do link é propriedade do template, não de quem está
+ * olhando — qualquer erro, ausência de linha ou de service_role devolve
+ * `false` (fail closed), nunca afirma disponível por omissão.
+ */
+async function hasEditableLinkConfigured(slug: string): Promise<boolean> {
+  const admin = createAdminClient();
+  if (!admin) return false;
+
+  const { data, error } = await admin
+    .from("templates")
+    .select("canva_editable_url")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (error || !data) return false;
+  return Boolean(data.canva_editable_url);
+}
+
 export default async function TemplatePage({ params }: TemplatePageProps) {
   const { slug } = await params;
-  const template = getTemplateBySlug(slug);
+  const template = await getTemplateBySlug(slug);
 
   if (!template) {
     notFound();
@@ -158,7 +183,10 @@ async function TemplateDetailData({
   template: Template;
   slug: string;
 }) {
-  const { hasPaidAccess, signedUrls } = await resolvePaidGallery(slug);
+  const [{ hasPaidAccess, signedUrls }, editLinkAvailable] = await Promise.all([
+    resolvePaidGallery(slug),
+    hasEditableLinkConfigured(slug),
+  ]);
 
   // Mesma allowlist de distribuição (Fase 4.58), só pra decidir se o
   // botão de download aparece na página — nunca uma segunda cópia da
@@ -174,6 +202,7 @@ async function TemplateDetailData({
       hasPaidAccess={hasPaidAccess}
       signedUrls={signedUrls}
       downloadAllowed={downloadAllowed}
+      editLinkAvailable={editLinkAvailable}
     />
   );
 }

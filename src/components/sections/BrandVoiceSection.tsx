@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
-import { getAllTemplates } from "@/lib/templates";
+import { getAllTemplates } from "@/lib/catalog";
 
 /**
  * Seção C — "voz da marca" (2026-10-20, revisão pós-referências). Substitui
@@ -16,8 +16,9 @@ import { getAllTemplates } from "@/lib/templates";
  * escolhe uma peça Feed/Carrossel com preview, diferente das já usadas no
  * Hero/colagem (índice 7 do pool elegível), determinístico.
  */
-function pickVoiceTemplate() {
-  const eligible = getAllTemplates().filter(
+async function pickVoiceTemplate() {
+  const templates = await getAllTemplates();
+  const eligible = templates.filter(
     (template) =>
       template.previewImageUrl &&
       (template.category === "Feed" || template.category === "Carrossel"),
@@ -25,8 +26,8 @@ function pickVoiceTemplate() {
   return eligible[7] ?? eligible[0];
 }
 
-export function BrandVoiceSection() {
-  const template = pickVoiceTemplate();
+export async function BrandVoiceSection() {
+  const template = await pickVoiceTemplate();
 
   return (
     <section className="bg-mosaico-bg py-10 lg:py-16">

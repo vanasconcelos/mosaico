@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
-import { getAllTemplates } from "@/lib/templates";
-import { getAllKits, getKitsWithRealContent, kitHasRealContent } from "@/lib/kits";
+import { getAllTemplates, getAllKits, getKitsWithRealContent } from "@/lib/catalog";
 
 /**
  * Hero — quarta reescrita (2026-10-20). A versão com `rotateY`/`rotateX`/
@@ -21,8 +20,9 @@ import { getAllKits, getKitsWithRealContent, kitHasRealContent } from "@/lib/kit
  * promessa de inventário; o badge numérico (323 artes / 6 kits
  * publicados) continua separado, correto e não lido por essa lista.
  */
-function pickHeroCluster() {
-  const eligible = getAllTemplates().filter(
+async function pickHeroCluster() {
+  const allTemplates = await getAllTemplates();
+  const eligible = allTemplates.filter(
     (template) =>
       template.previewImageUrl &&
       (template.category === "Carrossel" || template.category === "Feed"),
@@ -40,11 +40,15 @@ function pickHeroCluster() {
   return cluster;
 }
 
-export function Hero() {
-  const cluster = pickHeroCluster();
-  const totalTemplates = getAllTemplates().length;
-  const kitsComConteudo = getKitsWithRealContent();
-  const todosOsKits = getAllKits();
+export async function Hero() {
+  const [cluster, allTemplates, kitsComConteudo, todosOsKits] = await Promise.all([
+    pickHeroCluster(),
+    getAllTemplates(),
+    getKitsWithRealContent(),
+    getAllKits(),
+  ]);
+  const totalTemplates = allTemplates.length;
+  const kitSlugsComConteudo = new Set(kitsComConteudo.map((kit) => kit.slug));
 
   return (
     <section className="relative overflow-hidden bg-mosaico-bg py-20 lg:py-28">
@@ -148,7 +152,7 @@ export function Hero() {
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
             {todosOsKits.map((kit, i) => {
-              const hasContent = kitHasRealContent(kit.slug);
+              const hasContent = kitSlugsComConteudo.has(kit.slug);
               return (
                 <span
                   key={kit.id}

@@ -4,8 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { getKitBySlug } from "@/lib/kits";
-import { getAllTemplates } from "@/lib/templates";
+import { getKitBySlug, getAllTemplates } from "@/lib/catalog";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { TemplateCard } from "@/components/templates/TemplateCard";
 import { PresentationFolderCard } from "@/components/presentations/PresentationFolderCard";
@@ -32,12 +31,13 @@ interface KitPageProps {
  */
 export async function generateMetadata({ params }: KitPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const kit = getKitBySlug(slug);
+  const kit = await getKitBySlug(slug);
   if (!kit) {
     notFound();
   }
 
-  const coverTemplate = getAllTemplates().find(
+  const templates = await getAllTemplates();
+  const coverTemplate = templates.find(
     (template) =>
       template.kitSlug === kit.slug &&
       template.previewImageUrl &&
@@ -121,13 +121,14 @@ export async function generateMetadata({ params }: KitPageProps): Promise<Metada
  */
 export default async function KitPage({ params }: KitPageProps) {
   const { slug } = await params;
-  const kit = getKitBySlug(slug);
+  const kit = await getKitBySlug(slug);
 
   if (!kit) {
     notFound();
   }
 
-  const kitTemplates = getAllTemplates().filter(
+  const allTemplates = await getAllTemplates();
+  const kitTemplates = allTemplates.filter(
     (template) => template.kitSlug === kit.slug,
   );
   const apresentacoes = kitTemplates.filter(

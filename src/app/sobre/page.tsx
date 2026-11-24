@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
-import { getAllTemplates } from "@/lib/templates";
-import { getAllKits, getKitsWithRealContent } from "@/lib/kits";
+import { getAllTemplates, getAllKits, getKitsWithRealContent } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Sobre",
@@ -19,8 +18,9 @@ export const metadata: Metadata = {
  * motivo já documentado em PhoneShowcaseSection: evita mismatch de
  * hidratação em SSG.
  */
-function pickAboutTemplate() {
-  const eligible = getAllTemplates().filter(
+async function pickAboutTemplate() {
+  const templates = await getAllTemplates();
+  const eligible = templates.filter(
     (template) =>
       template.previewImageUrl &&
       (template.category === "Carrossel" || template.category === "Feed"),
@@ -56,11 +56,16 @@ const beneficios = [
   },
 ];
 
-export default function SobrePage() {
-  const template = pickAboutTemplate();
-  const totalTemplates = getAllTemplates().length;
-  const kitsPublicados = getKitsWithRealContent().length;
-  const totalKits = getAllKits().length;
+export default async function SobrePage() {
+  const [template, templates, kitsComConteudo, kits] = await Promise.all([
+    pickAboutTemplate(),
+    getAllTemplates(),
+    getKitsWithRealContent(),
+    getAllKits(),
+  ]);
+  const totalTemplates = templates.length;
+  const kitsPublicados = kitsComConteudo.length;
+  const totalKits = kits.length;
 
   return (
     <main>

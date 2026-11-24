@@ -1,12 +1,48 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { TemplateCard } from "@/components/templates/TemplateCard";
-import { getKitBySlug } from "@/lib/kits";
-import { getAllTemplates } from "@/lib/templates";
+import { getKitBySlug, getAllTemplates } from "@/lib/catalog";
+import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 
 interface ApresentacoesPageProps {
   params: Promise<{ slug: string }>;
+}
+
+/**
+ * Metadados (mesmo padrão de src/app/kits/[slug]/page.tsx): título e
+ * descrição nunca inventados, capa de Open Graph é a primeira
+ * Apresentação real do kit — `openGraph`/`twitter` só entram no objeto
+ * quando existe capa, pra preservar o fallback institucional quando não
+ * existe (mesma ressalva do kit pai).
+ */
+export async function generateMetadata({
+  params,
+}: ApresentacoesPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const kit = await getKitBySlug(slug);
+  if (!kit) {
+    notFound();
+  }
+
+  const templates = await getAllTemplates();
+  const apresentacoes = templates.filter(
+    (template) =>
+      template.kitSlug === kit.slug && template.category === "Apresentação",
+  );
+  const coverUrl = apresentacoes[0]
+    ? resolveSafeCoverUrl(apresentacoes[0].slug)
+    : null;
+
+  return {
+    title: `Apresentações — Kit ${kit.title}`,
+    description: `Materiais para apresentar aos seus clientes, parte do Kit ${kit.title}.`,
+    ...(coverUrl && {
+      openGraph: { images: [{ url: coverUrl }] },
+      twitter: { card: "summary_large_image" as const, images: [coverUrl] },
+    }),
+  };
 }
 
 /**
@@ -27,13 +63,14 @@ export default async function ApresentacoesPage({
   params,
 }: ApresentacoesPageProps) {
   const { slug } = await params;
-  const kit = getKitBySlug(slug);
+  const kit = await getKitBySlug(slug);
 
   if (!kit) {
     notFound();
   }
 
-  const apresentacoes = getAllTemplates().filter(
+  const templates = await getAllTemplates();
+  const apresentacoes = templates.filter(
     (template) =>
       template.kitSlug === kit.slug && template.category === "Apresentação",
   );

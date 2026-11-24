@@ -23,6 +23,13 @@ interface TemplateDetailProps {
    * download inteiro: a interface nunca oferece um caminho de entrega
    * que o próprio endpoint vai recusar, mesmo pra quem já comprou. */
   downloadAllowed: boolean;
+  /** Resolvido no servidor (page.tsx), consultando só a existência de
+   * `canva_editable_url` (nunca o valor) via client admin — nunca
+   * decidido aqui. `false` troca o botão "Editar no Canva" por um
+   * estado informativo "em breve" (achado da revisão de 2026-11-23: o
+   * botão aparecia sempre, incondicionalmente, prometendo uma ação que
+   * o servidor recusaria). */
+  editLinkAvailable: boolean;
 }
 
 /**
@@ -54,6 +61,7 @@ export function TemplateDetail({
   hasPaidAccess,
   signedUrls,
   downloadAllowed,
+  editLinkAvailable,
 }: TemplateDetailProps) {
   const { title, slug, category, description } = template;
   const unlocked = hasPaidAccess && signedUrls && signedUrls.length > 0;
@@ -140,7 +148,7 @@ export function TemplateDetail({
 
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
               {downloadAllowed && <DownloadTemplateButton title={title} slug={slug} />}
-              <EditInCanvaButton slug={slug} />
+              <EditInCanvaButton slug={slug} editLinkAvailable={editLinkAvailable} />
             </div>
             {/* Texto adaptado ao que a interface realmente oferece (Fase
                 4.60) — nunca anuncia o download como caminho de entrega
