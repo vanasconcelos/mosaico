@@ -1,7 +1,14 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import type { TemplateAspectRatio, TemplateSummary } from "@/types/template";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { cx } from "@/lib/cx";
+
+/** `sizes` padrão — cobre o caso mais comum (grades de 2-3 colunas: ver
+ * TemplateCard/catálogo de kit). Quem usa este componente numa peça maior
+ * ou mais crítica (ex.: Hero, TemplateDetail) passa o seu próprio valor,
+ * mais preciso pra aquele layout — ver Fase 4.4. */
+const DEFAULT_SIZES = "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw";
 
 /** Tons de placeholder com contraste real (claro/escuro alternando), não só
  * variações de marrom — a cor de rótulo muda junto para continuar legível.
@@ -32,6 +39,17 @@ interface TemplatePreviewProps {
   index?: number;
   className?: string;
   style?: CSSProperties;
+  /** Atributo `sizes` do `next/image` (Fase 4.4) — descreve a largura real
+   * renderizada neste call site pra gerar o srcset certo. Default cobre
+   * grades densas; passar um valor específico quando o layout for bem
+   * diferente disso (ex.: peça grande e sozinha). */
+  sizes?: string;
+  /** `priority` do `next/image` (Fase 4.4) — só pra imagem(ns)
+   * efetivamente crítica(s) da página (LCP acima da dobra: o leque do
+   * Hero, a peça principal de TemplateDetail). Nunca o padrão — ativar
+   * `priority` sem necessidade compete pelo mesmo orçamento de
+   * carregamento prioritário e piora, não melhora, o carregamento real. */
+  priority?: boolean;
 }
 
 /**
@@ -54,6 +72,8 @@ export function TemplatePreview({
   index = 0,
   className,
   style,
+  sizes = DEFAULT_SIZES,
+  priority = false,
 }: TemplatePreviewProps) {
   const { title, category, slug, aspectRatio } = template;
   const previewImageUrl = resolveSafeCoverUrl(slug);
@@ -72,15 +92,19 @@ export function TemplatePreview({
       )}
     >
       {previewImageUrl ? (
-        // Miniaturas densas e numerosas (grid do Hero, coleções) — plain
-        // <img> em vez de next/image evita configurar remotePatterns antes
-        // de sabermos de onde os previews reais vão vir (Supabase Storage).
-        // Revisar para next/image quando isso estiver definido.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        // `fill` preenche o box de `aspectRatio` já definido no wrapper
+        // acima — mesmo resultado visual do <img className="h-full w-full
+        // object-cover"> anterior, agora com otimização/srcset/lazy
+        // loading nativos do Next (Fase 4.4). Capa pública estática
+        // (public/templates-capas/), nunca o Storage pago — não precisa de
+        // remotePatterns.
+        <Image
           src={previewImageUrl}
           alt={title}
-          className="h-full w-full object-cover"
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
         />
       ) : placeholderStyle === "decorative" ? (
         <span
@@ -94,10 +118,10 @@ export function TemplatePreview({
       ) : (
         <div className="flex h-full flex-col items-center justify-center gap-1.5 px-6 text-center">
           <span className="font-sans text-[11px] font-semibold tracking-[0.15em] text-mosaico-ink-soft uppercase">
-            Preview pendente
+            Prévia em preparação
           </span>
           <span className="font-sans text-xs text-mosaico-ink-soft/70">
-            Aguardando PNG exportado do Canva
+            Em breve com imagem
           </span>
         </div>
       )}

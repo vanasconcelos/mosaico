@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
-import { getAllTemplates } from "@/lib/templates";
-import { getAllKits, getKitsWithRealContent, kitHasRealContent } from "@/lib/kits";
+import { getAllTemplates, getAllKits, getKitsWithRealContent } from "@/lib/catalog";
 
 /**
  * Hero — quarta reescrita (2026-10-20). A versão com `rotateY`/`rotateX`/
@@ -21,8 +20,9 @@ import { getAllKits, getKitsWithRealContent, kitHasRealContent } from "@/lib/kit
  * promessa de inventário; o badge numérico (323 artes / 6 kits
  * publicados) continua separado, correto e não lido por essa lista.
  */
-function pickHeroCluster() {
-  const eligible = getAllTemplates().filter(
+async function pickHeroCluster() {
+  const allTemplates = await getAllTemplates();
+  const eligible = allTemplates.filter(
     (template) =>
       template.previewImageUrl &&
       (template.category === "Carrossel" || template.category === "Feed"),
@@ -40,11 +40,15 @@ function pickHeroCluster() {
   return cluster;
 }
 
-export function Hero() {
-  const cluster = pickHeroCluster();
-  const totalTemplates = getAllTemplates().length;
-  const kitsComConteudo = getKitsWithRealContent();
-  const todosOsKits = getAllKits();
+export async function Hero() {
+  const [cluster, allTemplates, kitsComConteudo, todosOsKits] = await Promise.all([
+    pickHeroCluster(),
+    getAllTemplates(),
+    getKitsWithRealContent(),
+    getAllKits(),
+  ]);
+  const totalTemplates = allTemplates.length;
+  const kitSlugsComConteudo = new Set(kitsComConteudo.map((kit) => kit.slug));
 
   return (
     <section className="relative overflow-hidden bg-mosaico-bg py-20 lg:py-28">
@@ -89,6 +93,7 @@ export function Hero() {
                 <TemplatePreview
                   template={cluster[1]}
                   placeholderStyle="pending"
+                  sizes="(max-width: 1024px) 46vw, 24vw"
                   className="w-full overflow-hidden rounded-[3px] border border-mosaico-border/40 shadow-[0_28px_56px_-24px_rgba(23,19,15,0.4)]"
                 />
               </div>
@@ -98,25 +103,39 @@ export function Hero() {
                 <TemplatePreview
                   template={cluster[2]}
                   placeholderStyle="pending"
+                  sizes="(max-width: 1024px) 44vw, 23vw"
                   className="w-full overflow-hidden rounded-[3px] border border-mosaico-border/40 shadow-[0_24px_48px_-22px_rgba(23,19,15,0.35)]"
                 />
               </div>
             )}
             {cluster[0] && (
               <div className="absolute top-[12%] left-1/2 z-10 w-[54%] -translate-x-1/2 -rotate-2">
-                <span className="absolute -top-7 -right-8 z-10 flex h-20 w-20 flex-col items-center justify-center rounded-full border border-mosaico-border/30 bg-mosaico-bg font-sans text-[10px] leading-tight text-mosaico-ink shadow-[0_18px_36px_-16px_rgba(23,19,15,0.35)] sm:h-24 sm:w-24 sm:text-[11px]">
-                  <span className="font-serif text-lg sm:text-xl">{totalTemplates}</span>
-                  <span className="text-mosaico-ink-soft">artes</span>
-                  <span className="mt-0.5 text-mosaico-ink-soft">
-                    {kitsComConteudo.length} kits publicados
-                  </span>
-                </span>
                 <TemplatePreview
                   template={cluster[0]}
                   placeholderStyle="pending"
+                  priority
+                  sizes="(max-width: 1024px) 54vw, 30vw"
                   className="w-full overflow-hidden rounded-[3px] border border-mosaico-border/40 shadow-[0_48px_90px_-30px_rgba(23,19,15,0.5)]"
                 />
               </div>
+            )}
+            {/* Badge — ancorado no container do leque inteiro (não mais
+                dentro do card central), no canto vazio acima dele. Antes
+                ficava preso ao canto do próprio card e, mesmo com offset
+                negativo, um círculo de 72–96px nessa posição sempre cobria
+                uma fatia real do canto superior do card (confirmado na
+                auditoria da Fase 4.6, nos 4 tamanhos testados) — nunca uma
+                questão de breakpoint, e sim de nunca ter sobrado espaço
+                livre ali. Aqui ele flutua no respiro acima do card
+                central, sem tocar nenhuma peça. */}
+            {cluster[0] && (
+              <span className="absolute top-0 -right-2 z-20 flex h-[4.5rem] w-[4.5rem] flex-col items-center justify-center rounded-full border border-mosaico-border/30 bg-mosaico-bg font-sans text-[9px] leading-tight text-mosaico-ink shadow-[0_18px_36px_-16px_rgba(23,19,15,0.35)] sm:-right-6 sm:h-24 sm:w-24 sm:text-[11px] lg:-right-4">
+                <span className="font-serif text-lg sm:text-xl">{totalTemplates}</span>
+                <span className="text-mosaico-ink-soft">artes</span>
+                <span className="mt-0.5 text-mosaico-ink-soft">
+                  {kitsComConteudo.length} kits publicados
+                </span>
+              </span>
             )}
           </div>
         </div>
@@ -133,7 +152,7 @@ export function Hero() {
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
             {todosOsKits.map((kit, i) => {
-              const hasContent = kitHasRealContent(kit.slug);
+              const hasContent = kitSlugsComConteudo.has(kit.slug);
               return (
                 <span
                   key={kit.id}

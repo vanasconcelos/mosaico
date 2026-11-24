@@ -136,39 +136,77 @@ export async function POST(request: Request) {
 
   const status = mapStatus(result.status);
 
-  // Idempotência real, não só de aplicação: `upsert` com o par
-  // (provider, provider_event_id) que a migration 0001 já define como
-  // `unique` — reprocessar a mesma notificação várias vezes sempre
-  // atualiza a MESMA linha, nunca cria uma duplicata, mesmo sob
-  // concorrência (a garantia vem do banco, não só deste código).
-  const { error: purchaseError } = await admin.from("purchases").upsert(
-    {
-      user_id: userId,
-      provider: "mercadopago",
-      provider_event_id: dataId,
-      provider_event_at: new Date().toISOString(),
-      status,
-      amount_cents: result.transaction_amount
-        ? Math.round(result.transaction_amount * 100)
-        : null,
-    },
-    { onConflict: "provider,provider_event_id" },
-  );
+  // Timestamp do PRÓPRIO pagamento, nunca da hora de processamento deste
+  // servidor — é o que a coluna já documentava desde a migration 0001
+  // ("timestamp do PROVEDOR, nunca do recebimento"), mas o código nunca
+  // tinha honrado isso. `date_last_updated` é o campo que o tipo da SDK
+  // documenta como "Last modification timestamp" — usado como guarda de
+  // ordenação pela função abaixo. NÃO HÁ confirmação na documentação
+  // oficial de que esse campo se atualiza em TODA transição de status
+  // (reembolso, disputa) — a mesma incerteza já registrada na migration
+  // 0004 (seção "PENDENTE DE CONFIRMAÇÃO EXTERNA"), não resolvida nesta
+  // etapa. Por isso a função SQL nunca trata um timestamp empatado como
+  // prova de ordem real dos eventos — resolve empate por precedência de
+  // status (Etapa 6 da migration 0004), não por este campo. `new Date()`
+  // só como último recurso, se o pagamento não trouxer nenhum dos três
+  // campos (degrada pro comportamento antigo apenas nesse caso raro,
+  // nunca silenciosamente no caminho comum).
+  const providerEventAt =
+    result.date_last_updated ?? result.date_approved ?? result.date_created ?? new Date().toISOString();
 
-  if (purchaseError) {
-    // Nunca logar o corpo da notificação nem dados do pagamento — só o
-    // código do erro, pra diagnosticar sem expor nada sensível.
-    console.error("webhook mercadopago: falha ao gravar purchases", purchaseError.code);
+  // Grava o evento E recalcula has_paid_access numa única chamada
+  // atômica (função apply_purchase_event, migration 0004) — nunca duas
+  // escritas sequenciais independentes. A função:
+  //   - só aplica a atualização se este evento for igual ou mais recente
+  //     que o já gravado para o mesmo (provider, provider_event_id),
+  //     nunca deixando um evento atrasado reverter um estado mais novo;
+  //   - recalcula has_paid_access como EXISTS de qualquer compra 'paid'
+  //     do usuário, nunca um valor imperativo fixado só pelo status
+  //     desta chamada — consistente mesmo se o usuário tiver mais de uma
+  //     compra;
+  //   - levanta exceção (nunca aplica silenciosamente) se a compra já
+  //     registrada para este provider_event_id pertencer a outro
+  //     usuário (guarda de titularidade, Etapa 8).
+  //
+  // Etapa 8 (Parte B): o comportamento PADRÃO do @supabase/supabase-js
+  // (confirmado via leitura do código-fonte instalado,
+  // node_modules/@supabase/postgrest-js/src/PostgrestBuilder.ts, e via
+  // teste de integração local contra um PostgREST real) é resolver com
+  // `{ data, error }` mesmo quando a função Postgres levanta exceção —
+  // nunca rejeitar a Promise — enquanto `.rpc()` não encadear
+  // `.throwOnError()`, o que este código nunca faz. O try/catch abaixo
+  // não deveria disparar no caminho atual; existe como defesa em
+  // profundidade contra uma mudança futura (ex.: alguém encadear
+  // `.throwOnError()`) virar uma exceção não tratada aqui, deixando de
+  // responder ao Mercado Pago (que reinterpretaria como falha de
+  // entrega e tentaria de novo — comportamento aceitável, mas pior que
+  // um 500 explícito e silencioso quanto a detalhes do erro).
+  let applyError: { code?: string } | null;
+  try {
+    const rpcResult = await admin.rpc("apply_purchase_event", {
+      p_user_id: userId,
+      p_provider: "mercadopago",
+      p_provider_event_id: dataId,
+      p_provider_event_at: providerEventAt,
+      p_status: status,
+      p_amount_cents: result.transaction_amount ? Math.round(result.transaction_amount * 100) : null,
+    });
+    applyError = rpcResult.error;
+  } catch (err) {
+    // Nunca logar o erro inteiro (pode conter dado do pagamento) — só a
+    // classe do erro. 500 (não um 2xx) para preservar o retry do
+    // Mercado Pago, igual ao caminho de `applyError` abaixo.
+    console.error("webhook mercadopago: admin.rpc rejeitou inesperadamente", {
+      errorClass: err instanceof Error ? err.constructor.name : typeof err,
+    });
     return NextResponse.json({ error: "purchase_write_failed" }, { status: 500 });
   }
 
-  // Acesso global: `paid` libera; `refunded`/`disputed` revoga. Nenhum
-  // outro status altera `has_paid_access` — `pending`/`refused` nunca
-  // chegaram a liberar, então não há nada a revogar nesses casos.
-  if (status === "paid") {
-    await admin.from("profiles").update({ has_paid_access: true }).eq("id", userId);
-  } else if (status === "refunded" || status === "disputed") {
-    await admin.from("profiles").update({ has_paid_access: false }).eq("id", userId);
+  if (applyError) {
+    // Nunca logar o corpo da notificação nem dados do pagamento — só o
+    // código do erro, pra diagnosticar sem expor nada sensível.
+    console.error("webhook mercadopago: falha ao aplicar evento de compra", applyError.code);
+    return NextResponse.json({ error: "purchase_write_failed" }, { status: 500 });
   }
 
   return NextResponse.json({ received: true, status });

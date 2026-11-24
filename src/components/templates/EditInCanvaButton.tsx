@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { cx } from "@/lib/cx";
+import { extractSafeCanvaUrl } from "@/lib/canva-url";
 
 interface EditInCanvaButtonProps {
   /** Nunca o link em si — o componente busca `canva_editable_url` no
@@ -11,33 +12,21 @@ interface EditInCanvaButtonProps {
    * no servidor). O componente nunca decide por conta própria que o
    * usuário pagou; só interpreta o status HTTP que o servidor devolve. */
   slug: string;
+  /** Resolvido no servidor (page.tsx) — `false` quando
+   * `canva_editable_url` ainda não está configurado para este slug.
+   * Nunca o link em si, só o booleano. Quando `false`, nenhum botão
+   * clicável é renderizado — só um estado informativo "em breve",
+   * nunca uma ação que o servidor recusaria (2026-11-23: antes deste
+   * campo, o botão aparecia sempre, incondicionalmente). */
+  editLinkAvailable: boolean;
   className?: string;
 }
 
 type Status = "idle" | "loading" | "error";
 
-/**
- * Hosts aceitos para abrir a URL devolvida pela API. Mesmo vindo do
- * próprio backend (não do usuário), nunca confiamos ciegamente num
- * valor que vira `window.open` — se um dia a coluna `canva_editable_url`
- * guardar algo fora do domínio esperado (erro de cadastro, linha
- * corrompida), isso é rejeitado aqui, nunca aberto.
- */
-const ALLOWED_CANVA_HOSTS = new Set(["canva.com", "www.canva.com"]);
-
-function extractSafeCanvaUrl(value: unknown): string | null {
-  if (typeof value !== "string") return null;
-  let url: URL;
-  try {
-    url = new URL(value);
-  } catch {
-    return null;
-  }
-  if (url.protocol !== "https:") return null;
-  const isAllowedHost =
-    ALLOWED_CANVA_HOSTS.has(url.hostname) || url.hostname.endsWith(".canva.com");
-  return isAllowedHost ? value : null;
-}
+// Validação da URL devolvida pela API: src/lib/canva-url.ts (mesma
+// lógica de sempre, agora numa única fonte de verdade reutilizável por
+// ferramentas fora do navegador, ex.: scripts/import-canva-links.mjs).
 
 const GENERIC_ERROR =
   "Não foi possível abrir o Canva agora. Tente novamente em instantes.";
@@ -58,7 +47,11 @@ function messageForErrorCode(code: string | null): string {
   }
 }
 
-export function EditInCanvaButton({ slug, className }: EditInCanvaButtonProps) {
+export function EditInCanvaButton({
+  slug,
+  editLinkAvailable,
+  className,
+}: EditInCanvaButtonProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorCode, setErrorCode] = useState<string | null>(null);
 
@@ -117,6 +110,24 @@ export function EditInCanvaButton({ slug, className }: EditInCanvaButtonProps) {
     // local, usada uma vez, e descartada ao sair desta função.
     window.open(safeUrl, "_blank", "noopener,noreferrer");
     setStatus("idle");
+  }
+
+  if (!editLinkAvailable) {
+    // Nenhum botão clicável, nenhuma promessa de ação indisponível —
+    // mesmo padrão visual "em preparação" já usado em outras partes do
+    // site (ex.: página do kit sem templates reais), só adaptado ao
+    // tamanho do CTA principal pra não deslocar o layout ao lado do
+    // botão de download.
+    return (
+      <span
+        className={cx(
+          "inline-flex w-fit items-center gap-2 rounded-full border border-mosaico-border/40 px-8 py-4 font-sans text-sm font-semibold tracking-wide text-mosaico-ink-soft uppercase",
+          className,
+        )}
+      >
+        Edição no Canva em breve
+      </span>
+    );
   }
 
   return (

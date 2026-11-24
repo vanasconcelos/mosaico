@@ -1,7 +1,26 @@
+import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { KitCatalogCard } from "@/components/kits/KitCatalogCard";
-import { getAllKits } from "@/lib/kits";
-import { getAllTemplates } from "@/lib/templates";
+import { getAllKits, getAllTemplates } from "@/lib/catalog";
+
+/**
+ * Metadados próprios do catálogo (Fase 4.3, item 1) — contagens reais,
+ * calculadas do mesmo jeito que o corpo da página já calcula (nunca um
+ * número hardcoded). Sem imagem própria: herda o fallback institucional
+ * de src/app/opengraph-image.tsx (nenhuma arte representaria "todos os
+ * kits" sem favorecer um produto específico).
+ *
+ * `generateMetadata` (async) em vez de `export const metadata` — Fase 2
+ * (integração do catálogo real via src/lib/catalog.ts): a leitura do
+ * Supabase é assíncrona, e `const metadata` só aceita um valor estático.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const [kits, templates] = await Promise.all([getAllKits(), getAllTemplates()]);
+  return {
+    title: "Catálogo de kits",
+    description: `${kits.length} coleções de templates organizadas por profissão, somando ${templates.length} templates editáveis no Canva.`,
+  };
+}
 
 /**
  * Catálogo (`/kits`, novo em 2026-10-20) — antes não existia: a única
@@ -21,12 +40,17 @@ import { getAllTemplates } from "@/lib/templates";
  *   I/O, nunca vazio; fingir esses estados simularia uma infraestrutura
  *   assíncrona que não existe no projeto.
  */
-export default function KitsCatalogPage() {
-  const kits = getAllKits();
-  const totalTemplates = getAllTemplates().length;
+export default async function KitsCatalogPage() {
+  const [kits, templates] = await Promise.all([getAllKits(), getAllTemplates()]);
+  const totalTemplates = templates.length;
 
   return (
-    <section className="bg-grid-paper bg-mosaico-bg py-20 lg:py-28">
+    // `<main>` em vez de `<section>` (Fase 4.9, item 2 da auditoria de
+    // acessibilidade) — landmark principal da página, mesma classe/layout
+    // de antes, só a tag muda. `/`, `/login`, `/cadastro`, `/recuperar-
+    // senha`, `/atualizar-senha` e `/conta` já tinham `<main>` próprio;
+    // esta era uma das 3 páginas sem nenhum.
+    <main className="bg-grid-paper bg-mosaico-bg py-20 lg:py-28">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-sans text-xs font-semibold tracking-[0.2em] text-mosaico-accent-deep uppercase">
@@ -45,10 +69,16 @@ export default function KitsCatalogPage() {
 
         <div className="mt-20 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {kits.map((kit, i) => (
-            <KitCatalogCard key={kit.id} kit={kit} tilt={i % 2 === 0 ? -1 : 1} />
+            <KitCatalogCard
+              key={kit.id}
+              kit={kit}
+              tilt={i % 2 === 0 ? -1 : 1}
+              priority={i === 0}
+              index={i}
+            />
           ))}
         </div>
       </Container>
-    </section>
+    </main>
   );
 }

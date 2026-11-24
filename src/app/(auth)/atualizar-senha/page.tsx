@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { createClient } from "@/lib/supabase/server";
 import { AtualizarSenhaForm } from "./AtualizarSenhaForm";
+
+/** Página de fluxo de autenticação — nunca indexável (ver nota em
+ * src/app/robots.ts sobre por que isso não vira `disallow` lá). */
+export const metadata: Metadata = {
+  title: "Definir nova senha",
+  robots: { index: false, follow: false },
+};
 
 /**
  * Página que `/auth/confirm` abre depois de trocar o código do link de

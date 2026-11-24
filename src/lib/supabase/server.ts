@@ -11,8 +11,9 @@ import { cookies } from "next/headers";
  * depreciada). `setAll` pode falhar quando chamado de dentro de um Server
  * Component (cookies só podem ser escritos em Server Actions/Route
  * Handlers) — nesses casos o erro é ignorado aqui; a renovação de sessão
- * nesse caminho é responsabilidade do `proxy.ts` da Fase 4, ainda não
- * criado.
+ * nesse caminho é responsabilidade do `src/proxy.ts` (já
+ * implementado — roda em toda requisição, chama `getClaims()` e
+ * reescreve os cookies antes de qualquer Server Component ler a sessão).
  */
 export async function createClient() {
   const cookieStore = await cookies();

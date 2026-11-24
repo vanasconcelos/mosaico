@@ -26,6 +26,7 @@ export function TemplateCard({ template, className }: TemplateCardProps) {
       <TemplatePreview
         template={template}
         placeholderStyle="pending"
+        sizes="(max-width: 640px) 50vw, 33vw"
         className="rounded-[2px] border border-mosaico-border/40 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_-24px_rgba(46,25,16,0.4)]"
       />
       <div className="mt-3">

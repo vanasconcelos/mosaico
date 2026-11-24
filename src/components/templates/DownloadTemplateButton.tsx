@@ -24,6 +24,8 @@ function messageForErrorCode(code: string | null): string {
       return "Muitas tentativas em pouco tempo. Aguarde um pouco e tente de novo.";
     case "content_not_available":
       return "Este conteúdo ainda não está disponível. Tente novamente mais tarde.";
+    case "download_temporarily_unavailable":
+      return "O download deste template está temporariamente indisponível. Use \"Editar no Canva\" para acessá-lo.";
     default:
       return GENERIC_ERROR;
   }

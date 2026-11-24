@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
 import { CrossfadeImage } from "@/components/ui/CrossfadeImage";
-import { getAllTemplates } from "@/lib/templates";
+import { getAllTemplates } from "@/lib/catalog";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 
 const CELL_COUNT = 12;
@@ -22,8 +22,9 @@ const MAX_IMAGES_PER_CELL = 3;
  * juntas. Exclui `"Apresentação"`/`"Conteúdo Jurídico"` e templates sem
  * `previewImageUrl` — mesmo critério de sempre.
  */
-function buildShowcaseGroups(): string[][] {
-  const pieces = getAllTemplates()
+async function buildShowcaseGroups(): Promise<string[][]> {
+  const templates = await getAllTemplates();
+  const pieces = templates
     .filter(
       (template) =>
         template.previewImageUrl &&
@@ -44,8 +45,8 @@ function buildShowcaseGroups(): string[][] {
   return groups.filter((group) => group.length > 0);
 }
 
-export function PhoneShowcaseSection() {
-  const groups = buildShowcaseGroups();
+export async function PhoneShowcaseSection() {
+  const groups = await buildShowcaseGroups();
 
   if (groups.length === 0) return null;
 
@@ -90,6 +91,7 @@ export function PhoneShowcaseSection() {
                     images={images}
                     alt="Arte real de um kit do Mosaico"
                     intervalMs={4000 + i * 450}
+                    sizes="100px"
                     className="h-full w-full"
                   />
                 ))}

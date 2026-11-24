@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Template } from "@/types/template";
 import { resolveSafeCoverUrl } from "@/lib/safe-covers";
 import { cx } from "@/lib/cx";
@@ -77,10 +78,16 @@ export function PresentationFolderCard({
           >
             {(() => {
               const safeUrl = resolveSafeCoverUrl(template.slug);
+              // `fill` ancora no próprio div absolute/h-[80%]/w-[80%] acima
+              // (já é um contexto de posicionamento válido) — mesmo
+              // resultado visual do <img className="h-full w-full
+              // object-cover"> anterior. Pilha pequena (3 capas, card
+              // único por kit) — sem `sizes`/`priority` especiais, usa o
+              // default do navegador (carregamento lazy já é adequado
+              // aqui, nunca é a primeira coisa vista na página do kit).
               return (
                 safeUrl && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={safeUrl} alt="" className="h-full w-full object-cover" />
+                  <Image src={safeUrl} alt="" fill className="object-cover" />
                 )
               );
             })()}

@@ -1,8 +1,10 @@
 import { Container } from "@/components/ui/Container";
 import { TemplatePreview } from "@/components/templates/TemplatePreview";
 import { TemplateGallery } from "@/components/templates/TemplateGallery";
+import { SignedImage } from "@/components/templates/SignedImage";
 import { EditInCanvaButton } from "@/components/templates/EditInCanvaButton";
 import { DownloadTemplateButton } from "@/components/templates/DownloadTemplateButton";
+import { formatMosaicoPrice } from "@/lib/pricing";
 import type { Template } from "@/types/template";
 
 interface TemplateDetailProps {
@@ -14,6 +16,20 @@ interface TemplateDetailProps {
    * `hasPaidAccess` é `true` e o bucket privado respondeu com sucesso.
    * `null` nunca deve virar um array vazio tratado como "sem páginas". */
   signedUrls: string[] | null;
+  /** Resolvido no servidor (page.tsx) via a mesma allowlist de
+   * distribuição do endpoint de download (Fase 4.58) — nunca decidido
+   * aqui, nunca uma segunda cópia da regra. `false` (hoje, pra todos os
+   * 323 templates, allowlist vazia de propósito) esconde o botão de
+   * download inteiro: a interface nunca oferece um caminho de entrega
+   * que o próprio endpoint vai recusar, mesmo pra quem já comprou. */
+  downloadAllowed: boolean;
+  /** Resolvido no servidor (page.tsx), consultando só a existência de
+   * `canva_editable_url` (nunca o valor) via client admin — nunca
+   * decidido aqui. `false` troca o botão "Editar no Canva" por um
+   * estado informativo "em breve" (achado da revisão de 2026-11-23: o
+   * botão aparecia sempre, incondicionalmente, prometendo uma ação que
+   * o servidor recusaria). */
+  editLinkAvailable: boolean;
 }
 
 /**
@@ -40,12 +56,29 @@ interface TemplateDetailProps {
  * `EditInCanvaButton` segue seu próprio caminho (endpoint `edit-link`, já
  * existente) para o Template Link do Canva — nenhuma mudança ali.
  */
-export function TemplateDetail({ template, hasPaidAccess, signedUrls }: TemplateDetailProps) {
+export function TemplateDetail({
+  template,
+  hasPaidAccess,
+  signedUrls,
+  downloadAllowed,
+  editLinkAvailable,
+}: TemplateDetailProps) {
   const { title, slug, category, description } = template;
   const unlocked = hasPaidAccess && signedUrls && signedUrls.length > 0;
+  // Fonte da contagem de páginas: `carouselImageUrls`, não uma leitura do
+  // Storage — ver definição do campo em src/types/template.ts
+  // ("undefined/lista vazia = template de página única"). Confirmado
+  // consistente com o Storage para todo o catálogo na auditoria B4.0.
+  const pageCount = template.carouselImageUrls?.length ?? 1;
+  const pageCountLabel = pageCount > 1 ? `${pageCount} páginas` : "Peça única";
 
   return (
-    <section className="bg-mosaico-bg py-16 lg:py-24">
+    // `<main>` em vez de `<section>` (Fase 4.9, item 2) — landmark
+    // principal de `/templates/[slug]` (este componente é usado só por
+    // essa rota). `TemplateDetailSkeleton` (fallback do Suspense desta
+    // mesma posição na árvore) recebeu a mesma troca, nunca os dois ao
+    // mesmo tempo — sempre exatamente um `<main>` no DOM.
+    <main className="bg-mosaico-bg py-16 lg:py-24">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-start lg:gap-16">
           {/* 1. Design — o produto, lado principal. Só mostra a galeria/
@@ -66,14 +99,25 @@ export function TemplateDetail({ template, hasPaidAccess, signedUrls }: Template
                   style={{ aspectRatio: template.aspectRatio }}
                   className="relative w-full overflow-hidden rounded-[3px] border border-mosaico-border/40 shadow-[0_36px_70px_-32px_rgba(46,25,16,0.4)]"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={signedUrls![0]} alt={title} className="h-full w-full object-cover" />
+                  {/* Mesmo tratamento de carregamento/erro da galeria
+                      multi-página (Fase 4.11, item 1) — template de
+                      página única é só o caso de 1 imagem só, nunca um
+                      caminho visual à parte. */}
+                  <SignedImage
+                    src={signedUrls![0]}
+                    alt={title}
+                    loading="eager"
+                    fetchPriority="high"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               )
             ) : (
               <TemplatePreview
                 template={template}
                 placeholderStyle="pending"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="rounded-[3px] border border-mosaico-border/40 shadow-[0_36px_70px_-32px_rgba(46,25,16,0.4)]"
               />
             )}
@@ -95,17 +139,32 @@ export function TemplateDetail({ template, hasPaidAccess, signedUrls }: Template
               {description ?? "Descrição a definir."}
             </p>
 
+            <p className="mt-5 font-sans text-sm text-mosaico-ink-soft">
+              <span className="font-serif text-2xl text-mosaico-ink">
+                {formatMosaicoPrice()}
+              </span>{" "}
+              — acesso completo, pagamento único · {pageCountLabel}
+            </p>
+
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
-              <DownloadTemplateButton title={title} slug={slug} />
-              <EditInCanvaButton slug={slug} />
+              {downloadAllowed && <DownloadTemplateButton title={title} slug={slug} />}
+              <EditInCanvaButton slug={slug} editLinkAvailable={editLinkAvailable} />
             </div>
+            {/* Texto adaptado ao que a interface realmente oferece (Fase
+                4.60) — nunca anuncia o download como caminho de entrega
+                enquanto `downloadAllowed` for `false` (hoje, para todos os
+                323 templates): a allowlist de distribuição continua vazia
+                até a inspeção de licenciamento aprovar cada um
+                individualmente. Com download liberado, mantém a frase
+                original (os dois caminhos voltam a fazer sentido juntos). */}
             <p className="mx-auto mt-3 max-w-sm font-sans text-xs text-mosaico-ink-soft/70 lg:mx-0">
-              Use a arte exatamente como está, ou personalize textos, fotos,
-              cores e informações no Canva — sem afetar o modelo original.
+              {downloadAllowed
+                ? "Use a arte exatamente como está, ou personalize textos, fotos, cores e informações no Canva — sem afetar o modelo original."
+                : "Seu template fica disponível para edição no Canva — acesse, personalize textos, fotos e cores, e use sua própria versão."}
             </p>
           </div>
         </div>
       </Container>
-    </section>
+    </main>
   );
 }
